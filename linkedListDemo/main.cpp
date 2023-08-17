@@ -4,7 +4,7 @@
 
 int main()
 {
-	std::cout << "linkedListDemo v0.0.0\n\n";
+	std::cout << "linkedListDemo v0.1.0\n\n";
 
 	node *head = new node();
 	node *two = new node();
@@ -19,4 +19,9 @@ int main()
 
 	sll sll;
 	sll.printList(head);
+
+	std::cout << "linked list size: " << sll.size(head) << '\n';
+	sll.addNodeEnd(head, 100);
+	sll.printList(head);
+	std::cout << "linked list size: " << sll.size(head) << '\n';
 }

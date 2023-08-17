@@ -11,6 +11,8 @@ struct node
 class sll
 {
 public:
+	void addNodeEnd(node *head, int data);
+	int size(node *head);
 	void printList(node *node);
 };
 
