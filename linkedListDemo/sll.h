@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-// sweeney's roll-your-own singly linked list.
+// sweeney's hand-rolled singly linked list.
 
 struct node
 {
@@ -11,8 +11,12 @@ struct node
 class sll
 {
 public:
-	void addNodeEnd(node *head, int data);
-	int size(node *head);
-	void printList(node *node);
+	void addNode(node *list, int data, int pos);
+	void addNodeFront(node *list, int data);
+	void addNodeBack(node *list, int data);
+	int accessNode(node *list, int pos);
+	void updateNodeData(node *list, int data, int pos);
+	int size(node *list);
+	void printList(node *list, bool showDetails);
 };
 

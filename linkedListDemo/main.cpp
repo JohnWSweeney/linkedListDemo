@@ -4,24 +4,37 @@
 
 int main()
 {
-	std::cout << "linkedListDemo v0.1.0\n\n";
+	std::cout << "linkedListDemo v0.2.0\n\n";
 
-	node *head = new node();
-	node *two = new node();
-	node *three = new node();
-
-	head->data = 1;
-	head->next = two;
-	two->data = 2;
-	two->next = three;
-	three->data = 3;
-	three->next = NULL;
+	node *list = new node();
 
 	sll sll;
-	sll.printList(head);
+	for (int i = 1; i < 6; i++)
+	{
+		sll.addNodeBack(list, i*i);
+	}
 
-	std::cout << "linked list size: " << sll.size(head) << '\n';
-	sll.addNodeEnd(head, 100);
-	sll.printList(head);
-	std::cout << "linked list size: " << sll.size(head) << '\n';
+	std::cout << "linked list size: " << sll.size(list) << '\n';
+	sll.printList(list, false);
+
+	sll.addNodeFront(list, 1234);
+	std::cout << "linked list size: " << sll.size(list) << '\n';
+	sll.printList(list, false);
+
+	sll.addNodeBack(list, 2345);
+	std::cout << "linked list size: " << sll.size(list) << '\n';
+	sll.printList(list, false);
+
+	sll.addNode(list, 4321, 5);
+	std::cout << "linked list size: " << sll.size(list) << '\n';
+	sll.printList(list, false);
+
+	int elementPos = 0;
+	std::cout << "element " << elementPos << ": " << sll.accessNode(list, elementPos) << '\n';
+
+	sll.updateNodeData(list, -1, 0);
+	std::cout << "linked list size: " << sll.size(list) << '\n';
+	sll.printList(list, false);
+
+	sll.printList(list, true);
 }
