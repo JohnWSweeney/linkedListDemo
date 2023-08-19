@@ -1,16 +1,13 @@
-#include "sll.h"
+#include "sList.h"
 // sweeney's hand-rolled singly linked list.
 
-void sll::addNode(node *list, int data, int pos)
+void sList::addNode(sNode *list, int data, int pos)
 {
-	node *newNode = new node();
+	sNode *newNode = new sNode();
 	newNode->data = data;
-	newNode->next = NULL;
 
 	int tempPos = 1;
-	node *prevNode;
 	do {
-		prevNode = list;
 		if (tempPos == pos)
 		{		
 			newNode->next = list->next;
@@ -22,21 +19,19 @@ void sll::addNode(node *list, int data, int pos)
 	} while (list != NULL);
 }
 
-void sll::addNodeFront(node *list, int data)
+void sList::addNodeFront(sNode *list, int data)
 {
-	node *newNode = new node();
-	
+	sNode *newNode = new sNode();
 	newNode->data = list->data;
 	newNode->next = list->next;
 	list->data = data;
 	list->next = newNode;
 }
 
-void sll::addNodeBack(node *list, int data)
+void sList::addNodeBack(sNode *list, int data)
 {
-	node *newNode = new node();
+	sNode *newNode = new sNode();
 	newNode->data = data;
-	newNode->next = NULL;
 
 	do {
 		if (list->next == NULL)
@@ -48,7 +43,7 @@ void sll::addNodeBack(node *list, int data)
 	} while (list != NULL);
 }
 
-int sll::accessNode(node *list, int pos)
+int sList::accessNode(sNode *list, int pos)
 {
 	int tempPos = 0;
 	do {
@@ -62,7 +57,7 @@ int sll::accessNode(node *list, int pos)
 	return INT_MIN;
 }
 
-void sll::updateNodeData(node *list, int data, int pos)
+void sList::updateNodeData(sNode *list, int data, int pos)
 {
 	int tempPos = 0;
 	do {
@@ -75,17 +70,17 @@ void sll::updateNodeData(node *list, int data, int pos)
 	} while (list != NULL);
 }
 
-int sll::size(node *list)
+int sList::size(sNode *list)
 {
-	int nodeCount = 0;
+	int sNodeCount = 0;
 	do {
-		++nodeCount;
+		++sNodeCount;
 		list = list->next;
 	} while (list != NULL);
-	return nodeCount;
+	return sNodeCount;
 }
 
-void sll::printList(node *list, bool showDetails)
+void sList::printList(sNode *list, bool showDetails)
 {
 	if (showDetails == true)
 	{
@@ -105,4 +100,21 @@ void sll::printList(node *list, bool showDetails)
 		list = list->next;
 	} while (list != NULL);
 	std::cout << '\n';
+}
+
+int sList::find(sNode *list, int data)
+{
+	int tempPos = 0;
+	do {
+		if (list->data == data)
+		{
+			return tempPos;
+		}
+		else
+		{
+			++tempPos;
+			list = list->next;
+		}
+	} while (list != NULL);
+	return -1;
 }
