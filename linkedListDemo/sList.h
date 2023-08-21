@@ -15,9 +15,8 @@ public:
 	void addNodeFront(sNode *list, int data);
 	void addNodeBack(sNode *list, int data);
 	int accessNode(sNode *list, int pos);
-	void updateNodeData(sNode *list, int data, int pos);
+	int updateNodeData(sNode *list, int data, int pos);
 	int size(sNode *list);
 	void printList(sNode *list, bool showDetails);
 	int find(sNode *list, int data);
 };
-

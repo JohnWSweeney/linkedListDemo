@@ -12,9 +12,11 @@ struct dNode
 class dList
 {
 public:
-	void addNodeBack(dNode *list, int data);
 	void addNodeFront(dNode *list, int data);
+	void addNodeBack(dNode *list, int data);
+	int accessNode(dNode *list, int pos);
+	int updateNodeData(dNode *list, int data, int pos);
 	int size(dNode *list);
-	void printList(dNode *list);
+	void printList(dNode *list, bool showDetails);
+	int find(dNode *list, int data);
 };
-

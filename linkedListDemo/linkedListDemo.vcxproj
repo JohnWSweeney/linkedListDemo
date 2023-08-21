@@ -128,14 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="demos.cpp" />
     <ClCompile Include="dList.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="random.cpp" />
     <ClCompile Include="sList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="demos.h" />
     <ClInclude Include="dList.h" />
-    <ClInclude Include="random.h" />
     <ClInclude Include="sList.h" />
   </ItemGroup>
   <ItemGroup>

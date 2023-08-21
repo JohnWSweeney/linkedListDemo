@@ -57,17 +57,19 @@ int sList::accessNode(sNode *list, int pos)
 	return INT_MIN;
 }
 
-void sList::updateNodeData(sNode *list, int data, int pos)
+int sList::updateNodeData(sNode *list, int data, int pos)
 {
 	int tempPos = 0;
 	do {
 		if (tempPos == pos)
 		{
 			list->data = data;
+			return 0;
 		}
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
+	return 1;
 }
 
 int sList::size(sNode *list)

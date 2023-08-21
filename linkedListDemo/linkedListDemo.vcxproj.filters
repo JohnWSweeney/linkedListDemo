@@ -18,18 +18,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="random.cpp">
+    <ClCompile Include="dList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sll.cpp">
+    <ClCompile Include="sList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="random.h">
+    <ClInclude Include="dList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sll.h">
+    <ClInclude Include="sList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
