@@ -49,6 +49,11 @@ void singlyLinkedListDemo()
 
 	// find element with "16" for data.
 	std::cout << "Find 16: element " << sList.find(list, 16) << "\n\n";
+
+	// delete element 5.
+	sList.deleteNode(list, 0);
+	std::cout << "linked list size: " << sList.size(list) << '\n';
+	sList.printList(list, false);
 }
 
 void doublyLinkedListDemo()
@@ -90,6 +95,11 @@ void doublyLinkedListDemo()
 	{
 		std::cout << "Linked list updated.\n\n";
 	}
+	std::cout << "linked list size: " << dList.size(list) << '\n';
+	dList.printList(list, true);
+
+	// delete element 3.
+	dList.deleteNode(list, elementPos);
 	std::cout << "linked list size: " << dList.size(list) << '\n';
 	dList.printList(list, true);
 }

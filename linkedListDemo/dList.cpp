@@ -54,6 +54,23 @@ int dList::updateNodeData(dNode *list, int data, int pos)
 	return 1;
 }
 
+void dList::deleteNode(dNode* list, int pos)
+{
+	int tempPos = 0;
+	do {
+		if (tempPos == pos - 1)
+		{
+			dNode* dummy = list->next;
+			list->next = dummy->next;
+			list = list->next;
+			list->prev = dummy->prev;
+			delete dummy;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+}
+
 int dList::size(dNode *list)
 {
 	int nodeCount = 0;
@@ -68,13 +85,13 @@ void dList::printList(dNode *list, bool showDetails)
 {
 	if (showDetails == true)
 	{
-		std::cout << "#:\tdata:\tlink:\n";
+		std::cout << "#:\tdata:\tprev:\t\t\tnext:\n";
 	}
 	int tempPos = 0;
 	do {
 		if (showDetails == true)
 		{
-			std::cout << tempPos << '\t' << list->data << '\t' << list->next << '\n';
+			std::cout << tempPos << '\t' << list->data << '\t' << list->prev << '\t' << list->next << '\n';
 		}
 		else
 		{

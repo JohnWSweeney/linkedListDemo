@@ -16,6 +16,7 @@ public:
 	void addNodeBack(dNode *list, int data);
 	int accessNode(dNode *list, int pos);
 	int updateNodeData(dNode *list, int data, int pos);
+	void deleteNode(dNode* list, int pos);
 	int size(dNode *list);
 	void printList(dNode *list, bool showDetails);
 	int find(dNode *list, int data);

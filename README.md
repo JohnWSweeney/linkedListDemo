@@ -3,6 +3,10 @@
 A console app exploring linked lists.
 
 ## ChangeLog
+v0.5.0
+- Added deleteNode functions to singly/doubly linked list classes.
+- Updated doubly linked list class printList function to display "prev" pointer.
+
 v0.4.0
 - Added demos.h/cpp demonstrating each class's functions.
 - Updated doubly linked list class dList.h/cpp.

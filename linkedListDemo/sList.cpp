@@ -72,6 +72,21 @@ int sList::updateNodeData(sNode *list, int data, int pos)
 	return 1;
 }
 
+void sList::deleteNode(sNode *list, int pos)
+{
+	int tempPos = 0;
+	do {
+		if (tempPos == pos - 1)
+		{
+			sNode* dummy = list->next;
+			list->next = dummy->next;
+			delete dummy;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+}
+
 int sList::size(sNode *list)
 {
 	int sNodeCount = 0;
