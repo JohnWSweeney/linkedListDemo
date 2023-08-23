@@ -7,8 +7,8 @@ void singlyLinkedListDemo()
 	sNode *list = new sNode();
 	sList sList;
 
-	// add five new nodes to the end of the list.
-	for (int i = 1; i < 6; i++)
+	// add nine new nodes to the end of the list.
+	for (int i = 1; i < 10; i++)
 	{
 		sList.addNodeBack(list, i * i);
 	}
@@ -52,6 +52,16 @@ void singlyLinkedListDemo()
 
 	// delete element 5.
 	sList.deleteNode(list, 0);
+	std::cout << "linked list size: " << sList.size(list) << '\n';
+	sList.printList(list, false);
+
+	// delete nodes after the 5th element.
+	sList.deleteAfter(list, 5);
+	std::cout << "linked list size: " << sList.size(list) << '\n';
+	sList.printList(list, false);
+
+	// clear the list.
+	sList.clear(list);
 	std::cout << "linked list size: " << sList.size(list) << '\n';
 	sList.printList(list, false);
 }

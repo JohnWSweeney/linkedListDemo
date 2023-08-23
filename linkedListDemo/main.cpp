@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "linkedListDemo v0.5.0\n\n";
+	std::cout << "linkedListDemo v0.6.0\n\n";
 
 	singlyLinkedListDemo();
 	doublyLinkedListDemo();

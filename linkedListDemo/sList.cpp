@@ -87,6 +87,30 @@ void sList::deleteNode(sNode *list, int pos)
 	} while (list != NULL);
 }
 
+void sList::deleteAfter(sNode* list, int pos)
+{
+	int tempPos = 0;
+	do {
+		++tempPos;
+		list = list->next;
+	} while (tempPos != pos);
+
+	do {
+		sNode* dummy = list->next;
+		list->next = dummy->next;
+		delete dummy;
+	} while (list->next != NULL);
+}
+
+void sList::clear(sNode* list)
+{
+	do {
+		sNode* dummy = list->next;
+		list->next = dummy->next;
+		delete dummy;
+	} while (list->next != NULL);
+}
+
 int sList::size(sNode *list)
 {
 	int sNodeCount = 0;

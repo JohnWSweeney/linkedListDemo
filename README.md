@@ -3,6 +3,9 @@
 A console app exploring linked lists.
 
 ## ChangeLog
+v0.6.0
+- Added deleteAfter, clear functions to singly linked list class.
+
 v0.5.0
 - Added deleteNode functions to singly/doubly linked list classes.
 - Updated doubly linked list class printList function to display "prev" pointer.
