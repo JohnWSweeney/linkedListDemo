@@ -71,6 +71,31 @@ void dList::deleteNode(dNode* list, int pos)
 	} while (list != NULL);
 }
 
+void dList::deleteAfter(dNode* list, int pos)
+{
+	int tempPos = 0;
+	do {
+		++tempPos;
+		list = list->next;
+	} while (tempPos != pos);
+
+	do {
+		dNode* dummy = list->next;
+		list->next = dummy->next;
+		delete dummy;
+	} while (list->next != NULL);
+}
+
+void dList::clear(dNode* list)
+{
+	do {
+		dNode* dummy = list->next;
+		list->next = dummy->next;
+		delete dummy;
+	} while (list->next != NULL);
+	list->data = 0;
+}
+
 int dList::size(dNode *list)
 {
 	int nodeCount = 0;

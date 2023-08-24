@@ -3,6 +3,9 @@
 A console app exploring linked lists.
 
 ## ChangeLog
+v0.7.0
+- Added deleteAfter, clear functions to doubly linked list class.
+
 v0.6.0
 - Added deleteAfter, clear functions to singly linked list class.
 

@@ -112,4 +112,14 @@ void doublyLinkedListDemo()
 	dList.deleteNode(list, elementPos);
 	std::cout << "linked list size: " << dList.size(list) << '\n';
 	dList.printList(list, true);
+
+	// delete nodes after the 5th element.
+	dList.deleteAfter(list, elementPos);
+	std::cout << "linked list size: " << dList.size(list) << '\n';
+	dList.printList(list, true);
+
+	// clear the list.
+	dList.clear(list);
+	std::cout << "linked list size: " << dList.size(list) << '\n';
+	dList.printList(list, true);
 }
