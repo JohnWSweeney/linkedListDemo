@@ -27,6 +27,9 @@
     <ClCompile Include="demos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fifo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dList.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

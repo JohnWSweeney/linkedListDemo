@@ -1,8 +1,14 @@
 # linkedListDemo
 
-A console app exploring linked lists.
+A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.8.0
+- Added FIFO (first-in-first-out) class, fifo.h/cpp.
+	- Includes write, read, size, clear, and print functions.
+	- Implemented as singly linked list.
+- Added fifoDemo function to demos.h/cpp.
+
 v0.7.0
 - Added deleteAfter, clear functions to doubly linked list class.
 

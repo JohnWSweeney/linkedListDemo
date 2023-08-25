@@ -123,3 +123,42 @@ void doublyLinkedListDemo()
 	std::cout << "linked list size: " << dList.size(list) << '\n';
 	dList.printList(list, true);
 }
+
+void fifoDemo()
+{
+	std::cout << "\n\nFIFO Demo\n\n";
+	// initialize singly listed list.
+	node* list = new node();
+	fifo fifo;
+
+	// write 8 "words" to the FIFO.
+	for (int i = 1; i < 9; i++)
+	{
+		fifo.write(list, i * i);
+	}
+	std::cout << "FIFO size: " << fifo.size(list) << '\n';
+	fifo.print(list);
+	std::cout << '\n';
+
+	// read one word from the FIFO.
+	std::cout << "FIFO data out: " << fifo.read(list) << '\n';
+	std::cout << "FIFO size: " << fifo.size(list) << '\n';
+	fifo.print(list);
+	std::cout << '\n';
+
+	// read four words from the FIFO.
+	for (int i = 0; i < 4; i++)
+	{
+		std::cout << "FIFO data out: " << fifo.read(list) << '\n';
+	}
+
+	std::cout << "FIFO size: " << fifo.size(list) << '\n';
+	fifo.print(list);
+	std::cout << '\n';
+
+	// clear the FIFO.
+	fifo.clear(list);
+	std::cout << "FIFO size: " << fifo.size(list) << '\n';
+	fifo.print(list);
+	std::cout << '\n';
+}
