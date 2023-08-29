@@ -1,5 +1,9 @@
 #include "demos.h"
 #include "nodes.h"
+#include "sList.h"
+#include "dList.h"
+#include "fifo.h"
+#include "stack.h"
 
 void singlyLinkedListDemo()
 {
@@ -162,4 +166,28 @@ void fifoDemo()
 	std::cout << "FIFO size: " << fifo.size(list) << '\n';
 	fifo.print(list);
 	std::cout << '\n';
+}
+
+void stackDemo()
+{
+	std::cout << "\n\nStack Demo\n\n";
+	// initialize singly listed list.
+	node* top = new node();
+	node* list = top;
+	stack stack;
+
+	// add nine new nodes to the stack.
+	for (int i = 1; i < 10; i++)
+	{
+		stack.push(list, i * i);
+	}
+	stack.print(list);
+
+	// pop top node from stack.
+	std::cout << "Popped from stack: " << stack.pop(&list) << "\n\n";
+	stack.print(list);
+
+	// pop top another node from stack.
+	std::cout << "Popped from stack: " << stack.pop(&list) << "\n\n";
+	stack.print(list);
 }

@@ -3,6 +3,15 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.10.0
+- Added stack class stack.h/cpp.
+	- Added push, pop, and print functions.
+- Added stackDemo to demos.h/cpp.
+
+v0.9.0
+- Added nodes.h
+	- Includes singly and doubly linked list node definitions.
+
 v0.8.0
 - Added FIFO (first-in-first-out) class, fifo.h/cpp.
 	- Includes write, read, size, clear, and print functions.
