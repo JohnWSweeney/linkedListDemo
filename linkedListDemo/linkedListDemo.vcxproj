@@ -138,6 +138,7 @@
     <ClInclude Include="demos.h" />
     <ClInclude Include="dList.h" />
     <ClInclude Include="fifo.h" />
+    <ClInclude Include="nodes.h" />
     <ClInclude Include="sList.h" />
   </ItemGroup>
   <ItemGroup>

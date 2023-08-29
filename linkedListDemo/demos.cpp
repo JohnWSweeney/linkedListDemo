@@ -1,10 +1,11 @@
 #include "demos.h"
+#include "nodes.h"
 
 void singlyLinkedListDemo()
 {
 	std::cout << "\n\nSingly Linked List Demo\n\n";
 	// initialize singly listed list.
-	sNode *list = new sNode();
+	node *list = new node();
 	sList sList;
 
 	// add nine new nodes to the end of the list.

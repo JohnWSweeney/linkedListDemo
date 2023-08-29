@@ -1,13 +1,7 @@
 #pragma once
 #include <iostream>
+#include "nodes.h"
 // sweeney's hand-rolled doubly linked list.
-
-struct dNode
-{
-	int data;
-	dNode *next = NULL;
-	dNode *prev = NULL;
-};
 
 class dList
 {

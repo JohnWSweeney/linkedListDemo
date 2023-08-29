@@ -1,9 +1,9 @@
 #include "sList.h"
 // sweeney's hand-rolled singly linked list.
 
-void sList::addNode(sNode *list, int data, int pos)
+void sList::addNode(node *list, int data, int pos)
 {
-	sNode *newNode = new sNode();
+	node *newNode = new node();
 	newNode->data = data;
 
 	int tempPos = 1;
@@ -19,18 +19,18 @@ void sList::addNode(sNode *list, int data, int pos)
 	} while (list != NULL);
 }
 
-void sList::addNodeFront(sNode *list, int data)
+void sList::addNodeFront(node *list, int data)
 {
-	sNode *newNode = new sNode();
+	node *newNode = new node();
 	newNode->data = list->data;
 	newNode->next = list->next;
 	list->data = data;
 	list->next = newNode;
 }
 
-void sList::addNodeBack(sNode *list, int data)
+void sList::addNodeBack(node *list, int data)
 {
-	sNode *newNode = new sNode();
+	node *newNode = new node();
 	newNode->data = data;
 
 	do {
@@ -43,7 +43,7 @@ void sList::addNodeBack(sNode *list, int data)
 	} while (list != NULL);
 }
 
-int sList::accessNode(sNode *list, int pos)
+int sList::accessNode(node *list, int pos)
 {
 	int tempPos = 0;
 	do {
@@ -57,7 +57,7 @@ int sList::accessNode(sNode *list, int pos)
 	return INT_MIN;
 }
 
-int sList::updateNodeData(sNode *list, int data, int pos)
+int sList::updateNodeData(node *list, int data, int pos)
 {
 	int tempPos = 0;
 	do {
@@ -72,13 +72,13 @@ int sList::updateNodeData(sNode *list, int data, int pos)
 	return 1;
 }
 
-void sList::deleteNode(sNode *list, int pos)
+void sList::deleteNode(node *list, int pos)
 {
 	int tempPos = 0;
 	do {
 		if (tempPos == pos - 1)
 		{
-			sNode* dummy = list->next;
+			node* dummy = list->next;
 			list->next = dummy->next;
 			delete dummy;
 		}
@@ -87,7 +87,7 @@ void sList::deleteNode(sNode *list, int pos)
 	} while (list != NULL);
 }
 
-void sList::deleteAfter(sNode* list, int pos)
+void sList::deleteAfter(node* list, int pos)
 {
 	int tempPos = 0;
 	do {
@@ -96,32 +96,32 @@ void sList::deleteAfter(sNode* list, int pos)
 	} while (tempPos != pos);
 
 	do {
-		sNode* dummy = list->next;
+		node* dummy = list->next;
 		list->next = dummy->next;
 		delete dummy;
 	} while (list->next != NULL);
 }
 
-void sList::clear(sNode* list)
+void sList::clear(node* list)
 {
 	do {
-		sNode* dummy = list->next;
+		node* dummy = list->next;
 		list->next = dummy->next;
 		delete dummy;
 	} while (list->next != NULL);
 }
 
-int sList::size(sNode *list)
+int sList::size(node *list)
 {
-	int sNodeCount = 0;
+	int nodeCount = 0;
 	do {
-		++sNodeCount;
+		++nodeCount;
 		list = list->next;
 	} while (list != NULL);
-	return sNodeCount;
+	return nodeCount;
 }
 
-void sList::printList(sNode *list, bool showDetails)
+void sList::printList(node *list, bool showDetails)
 {
 	if (showDetails == true)
 	{
@@ -143,7 +143,7 @@ void sList::printList(sNode *list, bool showDetails)
 	std::cout << '\n';
 }
 
-int sList::find(sNode *list, int data)
+int sList::find(node *list, int data)
 {
 	int tempPos = 0;
 	do {

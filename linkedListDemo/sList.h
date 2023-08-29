@@ -1,25 +1,20 @@
 #pragma once
 #include <iostream>
+#include "nodes.h"
 // sweeney's hand-rolled singly linked list.
-
-struct sNode
-{
-	int data;
-	sNode *next = NULL;
-};
 
 class sList
 {
 public:
-	void addNode(sNode *list, int data, int pos);
-	void addNodeFront(sNode *list, int data);
-	void addNodeBack(sNode *list, int data);
-	int accessNode(sNode *list, int pos);
-	int updateNodeData(sNode *list, int data, int pos);
-	void deleteNode(sNode *list, int pos);
-	void deleteAfter(sNode* list, int pos);
-	void clear(sNode* list);
-	int size(sNode *list);
-	void printList(sNode *list, bool showDetails);
-	int find(sNode *list, int data);
+	void addNode(node *list, int data, int pos);
+	void addNodeFront(node *list, int data);
+	void addNodeBack(node *list, int data);
+	int accessNode(node *list, int pos);
+	int updateNodeData(node *list, int data, int pos);
+	void deleteNode(node *list, int pos);
+	void deleteAfter(node* list, int pos);
+	void clear(node* list);
+	int size(node *list);
+	void printList(node *list, bool showDetails);
+	int find(node *list, int data);
 };
