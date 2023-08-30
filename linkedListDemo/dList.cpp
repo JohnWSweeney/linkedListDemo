@@ -1,5 +1,12 @@
 #include "dList.h"
 
+dNode* dList::initList(int data)
+{
+	dNode* newNode = new dNode();
+	newNode->data = data;
+	return newNode;
+}
+
 void dList::addNodeFront(dNode *list, int data)
 {
 	dNode *newNode = new dNode();

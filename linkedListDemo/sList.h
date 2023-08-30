@@ -6,6 +6,7 @@
 class sList
 {
 public:
+	node* initList(int data);
 	void addNode(node *list, int data, int pos);
 	void addNodeFront(node *list, int data);
 	void addNodeBack(node *list, int data);

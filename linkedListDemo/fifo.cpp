@@ -1,5 +1,12 @@
 #include "fifo.h"
 
+node* fifo::init(int data)
+{
+	node* newNode = new node();
+	newNode->data = data;
+	return newNode;
+}
+
 void fifo::write(node* list, int data)
 {
 	node* newNode = new node();

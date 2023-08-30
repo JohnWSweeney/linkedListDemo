@@ -1,5 +1,12 @@
 #include "stack.h"
 
+node* stack::init(int data)
+{
+	node* newNode = new node();
+	newNode->data = data;
+	return newNode;
+}
+
 void stack::push(node* list, int data)
 {
 	node* newNode = new node();

@@ -3,6 +3,10 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.11.0
+- Added list initialization functions to each class.
+- Updated demo functions with their respective list initialization functions.
+
 v0.10.0
 - Added stack class stack.h/cpp.
 	- Added push, pop, and print functions.

@@ -1,6 +1,13 @@
 #include "sList.h"
 // sweeney's hand-rolled singly linked list.
 
+node* sList::initList(int data)
+{
+	node* newNode = new node();
+	newNode->data = data;
+	return newNode;
+}
+
 void sList::addNode(node *list, int data, int pos)
 {
 	node *newNode = new node();

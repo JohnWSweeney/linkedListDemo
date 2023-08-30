@@ -9,11 +9,11 @@ void singlyLinkedListDemo()
 {
 	std::cout << "\n\nSingly Linked List Demo\n\n";
 	// initialize singly listed list.
-	node *list = new node();
 	sList sList;
+	node* list = sList.initList(1);
 
-	// add nine new nodes to the end of the list.
-	for (int i = 1; i < 10; i++)
+	// add eight new nodes to the end of the list.
+	for (int i = 2; i < 10; i++)
 	{
 		sList.addNodeBack(list, i * i);
 	}
@@ -75,11 +75,11 @@ void doublyLinkedListDemo()
 {
 	std::cout << "\n\nDoubly Linked List Demo\n\n";
 	// initialize doubly linked list.
-	dNode *list = new dNode();
 	dList dList;
+	dNode* list = dList.initList(1);
 
-	// add five new nodes to the end of the list.
-	for (int i = 1; i < 6; i++)
+	// add eight new nodes to the end of the list.
+	for (int i = 2; i < 10; i++)
 	{
 		dList.addNodeBack(list, i * i);
 	}
@@ -133,11 +133,11 @@ void fifoDemo()
 {
 	std::cout << "\n\nFIFO Demo\n\n";
 	// initialize singly listed list.
-	node* list = new node();
 	fifo fifo;
+	node* list = fifo.init(1);
 
-	// write 8 "words" to the FIFO.
-	for (int i = 1; i < 9; i++)
+	// write eight "words" to the FIFO.
+	for (int i = 2; i < 10; i++)
 	{
 		fifo.write(list, i * i);
 	}
@@ -172,12 +172,11 @@ void stackDemo()
 {
 	std::cout << "\n\nStack Demo\n\n";
 	// initialize singly listed list.
-	node* top = new node();
-	node* list = top;
 	stack stack;
+	node* list = stack.init(1);
 
-	// add nine new nodes to the stack.
-	for (int i = 1; i < 10; i++)
+	// add eight new nodes to the stack.
+	for (int i = 2; i < 10; i++)
 	{
 		stack.push(list, i * i);
 	}

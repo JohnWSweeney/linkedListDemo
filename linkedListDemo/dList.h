@@ -6,6 +6,7 @@
 class dList
 {
 public:
+	dNode* initList(int data);
 	void addNodeFront(dNode *list, int data);
 	void addNodeBack(dNode *list, int data);
 	int accessNode(dNode *list, int pos);
