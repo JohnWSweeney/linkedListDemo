@@ -14,7 +14,9 @@ public:
 	int updateNodeData(node *list, int data, int pos);
 	void deleteNode(node *list, int pos);
 	void deleteAfter(node* list, int pos);
-	void clear(node* list);
+	void deleteNodeFront(node** list);
+	void clear(node** list);
+	int empty(node* list);
 	int size(node *list);
 	void printList(node *list, bool showDetails);
 	int find(node *list, int data);

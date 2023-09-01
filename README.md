@@ -3,6 +3,11 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.12.0
+- Updated singly linked list class.
+	- Added empty, removeNodeFront functions.
+	- Updated clear, printList, size functions.
+
 v0.11.0
 - Added list initialization functions to each class.
 - Updated demo functions with their respective list initialization functions.

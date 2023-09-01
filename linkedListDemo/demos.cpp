@@ -9,6 +9,7 @@ void singlyLinkedListDemo()
 {
 	std::cout << "\n\nSingly Linked List Demo\n\n";
 	// initialize singly listed list.
+	std::cout << "Initialize singly listed list.\n";
 	sList sList;
 	node* list = sList.initList(1);
 
@@ -65,10 +66,27 @@ void singlyLinkedListDemo()
 	std::cout << "linked list size: " << sList.size(list) << '\n';
 	sList.printList(list, false);
 
-	// clear the list.
-	sList.clear(list);
+	// delete the first node.
+	sList.deleteNodeFront(&list);
 	std::cout << "linked list size: " << sList.size(list) << '\n';
 	sList.printList(list, false);
+
+	// clear the list.
+	sList.clear(&list);
+	std::cout << "linked list size: " << sList.size(list) << '\n';
+	sList.printList(list, false);
+
+	//// check if list is empty.
+	//result = sList.empty(list);
+	//if (result != 0)
+	//{
+	//	std::cout << "List is not empty.\n\n";
+	//}
+	//else
+	//{
+	//	std::cout << "List is empty.\n\n";
+	//}
+
 }
 
 void doublyLinkedListDemo()

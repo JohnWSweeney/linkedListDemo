@@ -109,17 +109,48 @@ void sList::deleteAfter(node* list, int pos)
 	} while (list->next != NULL);
 }
 
-void sList::clear(node* list)
+void sList::deleteNodeFront(node** list)
 {
+	node* dummy = *list;
+	*list = dummy->next;
+	delete dummy;
+}
+
+void sList::clear(node** list)
+{
+	if (list == NULL)
+	{
+		std::cout << "list is empty.\n";
+		return;
+	}
+
 	do {
-		node* dummy = list->next;
-		list->next = dummy->next;
+		node* dummy = *list;
+		*list = dummy->next;
 		delete dummy;
-	} while (list->next != NULL);
+	} while (*list != NULL);
+}
+
+int sList::empty(node* list)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 int sList::size(node *list)
 {
+	if (list == NULL)
+	{
+		std::cout << "list is empty.\n";
+		return INT_MIN;
+	}
+
 	int nodeCount = 0;
 	do {
 		++nodeCount;
@@ -130,6 +161,12 @@ int sList::size(node *list)
 
 void sList::printList(node *list, bool showDetails)
 {
+	if (list == NULL)
+	{
+		std::cout << "list is empty.\n";
+		return;
+	}
+
 	if (showDetails == true)
 	{
 		std::cout << "#:\tdata:\tlink:\n";
