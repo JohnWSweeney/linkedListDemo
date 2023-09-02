@@ -4,6 +4,7 @@
 #include "dList.h"
 #include "fifo.h"
 #include "stack.h"
+#include "dsList.h"
 
 void singlyLinkedListDemo()
 {
@@ -61,6 +62,17 @@ void singlyLinkedListDemo()
 	std::cout << "linked list size: " << sList.size(list) << '\n';
 	sList.printList(list, false);
 
+	// check if list is empty.
+	result = sList.empty(list);
+	if (result != 0)
+	{
+		std::cout << "List is not empty.\n\n";
+	}
+	else
+	{
+		std::cout << "List is empty.\n\n";
+	}
+
 	// delete nodes after the 5th element.
 	sList.deleteAfter(list, 5);
 	std::cout << "linked list size: " << sList.size(list) << '\n';
@@ -75,18 +87,6 @@ void singlyLinkedListDemo()
 	sList.clear(&list);
 	std::cout << "linked list size: " << sList.size(list) << '\n';
 	sList.printList(list, false);
-
-	//// check if list is empty.
-	//result = sList.empty(list);
-	//if (result != 0)
-	//{
-	//	std::cout << "List is not empty.\n\n";
-	//}
-	//else
-	//{
-	//	std::cout << "List is empty.\n\n";
-	//}
-
 }
 
 void doublyLinkedListDemo()
@@ -207,4 +207,39 @@ void stackDemo()
 	// pop top another node from stack.
 	std::cout << "Popped from stack: " << stack.pop(&list) << "\n\n";
 	stack.print(list);
+}
+
+void circularDoublyLinkedListDemo()
+{
+	std::cout << "\n\Circular Doubly Linked List Demo\n\n";
+	// initialize doubly listed list.
+	dsList dsList;
+	dNode* head = dsList.init(1234);
+	dNode* list = head;
+
+	// add eight new nodes to the end of the list.
+	for (int i = 0; i < 9; i++)
+	{
+		dsList.addNodeBack(list, i * i);
+	}
+	dsList.print(list);
+
+	// add another node to the end of the list.
+	dsList.addNodeBack(list, 999999);
+	dsList.print(list);
+
+	// delete the last node.
+	dsList.deleteNodeBack(list);
+	dsList.print(list);
+
+	// check if list is empty.
+	int result = dsList.isEmpty(list);
+	if (result == 1)
+	{
+		std::cout << "List is empty.\n\n";
+	}
+	else
+	{
+		std::cout << "List is not empty.\n\n";
+	}
 }

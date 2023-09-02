@@ -3,6 +3,11 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.13.0
+- Added circular doubly linked list class dsList.h/cpp.
+	- Added init, addNodeBack, deleteNodeBack, isEmpty, and print functions.
+- Added stackDemo to demos.h/cpp.
+
 v0.12.0
 - Updated singly linked list class.
 	- Added empty, removeNodeFront functions.

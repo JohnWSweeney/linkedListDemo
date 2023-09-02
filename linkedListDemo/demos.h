@@ -7,3 +7,4 @@ void singlyLinkedListDemo();
 void doublyLinkedListDemo();
 void fifoDemo();
 void stackDemo();
+void circularDoublyLinkedListDemo();

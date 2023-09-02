@@ -3,10 +3,11 @@
 
 int main()
 {
-	std::cout << "linkedListDemo v0.12.0\n\n";
+	std::cout << "linkedListDemo v0.13.0\n\n";
 
 	singlyLinkedListDemo();
-	//doublyLinkedListDemo();
-	//fifoDemo();
-	//stackDemo();
+	doublyLinkedListDemo();
+	fifoDemo();
+	stackDemo();
+	circularDoublyLinkedListDemo();
 }
