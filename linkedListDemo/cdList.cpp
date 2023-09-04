@@ -1,7 +1,7 @@
-#include "dsList.h"
+#include "cdList.h"
 // sweeney's hand-rolled circular doubly linked list.
 
-dNode* dsList::init(int data)
+dNode* cdList::init(int data)
 {
 	dNode* head = new dNode();
 	head->data = data;
@@ -10,7 +10,7 @@ dNode* dsList::init(int data)
 	return head;
 }
 
-void dsList::addNodeBack(dNode* list, int data)
+void cdList::addNodeBack(dNode* list, int data)
 {
 	dNode* tail = list->prev;
 	dNode* newNode = new dNode();
@@ -21,7 +21,7 @@ void dsList::addNodeBack(dNode* list, int data)
 	tail->next = newNode;
 }
 
-void dsList::deleteNodeBack(dNode*list)
+void cdList::deleteNodeBack(dNode*list)
 {
 	if (list == NULL)
 	{
@@ -36,7 +36,7 @@ void dsList::deleteNodeBack(dNode*list)
 	delete dummy;
 }
 
-int dsList::isEmpty(dNode* list)
+int cdList::isEmpty(dNode* list)
 {
 	if (list == NULL)
 	{
@@ -48,7 +48,7 @@ int dsList::isEmpty(dNode* list)
 	}
 }
 
-void dsList::print(dNode* list)
+void cdList::print(dNode* list)
 {
 	if (list == NULL)
 	{

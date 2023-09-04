@@ -12,4 +12,3 @@ public:
 	void clear(node* list);
 	void print(node* list);
 };
-

@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "nodes.h"
 // sweeney's hand-rolled doubly linked list.
 

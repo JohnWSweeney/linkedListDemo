@@ -3,7 +3,7 @@
 #include "nodes.h"
 // sweeney's hand-rolled circular doubly linked list.
 
-class dsList
+class cdList
 {
 public:
 	dNode* init(int data);
@@ -12,4 +12,3 @@ public:
 	int isEmpty(dNode* list);
 	void print(dNode* list);
 };
-

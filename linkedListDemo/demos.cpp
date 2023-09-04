@@ -4,7 +4,8 @@
 #include "dList.h"
 #include "fifo.h"
 #include "stack.h"
-#include "dsList.h"
+#include "csList.h"
+#include "cdList.h"
 
 void singlyLinkedListDemo()
 {
@@ -209,31 +210,74 @@ void stackDemo()
 	stack.print(list);
 }
 
+void circularSinglyLinkedListDemo()
+{
+	std::cout << "\n\nCircular Singly Linked List Demo\n\n";
+	// initialize singly listed list.
+	csList csList;
+	node* list = csList.init(4321);
+
+	// add eight new nodes to the end of the list.
+	for (int i = 0; i < 9; i++)
+	{
+		csList.addNodeBack(list, i * i * i);
+	}
+	std::cout << "Node count: " << csList.size(list) << '\n';
+	csList.print(list);
+
+	// check if list is empty.
+	int result = csList.isEmpty(list);
+	if (result != 0)
+	{
+		std::cout << "List is empty.\n";
+	}
+	else
+	{
+		std::cout << "List is not empty.\n";
+	}
+	std::cout << '\n';
+
+	// add a new node to the front of the list.
+	csList.addNodeFront(list, 1234);
+	std::cout << "Node count: " << csList.size(list) << '\n';
+	csList.print(list);
+
+	// return data for element 5.
+	int element = 5;
+	std::cout << "List element " << element << ": " << csList.accessNode(list, element) << '\n';
+
+	// update data for element 5.
+	int newData = 101010;
+	std::cout << "Update list element " << element << " data with " << newData << csList.updateNode(list, element, newData) << '\n';
+	std::cout << "Node count: " << csList.size(list) << '\n';
+	csList.print(list);
+}
+
 void circularDoublyLinkedListDemo()
 {
 	std::cout << "\n\Circular Doubly Linked List Demo\n\n";
 	// initialize doubly listed list.
-	dsList dsList;
-	dNode* head = dsList.init(1234);
+	cdList cdList;
+	dNode* head = cdList.init(1234);
 	dNode* list = head;
 
 	// add eight new nodes to the end of the list.
 	for (int i = 0; i < 9; i++)
 	{
-		dsList.addNodeBack(list, i * i);
+		cdList.addNodeBack(list, i * i);
 	}
-	dsList.print(list);
+	cdList.print(list);
 
 	// add another node to the end of the list.
-	dsList.addNodeBack(list, 999999);
-	dsList.print(list);
+	cdList.addNodeBack(list, 999999);
+	cdList.print(list);
 
 	// delete the last node.
-	dsList.deleteNodeBack(list);
-	dsList.print(list);
+	cdList.deleteNodeBack(list);
+	cdList.print(list);
 
 	// check if list is empty.
-	int result = dsList.isEmpty(list);
+	int result = cdList.isEmpty(list);
 	if (result == 1)
 	{
 		std::cout << "List is empty.\n\n";

@@ -3,10 +3,16 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.14.0
+- Added circular singly linked list class csList.h/cpp.
+	- Added init, addNodeFront, addNodeBack, accessNode, updateNode, size, isEmpty, and print functions.
+- Added circularSinglyLinkedListDemo to demos.h/cpp.
+- Changed circular singly linked list class name to cdList.h/cpp.
+
 v0.13.0
 - Added circular doubly linked list class dsList.h/cpp.
 	- Added init, addNodeBack, deleteNodeBack, isEmpty, and print functions.
-- Added stackDemo to demos.h/cpp.
+- Added circularDoublyLinkedListDemo to demos.h/cpp.
 
 v0.12.0
 - Updated singly linked list class.

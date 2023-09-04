@@ -33,7 +33,10 @@
     <ClCompile Include="stack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dsList.cpp">
+    <ClCompile Include="cdList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="csList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +59,10 @@
     <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dsList.h">
+    <ClInclude Include="cdList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="csList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
