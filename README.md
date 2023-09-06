@@ -10,7 +10,7 @@ v0.14.0
 - Changed circular singly linked list class name to cdList.h/cpp.
 
 v0.13.0
-- Added circular doubly linked list class dsList.h/cpp.
+- Added circular doubly linked list class cdList.h/cpp.
 	- Added init, addNodeBack, deleteNodeBack, isEmpty, and print functions.
 - Added circularDoublyLinkedListDemo to demos.h/cpp.
 

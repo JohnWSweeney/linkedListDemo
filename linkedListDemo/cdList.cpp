@@ -3,15 +3,38 @@
 
 dNode* cdList::init(int data)
 {
-	dNode* head = new dNode();
-	head->data = data;
-	head->next = head;
-	head->prev = head;
-	return head;
+	dNode* newNode = new dNode();
+	newNode->data = data;
+	newNode->next = newNode;
+	newNode->prev = newNode;
+	return newNode;
 }
 
-void cdList::addNodeBack(dNode* list, int data)
+int cdList::addNodeFront(dNode* list, int data)
 {
+	if (list == NULL)
+	{
+		std::cout << "addNodeFront: list is empty.\n";
+		return 1;
+	}
+
+	dNode* newNode = new dNode();
+	newNode->data = list->data;
+	newNode->next = list->next;
+	newNode->prev = list;
+	list->data = data;
+	list->next = newNode;
+	return 0;
+}
+
+int cdList::addNodeBack(dNode* list, int data)
+{
+	if (list == NULL)
+	{
+		std::cout << "addNodeBack: list is empty.\n";
+		return 1;
+	}
+
 	dNode* tail = list->prev;
 	dNode* newNode = new dNode();
 	newNode->data = data;
@@ -19,21 +42,79 @@ void cdList::addNodeBack(dNode* list, int data)
 	newNode->prev = tail;
 	list->prev = newNode;
 	tail->next = newNode;
+	return 0;
 }
 
-void cdList::deleteNodeBack(dNode*list)
+int cdList::deleteNodeFront(dNode** list)
 {
 	if (list == NULL)
 	{
-		std::cout << "List is empty.\n";
-		return;
+		std::cout << "deleteNodeFront: list is empty.\n";
+		return 1;
 	}
 
-	dNode* dummy = list->prev;
-	dNode* newTail = dummy->prev;
-	list->prev = newTail;
-	newTail->next = list;
+	dNode* dummy = *list;
+	dNode* before = dummy->prev;
+	dNode* after = dummy->next;
+	before->next = after;
+	after->prev = before;
 	delete dummy;
+	*list = after;
+	return 0;
+}
+
+int cdList::deleteNodeBack(dNode* list)
+{
+	if (list == NULL)
+	{
+		std::cout << "deleteNodeBack: list is empty.\n";
+		return 1;
+	}
+
+	dNode* head = list;
+	do {
+		dNode* dummy = list->next;
+		if (dummy->next == head)
+		{
+			list->next = head;
+			head->prev = list;
+			delete dummy;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return 1;
+}
+
+dNode* cdList::returnPtrByPos(dNode* list, int pos)
+{
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			return list;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+}
+
+int cdList::size(dNode* list)
+{
+	if (list == NULL)
+	{
+		std::cout << "cdList.size: list is empty.\n";
+		return -1;
+	}
+
+	dNode* head = list;
+	int nodeCount = 0;
+	do {
+		++nodeCount;
+		list = list->next;
+	} while (list != head);
+	return nodeCount;
 }
 
 int cdList::isEmpty(dNode* list)
@@ -52,18 +133,37 @@ void cdList::print(dNode* list)
 {
 	if (list == NULL)
 	{
-		std::cout << "List is empty.\n";
+		std::cout << "cdList.print: list is empty.\n";
 		return;
 	}
 
-	dNode* tail = list->prev;
+	dNode* head = list;
 	int tempPos = 0;
 	std::cout << "#\tdata:\tcurr:\t\t\tnext:\t\t\tprev:\n";
 	do {
-		dNode* curr = list;
-		std::cout << tempPos << '\t' << list->data << '\t' << curr << '\t' << list->next << '\t' << list->prev << '\n';
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
 		++tempPos;
 		list = list->next;
-	} while (list->prev != tail);
+	} while (list != head);
+	std::cout << '\n';
+}
+
+void cdList::printReverse(dNode* list)
+{
+	if (list == NULL)
+	{
+		std::cout << "cdList.printReverse: list is empty.\n";
+		return;
+	}
+
+	dNode* head = list;
+	int tempPos = size(list) - 1;
+	std::cout << "#\tdata:\tcurr:\t\t\tnext:\t\t\tprev:\n";
+	list = list->prev;
+	do {
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
+		--tempPos;
+		list = list->prev;
+	} while (list->next != head);
 	std::cout << '\n';
 }

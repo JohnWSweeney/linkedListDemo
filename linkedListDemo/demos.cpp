@@ -256,34 +256,50 @@ void circularSinglyLinkedListDemo()
 void circularDoublyLinkedListDemo()
 {
 	std::cout << "\n\Circular Doubly Linked List Demo\n\n";
-	// initialize doubly listed list.
+	// initialize doubly linked list.
 	cdList cdList;
-	dNode* head = cdList.init(1234);
-	dNode* list = head;
+	dNode* list = cdList.init(3141);
 
-	// add eight new nodes to the end of the list.
+	// add eight nodes to the end of the list;
 	for (int i = 0; i < 9; i++)
 	{
-		cdList.addNodeBack(list, i * i);
+		cdList.addNodeBack(list, i * i * i);
 	}
+	std::cout << "Node count: " << cdList.size(list) << '\n';
 	cdList.print(list);
 
-	// add another node to the end of the list.
-	cdList.addNodeBack(list, 999999);
-	cdList.print(list);
-
-	// delete the last node.
-	cdList.deleteNodeBack(list);
-	cdList.print(list);
-
-	// check if list is empty.
+	// check if the list is empty.
 	int result = cdList.isEmpty(list);
 	if (result == 1)
 	{
-		std::cout << "List is empty.\n\n";
+		std::cout << "The list is empty.\n\n";
 	}
 	else
 	{
-		std::cout << "List is not empty.\n\n";
+		std::cout << "The list is not empty.\n\n";
 	}
+
+	// add node to front of the list.
+	cdList.addNodeFront(list, 321);
+	std::cout << "Node count: " << cdList.size(list) << '\n';
+	cdList.print(list);
+
+	// delete the front node.
+	cdList.deleteNodeFront(&list);
+	std::cout << "Node count: " << cdList.size(list) << '\n';
+	cdList.print(list);
+
+	// delete node at the end of the list.
+	cdList.deleteNodeBack(list);
+	std::cout << "Node count: " << cdList.size(list) << '\n';
+	cdList.print(list);
+
+	// print the list in reverse order.
+	cdList.printReverse(list);
+
+	// return pointer to the node in the requested position in the list.
+	int position = 5;
+	dNode* ptr = NULL;
+	ptr = cdList.returnPtrByPos(list, position);
+	std::cout << "ptr to node " << position << ":\t" << ptr << '\n';
 }
