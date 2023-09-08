@@ -128,24 +128,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cdListDemo.cpp" />
+    <ClCompile Include="csListDemo.cpp" />
     <ClCompile Include="csList.cpp" />
-    <ClCompile Include="demos.cpp" />
     <ClCompile Include="dList.cpp" />
     <ClCompile Include="cdList.cpp" />
+    <ClCompile Include="dListDemo.cpp" />
     <ClCompile Include="fifo.cpp" />
+    <ClCompile Include="fifoDemo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sList.cpp" />
+    <ClCompile Include="sListDemo.cpp" />
+    <ClCompile Include="stackDemo.cpp" />
     <ClCompile Include="stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cdListDemo.h" />
+    <ClInclude Include="csListDemo.h" />
     <ClInclude Include="csList.h" />
-    <ClInclude Include="demos.h" />
+    <ClInclude Include="dListDemo.h" />
     <ClInclude Include="dList.h" />
     <ClInclude Include="cdList.h" />
     <ClInclude Include="fifo.h" />
+    <ClInclude Include="fifoDemo.h" />
     <ClInclude Include="nodes.h" />
     <ClInclude Include="sList.h" />
+    <ClInclude Include="sListDemo.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="stackDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

@@ -24,9 +24,6 @@
     <ClCompile Include="sList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demos.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="fifo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,15 +36,30 @@
     <ClCompile Include="csList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cdListDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="csListDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stackDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fifoDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dListDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sListDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fifo.h">
@@ -63,6 +75,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="csList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cdListDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="csListDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stackDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifoDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dListDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sListDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

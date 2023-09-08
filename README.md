@@ -3,6 +3,18 @@
 A console app exploring linked lists amd their applications.
 
 ## ChangeLog
+v0.16.0
+- Moved each class demo function in demos.h/cpp to its own .h/cpp files.
+- Updated circular singly linked list class csList.h/cpp.
+	- Added deleteNodeFront, deleteNodeBack, deleteNodeByPtr, returnPtrByPos, and returnPosByPtr functions.
+	- Renamed accessNode to returnDataByPos, updateNode to updateNodeByPos.
+- Updated circularSinglyLinkedListDemo in csListDemo.h/cpp. with new functions.
+
+v0.15.0
+- Updated circular doubly linked list class cdList.h/cpp.
+	- Added addNodeFront, deleteNodeFront, returnPtrByPos, size, and printReverse functions.
+- Updated circularDoublyLinkedListDemo in demos.h/cpp. with new functions.
+
 v0.14.0
 - Added circular singly linked list class csList.h/cpp.
 	- Added init, addNodeFront, addNodeBack, accessNode, updateNode, size, isEmpty, and print functions.

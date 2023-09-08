@@ -1,9 +1,13 @@
-#include <iostream>
-#include "demos.h"
+#include "sListDemo.h"
+#include "dListDemo.h"
+#include "fifoDemo.h"
+#include "stackDemo.h"
+#include "csListDemo.h"
+#include "cdListDemo.h"
 
 int main()
 {
-	std::cout << "linkedListDemo v0.15.0\n\n";
+	std::cout << "linkedListDemo v0.16.0\n\n";
 
 	singlyLinkedListDemo();
 	doublyLinkedListDemo();
