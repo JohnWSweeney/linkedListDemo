@@ -9,6 +9,12 @@ node* fifo::init(int data)
 
 void fifo::write(node* list, int data)
 {
+	if (list == NULL)
+	{
+		std::cout << "fifo.write: list is empty.\n";
+		return;
+	}
+
 	node* newNode = new node();
 	newNode->data = data;
 	do {
@@ -23,6 +29,12 @@ void fifo::write(node* list, int data)
 
 int fifo::read(node*& list)
 {
+	if (list == NULL)
+	{
+		std::cout << "fifo.read: list is empty.\n";
+		return INT_MIN;
+	}
+
 	node* dummy = list;
 	int data = dummy->data;
 	list = list->next;
@@ -32,6 +44,12 @@ int fifo::read(node*& list)
 
 int fifo::size(node* list)
 {
+	if (list == NULL)
+	{
+		std::cout << "fifo.size: list is empty.\n";
+		return INT_MIN;
+	}
+
 	int count = 0;
 	do {
 		++count;
@@ -44,6 +62,7 @@ void fifo::clear(node* list)
 {
 	if (list == NULL)
 	{
+		std::cout << "fifo.clear: list is empty.\n";
 		return;
 	}
 
@@ -57,6 +76,12 @@ void fifo::clear(node* list)
 
 void fifo::print(node* list)
 {
+	if (list == NULL)
+	{
+		std::cout << "fifo.print: list is empty.\n";
+		return;
+	}
+
 	int tempPos = 0;
 	std::cout << "#\tdata:\tnext:\n";
 	do {
@@ -64,4 +89,5 @@ void fifo::print(node* list)
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
+	std::cout << '\n';
 }

@@ -1,8 +1,74 @@
 # linkedListDemo
 
-A console app exploring linked lists amd their applications.
+A console app exploring linked lists and their applications. Currently, only the circular singly linked list and FIFO class functions can be controlled with console commands. The others will be added in a future release. The Windows executable is compiled with C++17.
+
+## Functions
+The app opens a console window on startup. Enter the *command* keywords separated by a space. Commands are case-sensitive. 
+
+### Circular Singly (CS) Linked List
+To start or stop a circular singly linked thread, enter:
+> *start cs*
+
+> *stop*
+
+CS functions "init", "addNodeFront", "addNodeBack", "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", and "print" are currently supported. Once the CS thread is running enter:
+> *init integer*
+
+to initialize the list with *integer*. 
+
+Nodes can be added to the beginning or end of the list with the "addNodeFront" and "addNodeBack" functions, respectively:
+> *addNodeFront integer*
+
+> *addNodeBack integer*
+
+Similarly, the first and last nodes can be removed by:
+> *deleteNodeFront*
+
+> *deleteNodeBack*
+
+To check if the list is empty, enter:
+> *isEmpty*
+
+To find the list's node count, enter:
+> *size*
+
+To view the list's current contents, enter:
+> *print*
+
+### FIFO (First-In-First-Out)
+The FIFO is implemented as a singly linked list. The FIFO function names are based on the Xilinx FIFO conventions. To start or stop a FIFO thread, enter:
+> *start fifo*
+
+> *stop*
+
+FIFO functions "init", "write", "read", "size", and "print" are currently supported. Once the FIFO thread is running enter:
+> *init integer*
+
+to initialize the FIFO's linked list with *integer*. This is the first FIFO entry. To make another entry at the end of the list, enter: 
+> *write integer*
+
+To read out the entry at the beginning of the list, enter:
+> *read*
+
+To find the FIFO's total entry count, enter:
+> *size*
+
+To view the FIFO's current contents, enter:
+> *print*
+
+## Future Updates
+- Console control of remaining list classes.
+
+## Download
+[linkedListDemo v1.0.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.0.0/linkedListDemov1_0_0.exe) [40 kB]
 
 ## ChangeLog
+v1.0.0
+- Removed demo functions in favor of interactive function threads.
+	- Added start, commands, threads, functions, and atomicBool headers/cpps.
+	- Added threaded control of circular singly linked list and FIFO classes.
+- Updated fifo class functions with list NULL catch statements.
+
 v0.16.0
 - Moved each class demo function in demos.h/cpp to its own .h/cpp files.
 - Updated circular singly linked list class csList.h/cpp.

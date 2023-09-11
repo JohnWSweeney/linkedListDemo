@@ -36,22 +36,19 @@
     <ClCompile Include="csList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cdListDemo.cpp">
+    <ClCompile Include="start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="csListDemo.cpp">
+    <ClCompile Include="atomicBool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stackDemo.cpp">
+    <ClCompile Include="commands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fifoDemo.cpp">
+    <ClCompile Include="threads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dListDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sListDemo.cpp">
+    <ClCompile Include="functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,22 +74,19 @@
     <ClInclude Include="csList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cdListDemo.h">
+    <ClInclude Include="start.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="csListDemo.h">
+    <ClInclude Include="atomicBool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stackDemo.h">
+    <ClInclude Include="commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fifoDemo.h">
+    <ClInclude Include="threads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dListDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sListDemo.h">
+    <ClInclude Include="functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
