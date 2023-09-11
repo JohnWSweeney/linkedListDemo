@@ -6,12 +6,10 @@
 struct cmd
 {
 	std::string listType;
+	std::vector<std::string> funcsInts;
+	std::vector<std::string> funcsNoInts;
 	std::string function;
-	bool hasInt;
 	int data;
 };
 
-int checkListType(std::string token, std::string &listType);
-int checkFunction(std::string token, bool &hasInt, std::string &function);
-int getInteger(std::string token, int &integer);
 int populateCmd(std::vector<std::string> tokens, cmd &cmd);

@@ -21,32 +21,32 @@ void startMenu(bool &running)
 	std::mutex m;
 	std::condition_variable cv;
 	cmd cmd;
+	int result;
 
 	std::unique_lock<std::mutex> lk(m);
 	while (true)
 	{
 		std::vector<std::string> tokens;
 		getCommands(tokens);
-
-		int result = populateCmd(tokens, cmd);
-		if (result != 0)
+		
+		if (tokens[0] == "start")
+		{
+			result = populateCmd(tokens, cmd);
+			if (result == 0)
+			{
+				status = true;
+				startThread(std::ref(m), std::ref(cv), std::ref(cmd));
+				cv.wait(lk);
+			}
+		}
+		else if (tokens[0] == "stop")
 		{
 			cmd = { };
-		}
-
-		if (cmd.function == "start")
-		{
-			status = true;
-			startThread(std::ref(m), std::ref(cv), std::ref(cmd));
-			cv.wait(lk);
-		}
-		else if (cmd.function == "stop")
-		{
 			status = false;
 			cv.notify_one();
 			cv.wait(lk);
 		}
-		else if (cmd.function == "exit")
+		else if (tokens[0] == "exit")
 		{
 			if (status == true)
 			{
@@ -59,8 +59,12 @@ void startMenu(bool &running)
 		}
 		else
 		{
-			cv.notify_one();
-			cv.wait(lk);
+			result = populateCmd(tokens, cmd);
+			if (result == 0)
+			{
+				cv.notify_one();
+				cv.wait(lk);
+			}
 		}
 	}
 }

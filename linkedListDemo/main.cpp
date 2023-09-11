@@ -2,7 +2,7 @@
 
 int main()
 {
-	std::cout << "linkedListDemo v1.0.0\n\n";
+	std::cout << "linkedListDemo v1.0.1\n\n";
 	bool running = true;
 	while (running)
 	{

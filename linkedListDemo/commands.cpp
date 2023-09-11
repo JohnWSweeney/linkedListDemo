@@ -1,52 +1,40 @@
 #include "commands.h"
 
 std::vector<std::string> listTypes = { "cs", "fifo" };
-std::vector<std::string> functionsWithIntegers = { "init", "addNodeFront", "addNodeBack", "write" };
-std::vector<std::string> functionsNoIntegers = { "deleteNodeFront", "deleteNodeBack", "read", "isEmpty", "size", "print", "start", "stop", "exit" };
 
-int checkListType(std::string token, std::string &listType)
+std::vector<std::string> csFuncsInts = { "init", "addNodeFront", "addNodeBack" };
+std::vector<std::string> csFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
+
+std::vector<std::string> fifoFuncsInts = { "init", "write" };
+std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "print" };
+
+int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {
-	auto result = std::find(listTypes.begin(), listTypes.end(), token);
-	if (result != listTypes.end())
+	if (token.empty())
 	{
-		listType = token;
-		return 0;
-	}
-	else
-	{
-		std::cout << "Invalid list type.\n";
 		return 1;
 	}
-}
 
-int checkFunction(std::string token, bool &hasInt, std::string &function)
-{
-	auto result = std::find(functionsWithIntegers.begin(), functionsWithIntegers.end(), token);
-	if (result != functionsWithIntegers.end())
+	auto result = std::find(strVector.begin(), strVector.end(), token);
+	if (result != strVector.end())
 	{
-		hasInt = true;
-		function = token;
+		cmdStr = token;
 		return 0;
 	}
 	else
 	{
-		auto result = std::find(functionsNoIntegers.begin(), functionsNoIntegers.end(), token);
-		if (result != functionsNoIntegers.end())
-		{
-			hasInt = false;
-			function = token;
-			return 0;
-		}
-		else
-		{
-			std::cout << "Invalid function.\n";
-			return 1;
-		}
+		return 1;
 	}
 }
 
 int getInteger(std::string token, int &integer)
 {
+	if (token.empty())
+	{
+		std::cout << "No integer entered.\n";
+		return 1;
+	}
+
 	try {
 		integer = std::stoi(token);
 		return 0;
@@ -65,38 +53,63 @@ int getInteger(std::string token, int &integer)
 
 int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 {
-	int result = checkFunction(tokens[0], cmd.hasInt, cmd.function);
-	if (result != 0)
+	// check if user entered at least two tokens (commands).
+	if (tokens.size() < 2)
 	{
+		std::cout << "Too few commands entered.\n";
 		return 1;
 	}
 
-	if (cmd.function == "start")
+	int result;
+	// on start, check if user entered valid list type.
+	if (cmd.listType.empty())
 	{
-		int listResult = checkListType(tokens[1], cmd.listType);
-		if (listResult != 0)
+		result = checkStringVector(tokens[1], listTypes, cmd.listType);
+		if (result == 1)
 		{
+			std::cout << "Invalid list type.\n";
 			return 1;
 		}
+
+		// if valid, populate cmd func string vectors.
+		if (cmd.listType == "cs")
+		{
+			cmd.funcsInts = csFuncsInts;
+			cmd.funcsNoInts = csFuncsNoInts;
+		}
+		else if (cmd.listType == "fifo")
+		{
+			cmd.funcsInts = fifoFuncsInts;
+			cmd.funcsNoInts = fifoFuncsNoInts;
+		}
+		return 0;
 	}
 
-	if (cmd.hasInt == true)
+	// check if user entered valid function for list type.
+	// first, check if user command also requires an integer.
+	result = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
+	if (result == 0)
 	{
-		result = getInteger(tokens[1], cmd.data);
-		if (result != 0)
+		// if so, get the integer.
+		int newResult = getInteger(tokens[1], cmd.data);
+		if (newResult == 0)
 		{
-			return 1;
+			return 0;
 		}
 		else
 		{
-			return 0;
+			return 1;
 		}
 	}
 	else
 	{
-		return 0;
+		// else, get the non integer requiring command.
+		int newResult = checkStringVector(tokens[0], cmd.funcsNoInts, cmd.function);
+		if (newResult == 0)
+		{
+			return 0;
+		}
+		std::cout << "Invalid function.\n";
+		return 1;
 	}
-
-
-
 }
