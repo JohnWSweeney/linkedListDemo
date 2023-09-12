@@ -1,9 +1,9 @@
 #include "commands.h"
 
-std::vector<std::string> listTypes = { "cs", "fifo" };
+std::vector<std::string> listTypes = { "csList", "fifo" };
 
-std::vector<std::string> csFuncsInts = { "init", "addNodeFront", "addNodeBack" };
-std::vector<std::string> csFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
+std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
+std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
 
 std::vector<std::string> fifoFuncsInts = { "init", "write" };
 std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "print" };
@@ -53,13 +53,6 @@ int getInteger(std::string token, int &integer)
 
 int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 {
-	// check if user entered at least two tokens (commands).
-	if (tokens.size() < 2)
-	{
-		std::cout << "Too few commands entered.\n";
-		return 1;
-	}
-
 	int result;
 	// on start, check if user entered valid list type.
 	if (cmd.listType.empty())
@@ -72,10 +65,10 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		}
 
 		// if valid, populate cmd func string vectors.
-		if (cmd.listType == "cs")
+		if (cmd.listType == "csList")
 		{
-			cmd.funcsInts = csFuncsInts;
-			cmd.funcsNoInts = csFuncsNoInts;
+			cmd.funcsInts = csListFuncsInts;
+			cmd.funcsNoInts = csListFuncsNoInts;
 		}
 		else if (cmd.listType == "fifo")
 		{
@@ -86,30 +79,39 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 	}
 
 	// check if user entered valid function for list type.
-	// first, check if user command also requires an integer.
-	result = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
+		// first, check if user command also requires an integer.
+	result = checkStringVector(tokens[0], cmd.funcsNoInts, cmd.function);
 	if (result == 0)
 	{
-		// if so, get the integer.
-		int newResult = getInteger(tokens[1], cmd.data);
-		if (newResult == 0)
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
+		return 0;
 	}
 	else
 	{
-		// else, get the non integer requiring command.
-		int newResult = checkStringVector(tokens[0], cmd.funcsNoInts, cmd.function);
+		// else, get the non integer-requiring command.
+		int newResult = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
 		if (newResult == 0)
 		{
-			return 0;
+			// first, check if user entered at least two tokens (commands).
+			if (tokens.size() < 2)
+			{
+				std::cout << "Too few commands entered.\n";
+				return 1;
+			}
+
+			int getIntResult = getInteger(tokens[1], cmd.data);
+			if (newResult == 0)
+			{
+				return 0;
+			}
+			else
+			{
+				return 1;
+			}
 		}
-		std::cout << "Invalid function.\n";
-		return 1;
+		else
+		{
+			std::cout << "Invalid function.\n";
+			return 1;
+		}
 	}
 }

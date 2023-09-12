@@ -63,6 +63,9 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.0.1](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.0.1/linkedListDemo_v1_0_1.exe) [42 kB]
 
 ## ChangeLog
+v1.0.2
+- Updated command struct "listType" and subsequence sorting functions to use class name, i.e. "csList" vs "cs" for circular singly linked list classes and functions.
+
 v1.0.1
 - Updated startMenu, command header/cpp functions.
 
