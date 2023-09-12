@@ -1,29 +1,11 @@
 #include "sList.h"
 // sweeney's hand-rolled singly linked list.
 
-node* sList::initList(int data)
+node* sList::init(int data)
 {
 	node* newNode = new node();
 	newNode->data = data;
 	return newNode;
-}
-
-void sList::addNode(node *list, int data, int pos)
-{
-	node *newNode = new node();
-	newNode->data = data;
-
-	int tempPos = 1;
-	do {
-		if (tempPos == pos)
-		{		
-			newNode->next = list->next;
-			list->next = newNode;
-			return;
-		}
-		list = list->next;
-		++tempPos;
-	} while (list != NULL);
 }
 
 void sList::addNodeFront(node *list, int data)
@@ -50,33 +32,29 @@ void sList::addNodeBack(node *list, int data)
 	} while (list != NULL);
 }
 
-int sList::accessNode(node *list, int pos)
+void sList::addNode(node *list, int data, int pos)
 {
-	int tempPos = 0;
+	node *newNode = new node();
+	newNode->data = data;
+
+	int tempPos = 1;
 	do {
 		if (tempPos == pos)
 		{
-			return list->data;
+			newNode->next = list->next;
+			list->next = newNode;
+			return;
 		}
-		++tempPos;
 		list = list->next;
+		++tempPos;
 	} while (list != NULL);
-	return INT_MIN;
 }
 
-int sList::updateNodeData(node *list, int data, int pos)
+void sList::deleteNodeFront(node** list)
 {
-	int tempPos = 0;
-	do {
-		if (tempPos == pos)
-		{
-			list->data = data;
-			return 0;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != NULL);
-	return 1;
+	node* dummy = *list;
+	*list = dummy->next;
+	delete dummy;
 }
 
 void sList::deleteNode(node *list, int pos)
@@ -109,11 +87,50 @@ void sList::deleteAfter(node* list, int pos)
 	} while (list->next != NULL);
 }
 
-void sList::deleteNodeFront(node** list)
+int sList::accessNode(node *list, int pos)
 {
-	node* dummy = *list;
-	*list = dummy->next;
-	delete dummy;
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			return list->data;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return INT_MIN;
+}
+
+int sList::updateNodeData(node *list, int data, int pos)
+{
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			list->data = data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return 1;
+}
+
+int sList::find(node *list, int data)
+{
+	int tempPos = 0;
+	do {
+		if (list->data == data)
+		{
+			return tempPos;
+		}
+		else
+		{
+			++tempPos;
+			list = list->next;
+		}
+	} while (list != NULL);
+	return -1;
 }
 
 void sList::clear(node** list)
@@ -131,7 +148,7 @@ void sList::clear(node** list)
 	} while (*list != NULL);
 }
 
-int sList::empty(node* list)
+int sList::isEmpty(node* list)
 {
 	if (list == NULL)
 	{
@@ -159,7 +176,7 @@ int sList::size(node *list)
 	return nodeCount;
 }
 
-void sList::printList(node *list, bool showDetails)
+void sList::print(node *list)
 {
 	if (list == NULL)
 	{
@@ -167,39 +184,12 @@ void sList::printList(node *list, bool showDetails)
 		return;
 	}
 
-	if (showDetails == true)
-	{
-		std::cout << "#:\tdata:\tlink:\n";
-	}
+	std::cout << "#:\tdata:\tlist:\t\t\tnext:\n";
 	int tempPos = 0;
 	do {
-		if (showDetails == true)
-		{
-			std::cout << tempPos << '\t' << list->data << '\t' << list->next << '\n';
-		}
-		else
-		{
-			std::cout << list->data << '\n';
-		}
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\n';
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
 	std::cout << '\n';
-}
-
-int sList::find(node *list, int data)
-{
-	int tempPos = 0;
-	do {
-		if (list->data == data)
-		{
-			return tempPos;
-		}
-		else
-		{
-			++tempPos;
-			list = list->next;
-		}
-	} while (list != NULL);
-	return -1;
 }

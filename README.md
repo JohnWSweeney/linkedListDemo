@@ -60,9 +60,13 @@ To view the FIFO's current contents, enter:
 - Console control of remaining list classes.
 
 ## Download
-[linkedListDemo v1.0.1](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.0.1/linkedListDemo_v1_0_1.exe) [42 kB]
+[linkedListDemo v1.1.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.1.0/linkedListDemo_v1_1_0).exe) [46 kB]
 
 ## ChangeLog
+v1.1.0
+- Updated singly linked list class functions and names: init, isEmpty, and print.
+- Added threaded control of singly linked list class.
+
 v1.0.2
 - Updated command struct "listType" and subsequence sorting functions to use class name, i.e. "csList" vs "cs" for circular singly linked list classes and functions.
 

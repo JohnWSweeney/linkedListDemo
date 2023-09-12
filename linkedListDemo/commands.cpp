@@ -1,6 +1,9 @@
 #include "commands.h"
 
-std::vector<std::string> listTypes = { "csList", "fifo" };
+std::vector<std::string> listTypes = { "sList", "csList", "fifo" };
+
+std::vector<std::string> sListFuncsInts = { "init", "addNodeBack" };
+std::vector<std::string> sListFuncsNoInts = { "clear", "isEmpty", "size", "print" };
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
 std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
@@ -65,7 +68,12 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		}
 
 		// if valid, populate cmd func string vectors.
-		if (cmd.listType == "csList")
+		if (cmd.listType == "sList")
+		{
+			cmd.funcsInts = sListFuncsInts;
+			cmd.funcsNoInts = sListFuncsNoInts;
+		}
+		else if (cmd.listType == "csList")
 		{
 			cmd.funcsInts = csListFuncsInts;
 			cmd.funcsNoInts = csListFuncsNoInts;

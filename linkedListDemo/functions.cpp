@@ -1,7 +1,63 @@
 #include "functions.h"
+#include "sList.h"
 #include "csList.h"
 #include "fifo.h"
 #include "atomicBool.h"
+
+void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Singly linked list thread started.\n";
+	sList slist;
+	int result;
+	node* list = NULL;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "init")
+		{
+			list = slist.init(cmd.data);
+			slist.print(list);
+		}
+		else if (cmd.function == "addNodeBack")
+		{
+			slist.addNodeBack(list, cmd.data);
+			slist.print(list);
+		}
+		else if (cmd.function == "clear")
+		{
+			slist.clear(&list);
+			slist.print(list);
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = slist.isEmpty(list);
+			if (result == 0)
+			{
+				std::cout << "List is not empty.\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			std::cout << "Node count: " << slist.size(list) << '\n';
+			slist.print(list);
+		}
+		else if (cmd.function == "print")
+		{
+			slist.print(list);
+		}
+		cv.notify_one();
+	}
+	cv.notify_all();
+	std::cout << "Singly linked list thread stopped.\n";
+}
 
 void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
