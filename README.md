@@ -60,7 +60,7 @@ To view the FIFO's current contents, enter:
 - Console control of remaining list classes.
 
 ## Download
-[linkedListDemo v1.1.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.1.0/linkedListDemo_v1_1_0).exe) [46 kB]
+[linkedListDemo v1.1.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.1.0/linkedListDemo_v1_1_0.exe) [46 kB]
 
 ## ChangeLog
 v1.1.0
