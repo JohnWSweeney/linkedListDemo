@@ -11,6 +11,7 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	sList slist;
 	int result;
 	node* list = NULL;
+	node* ptr = NULL;
 
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
@@ -23,10 +24,66 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			list = slist.init(cmd.data);
 			slist.print(list);
 		}
+		else if (cmd.function == "addNodeFront")
+		{
+			result = slist.addNodeFront(list, cmd.data);
+			if (result == 0)
+			{
+				std::cout << "Node added to list front.\n";
+				slist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			
+		}
 		else if (cmd.function == "addNodeBack")
 		{
 			slist.addNodeBack(list, cmd.data);
 			slist.print(list);
+		}
+		else if (cmd.function == "deleteNodeBack")
+		{
+			slist.deleteNodeBack(list);
+			slist.print(list);
+		}
+		else if (cmd.function == "deleteNodeByPtr")
+		{
+			result = slist.deleteNodeByPtr(&list, ptr);
+			if (result == 0)
+			{
+				std::cout << "Postion deleted.\n\n";
+				slist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+		}
+		else if (cmd.function == "returnPtrByPos")
+		{
+			result = slist.returnPtrByPos(list, cmd.data, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer to position " << cmd.data << ": " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Requested postition is out of bounds.\n";
+			}
 		}
 		else if (cmd.function == "clear")
 		{
@@ -52,6 +109,14 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "print")
 		{
+			slist.print(list);
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				slist.addNodeBack(list, i);
+			}
 			slist.print(list);
 		}
 		cv.notify_one();

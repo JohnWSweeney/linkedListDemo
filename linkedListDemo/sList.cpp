@@ -8,13 +8,19 @@ node* sList::init(int data)
 	return newNode;
 }
 
-void sList::addNodeFront(node *list, int data)
+int sList::addNodeFront(node *list, int data)
 {
-	node *newNode = new node();
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	node* newNode = new node();
 	newNode->data = list->data;
 	newNode->next = list->next;
 	list->data = data;
 	list->next = newNode;
+	return 0;
 }
 
 void sList::addNodeBack(node *list, int data)
@@ -57,6 +63,25 @@ void sList::deleteNodeFront(node** list)
 	delete dummy;
 }
 
+int sList::deleteNodeBack(node* list)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	do {
+		node* dummy = list->next;
+		if (dummy->next == NULL)
+		{
+			list->next = NULL;
+			delete dummy;
+			return 0;
+		}
+		list = list->next;
+	} while (list != NULL);
+}
+
 void sList::deleteNode(node *list, int pos)
 {
 	int tempPos = 0;
@@ -85,6 +110,61 @@ void sList::deleteAfter(node* list, int pos)
 		list->next = dummy->next;
 		delete dummy;
 	} while (list->next != NULL);
+}
+
+int sList::deleteNodeByPtr(node** list, node* ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+	if (ptr == NULL)
+	{
+		return -1;
+	}
+
+	if (*list == ptr)
+	{
+		node* dummy = *list;
+		*list = dummy->next;
+		delete dummy;
+		return 0;
+	}
+	else
+	{
+		node* curr = *list;
+		do {
+			node* dummy = curr->next;
+			if (dummy == ptr)
+			{
+				curr->next = dummy->next;
+				delete dummy;
+				return 0;
+			}
+			curr = curr->next;
+		} while (curr != NULL);
+		return -2;
+	}
+}
+
+int sList::returnPtrByPos(node* list, int pos, node* &ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			ptr = list;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
 }
 
 int sList::accessNode(node *list, int pos)
