@@ -19,6 +19,10 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	{
 		ptr = fifoFunc;
 	}
+	else if (cmd.listType == "stack")
+	{
+		ptr = stackFunc;
+	}
 
 	std::thread newThread(ptr, std::ref(m), std::ref(cv), std::ref(cmd));
 	newThread.detach();

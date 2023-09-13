@@ -2,6 +2,7 @@
 #include "sList.h"
 #include "csList.h"
 #include "fifo.h"
+#include "stack.h"
 #include "atomicBool.h"
 
 void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
@@ -164,4 +165,64 @@ void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	}
 	cv.notify_one();
 	std::cout << "FIFO thread stopped.\n";
+}
+
+void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Stack thread started.\n";
+	stack stack;
+	int result;
+	node* list = NULL;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "init")
+		{
+			list = stack.init(cmd.data);
+			stack.print(list);
+		}
+		else if (cmd.function == "push")
+		{
+			stack.push(list, cmd.data);
+			stack.print(list);
+		}
+		else if (cmd.function == "pop")
+		{
+			std::cout << "Stack output: " << stack.pop(&list) << '\n';
+			stack.print(list);
+		}
+		else if (cmd.function == "clear")
+		{
+			stack.clear(&list);
+			stack.print(list);
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = stack.isEmpty(list);
+			if (result == 0)
+			{
+				std::cout << "Stack is not empty.\n";
+			}
+			else
+			{
+				std::cout << "Stack is empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			std::cout << "Stack size: " << stack.size(list) << '\n';
+			stack.print(list);
+		}
+		else if (cmd.function == "print")
+		{
+			stack.print(list);
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "Stack thread stopped.\n";
 }

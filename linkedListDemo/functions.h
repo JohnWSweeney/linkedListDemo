@@ -8,3 +8,4 @@
 void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);

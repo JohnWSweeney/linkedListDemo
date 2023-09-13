@@ -60,9 +60,13 @@ To view the FIFO's current contents, enter:
 - Console control of remaining list classes.
 
 ## Download
-[linkedListDemo v1.1.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.1.0/linkedListDemo_v1_1_0.exe) [46 kB]
+[linkedListDemo v1.2.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.2.0/linkedListDemo_v1_2_0.exe) [49 kB]
 
 ## ChangeLog
+v1.2.0
+- Added clear, isEmpty, size functions to stack class.
+- Added threaded control of stack class.
+
 v1.1.0
 - Updated singly linked list class functions and names: init, isEmpty, and print.
 - Added threaded control of singly linked list class.

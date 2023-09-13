@@ -1,6 +1,6 @@
 #include "commands.h"
 
-std::vector<std::string> listTypes = { "sList", "csList", "fifo" };
+std::vector<std::string> listTypes = { "sList", "csList", "fifo", "stack" };
 
 std::vector<std::string> sListFuncsInts = { "init", "addNodeBack" };
 std::vector<std::string> sListFuncsNoInts = { "clear", "isEmpty", "size", "print" };
@@ -10,6 +10,9 @@ std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBac
 
 std::vector<std::string> fifoFuncsInts = { "init", "write" };
 std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "print" };
+
+std::vector<std::string> stackFuncsInts = { "init", "push" };
+std::vector<std::string> stackFuncsNoInts = { "pop", "clear", "isEmpty", "size", "print" };
 
 int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {
@@ -82,6 +85,11 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		{
 			cmd.funcsInts = fifoFuncsInts;
 			cmd.funcsNoInts = fifoFuncsNoInts;
+		}
+		else if (cmd.listType == "stack")
+		{
+			cmd.funcsInts = stackFuncsInts;
+			cmd.funcsNoInts = stackFuncsNoInts;
 		}
 		return 0;
 	}
