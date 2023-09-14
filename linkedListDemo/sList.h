@@ -16,8 +16,10 @@ public:
 	int deleteNodeByPtr(node** list, node* ptr);
 	int returnPtrByPos(node* list, int pos, node* &ptr);
 	int accessNode(node *list, int pos);
-	int updateNodeData(node *list, int data, int pos);
-	int find(node *list, int data);
+	int updateDataByPos(node* list, int data, int pos);
+	int updateDataByPtr(node* list, int data, node* ptr);
+	int findDataReturnPos(node* list, int data, int &pos);
+	int findDataReturnPtr(node* list, int data, node* &ptr);
 	void clear(node** list);
 	int isEmpty(node* list);
 	int size(node *list);

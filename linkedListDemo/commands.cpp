@@ -2,7 +2,7 @@
 
 std::vector<std::string> listTypes = { "sList", "csList", "fifo", "stack" };
 
-std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos" };
+std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> sListFuncsNoInts = { "deleteNodeBack", "deleteNodeByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };

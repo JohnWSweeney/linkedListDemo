@@ -200,8 +200,13 @@ int sList::accessNode(node *list, int pos)
 	return INT_MIN;
 }
 
-int sList::updateNodeData(node *list, int data, int pos)
+int sList::updateDataByPos(node* list, int data, int pos)
 {
+	if (list == NULL)
+	{
+		return 1;
+	}
+
 	int tempPos = 0;
 	do {
 		if (tempPos == pos)
@@ -212,22 +217,65 @@ int sList::updateNodeData(node *list, int data, int pos)
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
-	return 1;
+	return -1;
 }
 
-int sList::find(node *list, int data)
+int sList::updateDataByPtr(node* list, int data, node* ptr)
 {
+	if (list == NULL)
+	{
+		return 1;
+	}
+	if (ptr == NULL)
+	{
+		return -2;
+	}
+
+	do {
+		if (list == ptr)
+		{
+			list->data = data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
+int sList::findDataReturnPos(node* list, int data, int &pos)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
 	int tempPos = 0;
 	do {
 		if (list->data == data)
 		{
-			return tempPos;
+			pos = tempPos;
+			return 0;
 		}
-		else
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
+int sList::findDataReturnPtr(node* list, int data, node* &ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	do {
+		if (list->data == data)
 		{
-			++tempPos;
-			list = list->next;
+			ptr = list;
+			return 0;
 		}
+		list = list->next;
 	} while (list != NULL);
 	return -1;
 }
