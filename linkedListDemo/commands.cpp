@@ -2,7 +2,7 @@
 
 std::vector<std::string> listTypes = { "sList", "csList", "fifo", "stack" };
 
-std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "returnPtrByPos" };
+std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos" };
 std::vector<std::string> sListFuncsNoInts = { "deleteNodeBack", "deleteNodeByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
@@ -104,8 +104,8 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 	else
 	{
 		// else, get the non integer-requiring command.
-		int newResult = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
-		if (newResult == 0)
+		result = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
+		if (result == 0)
 		{
 			// first, check if user entered at least two tokens (commands).
 			if (tokens.size() < 2)
@@ -113,15 +113,34 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 				std::cout << "Too few commands entered.\n";
 				return 1;
 			}
-
-			int getIntResult = getInteger(tokens[1], cmd.data);
-			if (newResult == 0)
+			else if (tokens.size() == 2)
 			{
-				return 0;
+				result = getInteger(tokens[1], cmd.input1);
+				if (result == 0)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
 			}
-			else
+			else if (tokens.size() == 3)
 			{
-				return 1;
+				result = getInteger(tokens[1], cmd.input1);
+				if(result == 1)
+				{
+					return 1;
+				}
+				result = getInteger(tokens[2], cmd.input2);
+				if (result == 0)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
 			}
 		}
 		else

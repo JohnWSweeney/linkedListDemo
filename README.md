@@ -63,6 +63,11 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.2.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.2.0/linkedListDemo_v1_2_0.exe) [49 kB]
 
 ## ChangeLog
+v1.3.0
+- Renamed int data in cmd struct to input1, added int input2, int output.
+- Added addNodeByPos function to sList class.
+- Updated affected functions in commands, functions cpps.
+
 v1.2.1
 - Added addNodeFront, addNodes, deleteNodeBack, returnPtrByPos, deleteNodeByPtr functions to sList class, sListFuncsInts in commands cpp, sFunc in functions cpp.
 

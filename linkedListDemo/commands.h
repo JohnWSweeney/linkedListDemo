@@ -9,7 +9,9 @@ struct cmd
 	std::vector<std::string> funcsInts;
 	std::vector<std::string> funcsNoInts;
 	std::string function;
-	int data;
+	int input1;
+	int input2;
+	int output;
 };
 
 int populateCmd(std::vector<std::string> tokens, cmd &cmd);

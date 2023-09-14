@@ -38,22 +38,41 @@ void sList::addNodeBack(node *list, int data)
 	} while (list != NULL);
 }
 
-void sList::addNode(node *list, int data, int pos)
+int sList::addNodeByPos(node* list, int data, int pos)
 {
-	node *newNode = new node();
-	newNode->data = data;
+	if (list == NULL)
+	{
+		return 1;
+	}
 
-	int tempPos = 1;
-	do {
-		if (tempPos == pos)
-		{
-			newNode->next = list->next;
-			list->next = newNode;
-			return;
-		}
-		list = list->next;
-		++tempPos;
-	} while (list != NULL);
+	if (pos == 0)
+	{
+		node* newNode = new node();
+		newNode->data = list->data;
+		newNode->next = list->next;
+		list->data = data;
+		list->next = newNode;
+		return 0;
+	}
+	else
+	{
+		int tempPos = 0;
+		do {
+			if (pos == tempPos + 1)
+			{
+				std::cout << list->data << '\n';
+				node* after = list->next;
+				node* newNode = new node();
+				newNode->data = data;
+				newNode->next = after;
+				list->next = newNode;
+				return 0;
+			}
+			++tempPos;
+			list = list->next;
+		} while (list->next != NULL);
+		return -1;
+	}
 }
 
 void sList::deleteNodeFront(node** list)

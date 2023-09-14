@@ -21,12 +21,12 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "init")
 		{
-			list = slist.init(cmd.data);
+			list = slist.init(cmd.input1);
 			slist.print(list);
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			result = slist.addNodeFront(list, cmd.data);
+			result = slist.addNodeFront(list, cmd.input1);
 			if (result == 0)
 			{
 				std::cout << "Node added to list front.\n";
@@ -40,8 +40,25 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeBack")
 		{
-			slist.addNodeBack(list, cmd.data);
+			slist.addNodeBack(list, cmd.input1);
 			slist.print(list);
+		}
+		else if (cmd.function == "addNodeByPos")
+		{
+			result = slist.addNodeByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				std::cout << "Postion added.\n\n";
+				slist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is out of bounds.\n\n";
+			}
 		}
 		else if (cmd.function == "deleteNodeBack")
 		{
@@ -71,10 +88,10 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnPtrByPos")
 		{
-			result = slist.returnPtrByPos(list, cmd.data, ptr);
+			result = slist.returnPtrByPos(list, cmd.input1, ptr);
 			if (result == 0)
 			{
-				std::cout << "Pointer to position " << cmd.data << ": " << ptr << '\n';
+				std::cout << "Pointer to position " << cmd.input1 << ": " << ptr << '\n';
 			}
 			else if (result == 1)
 			{
@@ -140,17 +157,17 @@ void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "init")
 		{
-			list = cslist.init(cmd.data);
+			list = cslist.init(cmd.input1);
 			cslist.print(list);
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			cslist.addNodeFront(list, cmd.data);
+			cslist.addNodeFront(list, cmd.input1);
 			cslist.print(list);
 		}
 		else if (cmd.function == "addNodeBack")
 		{
-			cslist.addNodeBack(list, cmd.data);
+			cslist.addNodeBack(list, cmd.input1);
 			cslist.print(list);
 		}
 		else if (cmd.function == "deleteNodeFront")
@@ -204,12 +221,12 @@ void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "init")
 		{
-			list = fifo.init(cmd.data);
+			list = fifo.init(cmd.input1);
 			fifo.print(list);
 		}
 		else if (cmd.function == "write")
 		{
-			fifo.write(list, cmd.data);
+			fifo.write(list, cmd.input1);
 			fifo.print(list);
 		}
 		else if (cmd.function == "read")
@@ -247,12 +264,12 @@ void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "init")
 		{
-			list = stack.init(cmd.data);
+			list = stack.init(cmd.input1);
 			stack.print(list);
 		}
 		else if (cmd.function == "push")
 		{
-			stack.push(list, cmd.data);
+			stack.push(list, cmd.input1);
 			stack.print(list);
 		}
 		else if (cmd.function == "pop")

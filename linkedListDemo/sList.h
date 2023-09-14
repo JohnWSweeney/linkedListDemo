@@ -8,7 +8,7 @@ public:
 	node* init(int data);
 	int addNodeFront(node *list, int data);
 	void addNodeBack(node *list, int data);
-	void addNode(node *list, int data, int pos);
+	int addNodeByPos(node* list, int data, int pos);
 	void deleteNodeFront(node** list);
 	int deleteNodeBack(node* list);
 	void deleteNode(node *list, int pos);
