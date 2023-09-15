@@ -10,6 +10,7 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Singly linked list thread started.\n";
 	sList slist;
 	int result;
+	int nodeCount;
 	node* list = NULL;
 	node* ptr = NULL;
 
@@ -40,8 +41,15 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeBack")
 		{
-			slist.addNodeBack(list, cmd.input1);
-			slist.print(list);
+			result = slist.addNodeBack(list, cmd.input1);
+			if (result == 0)
+			{
+				slist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "addNodeByPos")
 		{
@@ -60,10 +68,37 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeFront")
+		{
+			result = slist.deleteNodeFront(&list);
+			if (result == 0)
+			{
+				result = slist.print(list);
+				if (result != 0)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "deleteNodeBack")
 		{
-			slist.deleteNodeBack(list);
-			slist.print(list);
+			result = slist.deleteNodeBack(list);
+			if (result == 0)
+			{
+				result = slist.print(list);
+				if (result != 0)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "deleteNodeByPtr")
 		{
@@ -230,8 +265,15 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "clear")
 		{
-			slist.clear(&list);
-			slist.print(list);
+			result = slist.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List cleared.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "isEmpty")
 		{
@@ -247,12 +289,24 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "size")
 		{
-			std::cout << "Node count: " << slist.size(list) << '\n';
-			slist.print(list);
+			result = slist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			
 		}
 		else if (cmd.function == "print")
 		{
-			slist.print(list);
+			result = slist.print(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "addNodes")
 		{

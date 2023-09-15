@@ -23,16 +23,21 @@ int sList::addNodeFront(node *list, int data)
 	return 0;
 }
 
-void sList::addNodeBack(node *list, int data)
+int sList::addNodeBack(node *list, int data)
 {
-	node *newNode = new node();
-	newNode->data = data;
+	if (list == NULL)
+	{
+		return 1;
+	}
 
 	do {
 		if (list->next == NULL)
 		{
+			node* newNode = new node();
+			newNode->data = data;
+			newNode->next = NULL;
 			list->next = newNode;
-			return;
+			return 0;
 		}
 		list = list->next;
 	} while (list != NULL);
@@ -75,11 +80,17 @@ int sList::addNodeByPos(node* list, int data, int pos)
 	}
 }
 
-void sList::deleteNodeFront(node** list)
+int sList::deleteNodeFront(node** list)
 {
+	if (*list == NULL)
+	{
+		return 1;
+	}
+
 	node* dummy = *list;
 	*list = dummy->next;
 	delete dummy;
+	return 0;
 }
 
 int sList::deleteNodeBack(node* list)
@@ -99,36 +110,6 @@ int sList::deleteNodeBack(node* list)
 		}
 		list = list->next;
 	} while (list != NULL);
-}
-
-void sList::deleteNode(node *list, int pos)
-{
-	int tempPos = 0;
-	do {
-		if (tempPos == pos - 1)
-		{
-			node* dummy = list->next;
-			list->next = dummy->next;
-			delete dummy;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != NULL);
-}
-
-void sList::deleteAfter(node* list, int pos)
-{
-	int tempPos = 0;
-	do {
-		++tempPos;
-		list = list->next;
-	} while (tempPos != pos);
-
-	do {
-		node* dummy = list->next;
-		list->next = dummy->next;
-		delete dummy;
-	} while (list->next != NULL);
 }
 
 int sList::deleteNodeByPtr(node** list, node* ptr)
@@ -332,12 +313,11 @@ int sList::findDataReturnPtr(node* list, int data, node* &ptr)
 	return -1;
 }
 
-void sList::clear(node** list)
+int sList::clear(node** list)
 {
 	if (list == NULL)
 	{
-		std::cout << "list is empty.\n";
-		return;
+		return 1;
 	}
 
 	do {
@@ -345,6 +325,7 @@ void sList::clear(node** list)
 		*list = dummy->next;
 		delete dummy;
 	} while (*list != NULL);
+	return 0;
 }
 
 int sList::isEmpty(node* list)
@@ -359,36 +340,35 @@ int sList::isEmpty(node* list)
 	}
 }
 
-int sList::size(node *list)
+int sList::size(node *list, int &nodeCount)
 {
 	if (list == NULL)
 	{
-		std::cout << "list is empty.\n";
-		return INT_MIN;
+		return 1;
 	}
 
-	int nodeCount = 0;
+	nodeCount = 0;
 	do {
 		++nodeCount;
 		list = list->next;
 	} while (list != NULL);
-	return nodeCount;
+	return 0;
 }
 
-void sList::print(node *list)
+int sList::print(node* list)
 {
 	if (list == NULL)
 	{
-		std::cout << "list is empty.\n";
-		return;
+		return 1;
 	}
 
-	std::cout << "#:\tdata:\tlist:\t\t\tnext:\n";
 	int tempPos = 0;
+	std::cout << "#\tdata:\tlist:\t\t\tnext:\n";
 	do {
-		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\n';
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << '\n';
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
 	std::cout << '\n';
+	return 0;
 }
