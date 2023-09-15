@@ -63,6 +63,9 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.2.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.2.0/linkedListDemo_v1_2_0.exe) [49 kB]
 
 ## ChangeLog
+v1.3.2
+- Added returnPosByPtr, returnDataByPos, and returnDataByPtr functions to sList class.
+
 v1.3.1
 - Added updateDataByPos, updateDataByPtr, findDataReturnPos, and findDataReturnPtr functions to sList class.
 

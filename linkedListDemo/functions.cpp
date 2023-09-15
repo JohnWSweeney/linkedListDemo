@@ -102,6 +102,62 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Requested postition is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "returnPosByPtr")
+		{
+			result = slist.returnPosByPtr(list, cmd.output, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPos")
+		{
+			result = slist.returnDataByPos(list, cmd.output, cmd.input1);
+			if (result == 0)
+			{
+				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPtr")
+		{
+			result = slist.returnDataByPtr(list, cmd.output, ptr);
+			if (result == 0)
+			{
+				std::cout << "Data in pointer " << ptr << ": " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+		}
 		else if (cmd.function == "updateDataByPos")
 		{
 			result = slist.updateDataByPos(list, cmd.input1, cmd.input2);
@@ -202,7 +258,7 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		{
 			for (int i = 0; i < 9; i++)
 			{
-				slist.addNodeBack(list, i);
+				slist.addNodeBack(list, i * i * i);
 			}
 			slist.print(list);
 		}

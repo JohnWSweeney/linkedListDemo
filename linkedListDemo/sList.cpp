@@ -186,18 +186,70 @@ int sList::returnPtrByPos(node* list, int pos, node* &ptr)
 	return -1;
 }
 
-int sList::accessNode(node *list, int pos)
+int sList::returnPosByPtr(node* list, int &pos, node* ptr)
 {
+	if (list == NULL)
+	{
+		return 1;
+	}
+	if (ptr == NULL)
+	{
+		return -2;
+	}
+
 	int tempPos = 0;
 	do {
-		if (tempPos == pos)
+		if (list == ptr)
 		{
-			return list->data;
+			pos = tempPos;
+			return 0;
 		}
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
-	return INT_MIN;
+	return -1;
+}
+
+int sList::returnDataByPos(node* list, int &data, int pos)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			data = list->data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != 0);
+	return -1;
+}
+
+int sList::returnDataByPtr(node* list, int &data, node* ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+	if (ptr == NULL)
+	{
+		return -2;
+	}
+
+	do {
+		if (list == ptr)
+		{
+			data = list->data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != NULL);
+	return -1;
 }
 
 int sList::updateDataByPos(node* list, int data, int pos)
