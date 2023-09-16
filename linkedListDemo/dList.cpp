@@ -47,6 +47,70 @@ int dList::addNodeBack(dNode* list, int data)
 	} while (list != NULL);
 }
 
+int dList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			ptr = list;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
+int dList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+	if (ptr == NULL)
+	{
+		return -2;
+	}
+
+	int tempPos = 0;
+	do {
+		if (list == ptr)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
+int dList::returnDataByPos(dNode* list, int &data, int pos)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			data = list->data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
 int dList::clear(dNode** list)
 {
 	if (*list == NULL)

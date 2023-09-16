@@ -5,8 +5,8 @@ std::vector<std::string> listTypes = { "sList", "dList", "csList", "fifo", "stac
 std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
 
-std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack" };
-std::vector<std::string> dListFuncNoInts = { "clear", "isEmpty", "size", "print" };
+std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "returnPtrByPos", "returnDataByPos" };
+std::vector<std::string> dListFuncNoInts = { "returnPosByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
 std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };

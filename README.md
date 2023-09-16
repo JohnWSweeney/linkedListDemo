@@ -67,7 +67,7 @@ v1.4.0
 - Renamed class demo functions in functions header/cpp to from "-Func" to "-Demo".
 - Added interactive doubly linked list class demo, updated commands, functions, threads headers/cpps accordingly. 
 - Began refactoring dList class: removed all functions, adding revised versions.
-	- Added init, addNodeFront, addNodeBack, isEmpty, size, and print functions.
+	- Added init, addNodeFront, addNodeBack, clear, isEmpty, size, and print functions.
 
 v1.3.3
 - Updated addNodeBack, deleteNodeFront, clear, size, and print functions in sList class to return int error codes.

@@ -8,6 +8,9 @@ public:
 	dNode* init(int data);
 	int addNodeFront(dNode** list, int data);
 	int addNodeBack(dNode* list, int data);
+	int returnPtrByPos(dNode* list, int pos, dNode* &ptr);
+	int returnPosByPtr(dNode* list, int &pos, dNode* ptr);
+	int returnDataByPos(dNode* list, int &data, int pos);
 	int clear(dNode** list);
 	int size(dNode* list, int &nodeCount);
 	int isEmpty(dNode* list);
