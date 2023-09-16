@@ -419,6 +419,39 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "updateDataByPos")
+		{
+			result = dlist.updateDataByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				std::cout << "List updated.\n";
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is out of bounds.\n";
+			}
+		}
+		else if (cmd.function == "findDataReturnPos")
+		{
+			result = dlist.findDataReturnPos(list, cmd.input1, cmd.output);
+			if (result == 0)
+			{
+				std::cout << "Data '" << cmd.input1 << "' found in position " << cmd.output << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Data not found in list.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = dlist.clear(&list);
@@ -479,6 +512,11 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "List is empty.\n";
 			}
+		}
+		else if (cmd.function == "clearPtr")
+		{
+			ptr = NULL;
+			std::cout << "Pointer cleared.\n";
 		}
 		cv.notify_one();
 	}

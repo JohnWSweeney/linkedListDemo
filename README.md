@@ -60,9 +60,17 @@ To view the FIFO's current contents, enter:
 - Console control of remaining list classes.
 
 ## Download
-[linkedListDemo v1.2.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.2.0/linkedListDemo_v1_2_0.exe) [49 kB]
+[linkedListDemo v1.4.2](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.4.2/linkedListDemo_v1_4_2.exe) [61 kB]
 
 ## ChangeLog
+v1.4.2
+- Updated dList class, demo.
+	- Added updateDataByPos, findDataReturnPos, and clearPtr functions.
+
+v1.4.1
+- Updated dList class, demo.
+	- Added returnPtrByPos, returnPosByPtr, returnDataByPos, and addNodes functions.
+
 v1.4.0
 - Renamed class demo functions in functions header/cpp to from "-Func" to "-Demo".
 - Added interactive doubly linked list class demo, updated commands, functions, threads headers/cpps accordingly. 

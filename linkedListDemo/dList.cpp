@@ -111,6 +111,46 @@ int dList::returnDataByPos(dNode* list, int &data, int pos)
 	return -1;
 }
 
+int dList::updateDataByPos(dNode* list, int data, int pos)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			list->data = data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
+int dList::findDataReturnPos(dNode* list, int data, int &pos)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	int tempPos = 0;
+	do {
+		if (list->data == data)
+		{
+			pos == tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
 int dList::clear(dNode** list)
 {
 	if (*list == NULL)
