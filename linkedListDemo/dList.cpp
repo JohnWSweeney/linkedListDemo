@@ -1,150 +1,108 @@
 #include "dList.h"
 
-dNode* dList::initList(int data)
+dNode* dList::init(int data)
 {
 	dNode* newNode = new dNode();
 	newNode->data = data;
+	newNode->next = NULL;
+	newNode->prev = NULL;
 	return newNode;
 }
 
-void dList::addNodeFront(dNode *list, int data)
+int dList::addNodeFront(dNode** list, int data)
 {
-	dNode *newNode = new dNode();
-	newNode->data = list->data;
-	newNode->next = list->next;
-	newNode->prev = list;
-	list->data = data;
-	list->next = newNode;
+	if (*list == NULL)
+	{
+		return 1;
+	}
+
+	dNode* head = *list;
+	dNode* newHead = new dNode();
+	newHead->data = data;
+	newHead->next = head;
+	newHead->prev = NULL;
+	head->prev = newHead;
+	*list = newHead;
+	return 0;
 }
 
-void dList::addNodeBack(dNode *list, int data)
+int dList::addNodeBack(dNode* list, int data)
 {
-	dNode *newNode = new dNode();
-	newNode->data = data;
+	if (list == NULL)
+	{
+		return 1;
+	}
 
 	do {
 		if (list->next == NULL)
 		{
-			list->next = newNode;
+			dNode* newNode = new dNode();
+			newNode->data = data;
+			newNode->next = NULL;
 			newNode->prev = list;
-			return;
-		}
-		list = list->next;
-	} while (list != NULL);
-}
-
-int dList::accessNode(dNode *list, int pos)
-{
-	int tempPos = 0;
-	do {
-		if (tempPos == pos)
-		{
-			return list->data;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != NULL);
-}
-
-int dList::updateNodeData(dNode *list, int data, int pos)
-{
-	int tempPos = 0;
-	do {
-		if (tempPos == pos)
-		{
-			list->data = data;
+			list->next = newNode;
 			return 0;
 		}
-		++tempPos;
-		list = list->next;
-	} while (list != NULL);
-	return 1;
-}
-
-void dList::deleteNode(dNode* list, int pos)
-{
-	int tempPos = 0;
-	do {
-		if (tempPos == pos - 1)
-		{
-			dNode* dummy = list->next;
-			list->next = dummy->next;
-			list = list->next;
-			list->prev = dummy->prev;
-			delete dummy;
-		}
-		++tempPos;
 		list = list->next;
 	} while (list != NULL);
 }
 
-void dList::deleteAfter(dNode* list, int pos)
+int dList::clear(dNode** list)
 {
-	int tempPos = 0;
-	do {
-		++tempPos;
-		list = list->next;
-	} while (tempPos != pos);
+	if (*list == NULL)
+	{
+		return 1;
+	}
 
 	do {
-		dNode* dummy = list->next;
-		list->next = dummy->next;
+		dNode* dummy = *list;
+		*list = dummy->next;
 		delete dummy;
-	} while (list->next != NULL);
+	} while (*list != NULL);
+	return 0;
 }
 
-void dList::clear(dNode* list)
+int dList::size(dNode* list, int &nodeCount)
 {
-	do {
-		dNode* dummy = list->next;
-		list->next = dummy->next;
-		delete dummy;
-	} while (list->next != NULL);
-	list->data = 0;
-}
+	if (list == NULL)
+	{
+		return 1;
+	}
 
-int dList::size(dNode *list)
-{
-	int nodeCount = 0;
+	nodeCount = 0;
 	do {
 		++nodeCount;
 		list = list->next;
 	} while (list != NULL);
-	return nodeCount;
+	return 0;
 }
 
-void dList::printList(dNode *list, bool showDetails)
+int dList::isEmpty(dNode* list)
 {
-	if (showDetails == true)
+	if (list == NULL)
 	{
-		std::cout << "#:\tdata:\tprev:\t\t\tnext:\n";
+		return 1;
 	}
+	else
+	{
+		return 0;
+	}
+}
+
+int dList::print(dNode* list)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
 	int tempPos = 0;
+	std::cout << "#\tdata:\tcurr:\t\t\tnext:\t\t\tprev:\n";
 	do {
-		if (showDetails == true)
-		{
-			std::cout << tempPos << '\t' << list->data << '\t' << list->prev << '\t' << list->next << '\n';
-		}
-		else
-		{
-			std::cout << list->data << '\n';
-		}
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
 		++tempPos;
 		list = list->next;
 	} while (list != NULL);
 	std::cout << '\n';
-}
-
-int dList::find(dNode *list, int data)
-{
-	int tempPos = 0;
-	do {
-		if (list->data == data)
-		{
-			return tempPos;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != NULL);
-	return INT_MIN;
+	return 0;
 }

@@ -5,7 +5,8 @@
 #include <condition_variable>
 #include "commands.h"
 
-void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
-void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
-void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
-void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);

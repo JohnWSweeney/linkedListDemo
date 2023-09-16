@@ -8,7 +8,7 @@ node* sList::init(int data)
 	return newNode;
 }
 
-int sList::addNodeFront(node *list, int data)
+int sList::addNodeFront(node* list, int data)
 {
 	if (list == NULL)
 	{
@@ -23,7 +23,7 @@ int sList::addNodeFront(node *list, int data)
 	return 0;
 }
 
-int sList::addNodeBack(node *list, int data)
+int sList::addNodeBack(node* list, int data)
 {
 	if (list == NULL)
 	{
@@ -340,7 +340,7 @@ int sList::isEmpty(node* list)
 	}
 }
 
-int sList::size(node *list, int &nodeCount)
+int sList::size(node* list, int &nodeCount)
 {
 	if (list == NULL)
 	{

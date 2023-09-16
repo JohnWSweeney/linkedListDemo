@@ -6,8 +6,8 @@ class sList
 {
 public:
 	node* init(int data);
-	int addNodeFront(node *list, int data);
-	int addNodeBack(node *list, int data);
+	int addNodeFront(node* list, int data);
+	int addNodeBack(node* list, int data);
 	int addNodeByPos(node* list, int data, int pos);
 	int deleteNodeFront(node** list);
 	int deleteNodeBack(node* list);
@@ -22,6 +22,6 @@ public:
 	int findDataReturnPtr(node* list, int data, node* &ptr);
 	int clear(node** list);
 	int isEmpty(node* list);
-	int size(node *list, int &nodeCount);
-	int print(node *list);
+	int size(node* list, int &nodeCount);
+	int print(node* list);
 };

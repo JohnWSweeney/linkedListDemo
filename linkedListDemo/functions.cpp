@@ -1,13 +1,14 @@
 #include "functions.h"
 #include "sList.h"
+#include "dList.h"
 #include "csList.h"
 #include "fifo.h"
 #include "stack.h"
 #include "atomicBool.h"
 
-void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
-	std::cout << "Singly linked list thread started.\n";
+	std::cout << "Singly linked list demo started.\n";
 	sList slist;
 	int result;
 	int nodeCount;
@@ -318,13 +319,107 @@ void sFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		cv.notify_one();
 	}
-	cv.notify_all();
-	std::cout << "Singly linked list thread stopped.\n";
+	cv.notify_one();
+	std::cout << "Singly linked list demo stopped.\n";
 }
 
-void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
-	std::cout << "Circular singly linked list thread started.\n";
+	std::cout << "Doubly linked list demo started.\n";
+	dList dlist;
+	int result;
+	int nodeCount;
+	dNode* list = NULL;
+	dNode* ptr = NULL;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "init")
+		{
+			list = dlist.init(cmd.input1);
+			dlist.print(list);
+		}
+		else if (cmd.function == "addNodeFront")
+		{
+			result = dlist.addNodeFront(&list, cmd.input1);
+			if (result == 0)
+			{
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodeBack")
+		{
+			result = dlist.addNodeBack(list, cmd.input1);
+			if (result == 0)
+			{
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "clear")
+		{
+			result = dlist.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List cleared.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = dlist.isEmpty(list);
+			if (result == 0)
+			{
+				std::cout << "List is not empty.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "list is empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			result = dlist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "print")
+		{
+			result = dlist.print(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "Doubly linked list demo stopped.\n";
+}
+
+void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Circular singly linked list demo started.\n";
 	csList cslist;
 	int result;
 	node* list = NULL;
@@ -384,12 +479,12 @@ void csFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		cv.notify_one();
 	}
 	cv.notify_one();
-	std::cout << "Circular singly linked list thread stopped.\n";
+	std::cout << "Circular singly linked list demo stopped.\n";
 }
 
-void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
-	std::cout << "FIFO thread started.\n";
+	std::cout << "FIFO demo started.\n";
 	fifo fifo;
 	node* list = NULL;
 
@@ -426,12 +521,12 @@ void fifoFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		cv.notify_one();
 	}
 	cv.notify_one();
-	std::cout << "FIFO thread stopped.\n";
+	std::cout << "FIFO demo stopped.\n";
 }
 
-void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
-	std::cout << "Stack thread started.\n";
+	std::cout << "Stack demo started.\n";
 	stack stack;
 	int result;
 	node* list = NULL;
@@ -486,5 +581,5 @@ void stackFunc(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		cv.notify_one();
 	}
 	cv.notify_one();
-	std::cout << "Stack thread stopped.\n";
+	std::cout << "Stack dmeo stopped.\n";
 }

@@ -63,6 +63,12 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.2.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.2.0/linkedListDemo_v1_2_0.exe) [49 kB]
 
 ## ChangeLog
+v1.4.0
+- Renamed class demo functions in functions header/cpp to from "-Func" to "-Demo".
+- Added interactive doubly linked list class demo, updated commands, functions, threads headers/cpps accordingly. 
+- Began refactoring dList class: removed all functions, adding revised versions.
+	- Added init, addNodeFront, addNodeBack, isEmpty, size, and print functions.
+
 v1.3.3
 - Updated addNodeBack, deleteNodeFront, clear, size, and print functions in sList class to return int error codes.
 

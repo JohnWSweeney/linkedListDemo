@@ -9,19 +9,23 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	// assign function pointer to chosen list type function.
 	if (cmd.listType == "sList")
 	{
-		ptr = sFunc;
+		ptr = sDemo;
 	}
-	if (cmd.listType == "csList")
+	else if (cmd.listType == "dList")
 	{
-		ptr = csFunc;
+		ptr = dDemo;
+	}
+	else if (cmd.listType == "csList")
+	{
+		ptr = csDemo;
 	}
 	else if (cmd.listType == "fifo")
 	{
-		ptr = fifoFunc;
+		ptr = fifoDemo;
 	}
 	else if (cmd.listType == "stack")
 	{
-		ptr = stackFunc;
+		ptr = stackDemo;
 	}
 
 	std::thread newThread(ptr, std::ref(m), std::ref(cv), std::ref(cmd));

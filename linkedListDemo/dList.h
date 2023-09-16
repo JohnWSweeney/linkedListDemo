@@ -5,15 +5,11 @@
 class dList
 {
 public:
-	dNode* initList(int data);
-	void addNodeFront(dNode *list, int data);
-	void addNodeBack(dNode *list, int data);
-	int accessNode(dNode *list, int pos);
-	int updateNodeData(dNode *list, int data, int pos);
-	void deleteNode(dNode* list, int pos);
-	void deleteAfter(dNode* list, int pos);
-	void clear(dNode* list);
-	int size(dNode *list);
-	void printList(dNode *list, bool showDetails);
-	int find(dNode *list, int data);
+	dNode* init(int data);
+	int addNodeFront(dNode** list, int data);
+	int addNodeBack(dNode* list, int data);
+	int clear(dNode** list);
+	int size(dNode* list, int &nodeCount);
+	int isEmpty(dNode* list);
+	int print(dNode* list);
 };
