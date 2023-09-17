@@ -63,6 +63,10 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.4.2](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.4.2/linkedListDemo_v1_4_2.exe) [61 kB]
 
 ## ChangeLog
+v1.4.3
+- Updated dList class, demo.
+	- Added findDataReturnPtr function.
+
 v1.4.2
 - Updated dList class, demo.
 	- Added updateDataByPos, findDataReturnPos, and clearPtr functions.

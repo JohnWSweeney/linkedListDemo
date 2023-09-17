@@ -13,6 +13,7 @@ public:
 	int returnDataByPos(dNode* list, int &data, int pos);
 	int updateDataByPos(dNode* list, int data, int pos);
 	int findDataReturnPos(dNode* list, int data, int &pos);
+	int findDataReturnPtr(dNode* list, int data, dNode* &ptr);
 	int clear(dNode** list);
 	int size(dNode* list, int &nodeCount);
 	int isEmpty(dNode* list);

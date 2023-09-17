@@ -452,6 +452,22 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Data not found in list.\n";
 			}
 		}
+		else if (cmd.function == "findDataReturnPtr")
+		{
+			result = dlist.findDataReturnPtr(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "Data '" << cmd.input1 << "' found in pointer " << ptr << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Data not found in list.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = dlist.clear(&list);

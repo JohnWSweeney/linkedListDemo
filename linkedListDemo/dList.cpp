@@ -151,6 +151,24 @@ int dList::findDataReturnPos(dNode* list, int data, int &pos)
 	return -1;
 }
 
+int dList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
+{
+	if (list == NULL)
+	{
+		return 1;
+	}
+
+	do {
+		if (list->data == data)
+		{
+			ptr = list;
+			return 0;
+		}
+		list = list->next;
+	} while (list != NULL);
+	return -1;
+}
+
 int dList::clear(dNode** list)
 {
 	if (*list == NULL)
