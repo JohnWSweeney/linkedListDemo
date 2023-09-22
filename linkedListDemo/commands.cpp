@@ -1,6 +1,6 @@
 #include "commands.h"
 
-std::vector<std::string> listTypes = { "sList", "dList", "csList", "fifo", "stack" };
+std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack" };
 
 std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
@@ -10,6 +10,9 @@ std::vector<std::string> dListFuncNoInts = { "returnPosByPtr", "clear", "isEmpty
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
 std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
+
+std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
+std::vector<std::string> cdListFuncsNoInts = { "size", "print", "addNodes"};
 
 std::vector<std::string> fifoFuncsInts = { "init", "write" };
 std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "print" };
@@ -88,6 +91,11 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		{
 			cmd.funcsInts = csListFuncsInts;
 			cmd.funcsNoInts = csListFuncsNoInts;
+		}
+		else if (cmd.listType == "cdList")
+		{
+			cmd.funcsInts = cdListFuncsInts;
+			cmd.funcsNoInts = cdListFuncsNoInts;
 		}
 		else if (cmd.listType == "fifo")
 		{

@@ -2,6 +2,7 @@
 #include "sList.h"
 #include "dList.h"
 #include "csList.h"
+#include "cdList.h"
 #include "fifo.h"
 #include "stack.h"
 #include "atomicBool.h"
@@ -603,6 +604,75 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	}
 	cv.notify_one();
 	std::cout << "Circular singly linked list demo stopped.\n";
+}
+
+void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Circular doubly linked list demo started.\n";
+	cdList cdlist;
+	int result;
+	int nodeCount;
+	dNode* list = nullptr;
+	dNode* ptr = nullptr;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "init")
+		{
+			list = cdlist.init(cmd.input1);
+			cdlist.print(list);
+		}
+		else if (cmd.function == "addNodeFront")
+		{
+			cdlist.addNodeFront(list, cmd.input1);
+			cdlist.print(list);
+		}
+		else if (cmd.function == "addNodeBack")
+		{
+			cdlist.addNodeBack(list, cmd.input1);
+			cdlist.print(list);
+		}
+		else if (cmd.function == "size")
+		{
+			result = cdlist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "print")
+		{
+			cdlist.print(list);
+		}
+		else if (cmd.function == "addNodes")
+		{
+			if (list != nullptr)
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					cdlist.addNodeBack(list, i * i * i * i);
+				}
+				cdlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
+				cdlist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "Circular doubly linked list demo stopped.\n";
 }
 
 void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)

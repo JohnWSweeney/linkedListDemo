@@ -19,6 +19,10 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	{
 		ptr = csDemo;
 	}
+	else if (cmd.listType == "cdList")
+	{
+		ptr = cdDemo;
+	}
 	else if (cmd.listType == "fifo")
 	{
 		ptr = fifoDemo;
