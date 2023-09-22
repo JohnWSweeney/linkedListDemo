@@ -11,8 +11,8 @@ std::vector<std::string> dListFuncNoInts = { "returnPosByPtr", "clear", "isEmpty
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack" };
 std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", "print" };
 
-std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "returnPtrByPos" };
-std::vector<std::string> cdListFuncsNoInts = { "returnPosByPtr", "clear", "isEmpty", "size", "print", "addNodes"};
+std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "deleteNodeByPos", "returnPtrByPos" };
+std::vector<std::string> cdListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "returnPosByPtr", "clear", "isEmpty", "size", "print", "addNodes"};
 
 std::vector<std::string> fifoFuncsInts = { "init", "write" };
 std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "print" };

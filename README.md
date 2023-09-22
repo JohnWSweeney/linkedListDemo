@@ -63,6 +63,11 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.4.2](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.4.2/linkedListDemo_v1_4_2.exe) [61 kB]
 
 ## ChangeLog
+v1.4.6
+- Updated cdList class and cdDemo.
+	- Added deleteNodeFront, deleteNodeBack, and deleteNodeByPos functions.
+	- Updated size function to zero nodeCount when list is null.
+
 v1.4.5
 - Updated cdList class and cdDemo.
 	- Added returnPtrByPos, returnPosByPtr, clear, and isEmpty functions.

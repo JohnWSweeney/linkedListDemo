@@ -650,6 +650,73 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeFront")
+		{
+			result = cdlist.deleteNodeFront(&list);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeBack")
+		{
+			result = cdlist.deleteNodeBack(&list);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}			
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeByPos")
+		{
+			result = cdlist.deleteNodeByPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+				else if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Requested postition is out of bounds.\n";
+			}
+		}
 		else if (cmd.function == "returnPtrByPos")
 		{
 			result = cdlist.returnPtrByPos(list, cmd.input1, ptr);

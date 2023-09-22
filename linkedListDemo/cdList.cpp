@@ -46,6 +46,92 @@ int cdList::addNodeBack(dNode* list, int data)
 	} while (list != head);
 }
 
+int cdList::deleteNodeFront(dNode** list)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* dummy = *list;
+	if (dummy->next == dummy)
+	{
+		delete dummy;
+		*list = nullptr;
+		return 0;
+	}
+	else
+	{
+		dNode* newHead = dummy->next;
+		dNode* tail = dummy->prev;
+		newHead->prev = tail;
+		tail->next = newHead;
+		*list = newHead;
+		return 0;
+	}
+}
+
+int cdList::deleteNodeBack(dNode** list)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* head = *list;
+	do {
+		dNode* dummy = *list;
+		// if the list contains only one node.
+		if (dummy->next == head and dummy->prev == head)
+		{
+			delete dummy;
+			*list = nullptr;
+			return 0;
+		}
+		else if (dummy->next->next == head)
+		{
+			delete dummy->next;
+			dummy->next = head;
+			head->prev = dummy;
+			*list = head;
+			return 0;
+		}
+		*list = dummy->next;
+	} while (*list != head);
+}
+
+int cdList::deleteNodeByPos(dNode** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* head = *list;
+	int tempPos = 0;
+	do {
+		dNode* dummy = *list;
+		// if the list contains only one node.
+		if (dummy->next == dummy)
+		{
+			delete dummy;
+			*list = nullptr;
+			return 0;
+		}
+		else if (tempPos == pos)
+		{
+			dNode* before = dummy->prev;
+			dNode* after = dummy->next;
+			delete dummy;
+			before->next = after;
+			after->prev = before;
+			if (pos == 0)
+			{
+				*list = after;
+			}
+			else
+			{
+				*list = head;
+			}
+			return 0;
+		}
+		++tempPos;
+		*list = dummy->next;
+	} while (*list != head);
+	return -1;
+}
+
 int cdList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
@@ -112,7 +198,11 @@ int cdList::isEmpty(dNode* list)
 
 int cdList::size(dNode* list, int &nodeCount)
 {
-	if (list == nullptr) return 1;
+	if (list == nullptr)
+	{
+		nodeCount = 0;
+		return 1;
+	}
 
 	dNode* head = list;
 	nodeCount = 0;
