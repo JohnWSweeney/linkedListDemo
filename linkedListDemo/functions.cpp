@@ -628,13 +628,88 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			cdlist.addNodeFront(list, cmd.input1);
-			cdlist.print(list);
+			result = cdlist.addNodeFront(list, cmd.input1);
+			if (result == 0)
+			{
+				cdlist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "addNodeBack")
 		{
-			cdlist.addNodeBack(list, cmd.input1);
-			cdlist.print(list);
+			result = cdlist.addNodeBack(list, cmd.input1);
+			if (result == 0)
+			{
+				cdlist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "returnPtrByPos")
+		{
+			result = cdlist.returnPtrByPos(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer to position " << cmd.input1 << ": " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Requested postition is out of bounds.\n";
+			}
+		}
+		else if (cmd.function == "returnPosByPtr")
+		{
+			result = cdlist.returnPosByPtr(list, cmd.output, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				
+				std::cout << "Pointer not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "clear")
+		{
+			result = cdlist.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else
+			{
+				std::cout << "List was already empty.\n";
+			}
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = cdlist.isEmpty(list);
+			if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else
+			{
+				std::cout << "List is not empty.\n";
+			}
 		}
 		else if (cmd.function == "size")
 		{
@@ -650,7 +725,11 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "print")
 		{
-			cdlist.print(list);
+			result = cdlist.print(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "addNodes")
 		{

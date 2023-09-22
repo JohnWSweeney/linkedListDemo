@@ -63,6 +63,10 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.4.2](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.4.2/linkedListDemo_v1_4_2.exe) [61 kB]
 
 ## ChangeLog
+v1.4.5
+- Updated cdList class and cdDemo.
+	- Added returnPtrByPos, returnPosByPtr, clear, and isEmpty functions.
+
 v1.4.4
 - Added interactive circular doubly linked list class demo, updated commands, functions, threads headers/cpps accordingly. 
 - Began refactoring cdList class: removed all functions, adding revised versions.
