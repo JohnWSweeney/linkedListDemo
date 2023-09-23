@@ -5,6 +5,7 @@
 #include "cdList.h"
 #include "fifo.h"
 #include "stack.h"
+#include "queue.h"
 #include "atomicBool.h"
 
 void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
@@ -921,4 +922,113 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	}
 	cv.notify_one();
 	std::cout << "Stack dmeo stopped.\n";
+}
+
+void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Queue demo started.\n";
+	queue q;
+	int result;
+	int nodeCount;
+	dNode* list = nullptr;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "push")
+		{
+			result = q.push(list, cmd.input1);
+			q.print(list);
+		}
+		else if (cmd.function == "pop")
+		{
+			result = q.pop(&list);
+			if (result == 0)
+			{
+				result = q.print(list);
+				if (result != 0)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if(result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "front")
+		{
+			result = q.front(list, cmd.output);
+			if (result == 0)
+			{
+				std::cout << "First element in queue: " << cmd.output << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "back")
+		{
+			result = q.back(list, cmd.output);
+			if (result == 0)
+			{
+				std::cout << "Last element in queue: " << cmd.output << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "clear")
+		{
+			result = q.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List was already empty.\n";
+			}
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = q.isEmpty(list);
+			if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else
+			{
+				std::cout << "List is not empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			result = q.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "print")
+		{
+			result = q.print(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "Queue demo stopped.\n";
 }

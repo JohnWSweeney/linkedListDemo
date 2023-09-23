@@ -1,6 +1,6 @@
 #include "commands.h"
 
-std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack" };
+std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
 std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
@@ -19,6 +19,9 @@ std::vector<std::string> fifoFuncsNoInts = { "read", "deleteNodeBack", "size", "
 
 std::vector<std::string> stackFuncsInts = { "init", "push" };
 std::vector<std::string> stackFuncsNoInts = { "pop", "clear", "isEmpty", "size", "print" };
+
+std::vector<std::string> queueFuncsInts = { "push" };
+std::vector<std::string> queueFuncsNoInts = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
 
 int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {
@@ -106,6 +109,11 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		{
 			cmd.funcsInts = stackFuncsInts;
 			cmd.funcsNoInts = stackFuncsNoInts;
+		}
+		else if (cmd.listType == "queue")
+		{
+			cmd.funcsInts = queueFuncsInts;
+			cmd.funcsNoInts = queueFuncsNoInts;
 		}
 		return 0;
 	}

@@ -57,12 +57,16 @@ To view the FIFO's current contents, enter:
 > *print*
 
 ## Future Updates
-- Console control of remaining list classes.
+- ?
 
 ## Download
-[linkedListDemo v1.4.2](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.4.2/linkedListDemo_v1_4_2.exe) [61 kB]
+[linkedListDemo v1.5.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.0/linkedListDemo_v1_5_0.exe) [61 kB]
 
 ## ChangeLog
+v1.5.0
+- Added queue class and interactive demo function, updated commands, functions, threads headers/cpps accordingly. 
+	- Added push, pop, front, back, clear, isEmpty, size, and print functions.
+
 v1.4.6
 - Updated cdList class and cdDemo.
 	- Added deleteNodeFront, deleteNodeBack, and deleteNodeByPos functions.

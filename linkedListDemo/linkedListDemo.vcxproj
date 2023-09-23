@@ -136,6 +136,7 @@
     <ClCompile Include="fifo.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="queue.cpp" />
     <ClCompile Include="sList.cpp" />
     <ClCompile Include="stack.cpp" />
     <ClCompile Include="start.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="commands.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="nodes.h" />
+    <ClInclude Include="queue.h" />
     <ClInclude Include="sList.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="start.h" />
