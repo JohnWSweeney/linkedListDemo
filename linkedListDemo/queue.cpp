@@ -1,4 +1,5 @@
 #include "queue.h"
+// sweeney's hand-rolled queue class.
 
 int queue::push(dNode* &list, int data)
 {

@@ -1,4 +1,5 @@
 #include "fifo.h"
+// sweeney's hand-rolled first-in-first-out (FIFO) class.
 
 node* fifo::init(int data)
 {

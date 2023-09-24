@@ -1,4 +1,5 @@
 #include "stack.h"
+// sweeney's hand-rolled stack class.
 
 node* stack::init(int data)
 {

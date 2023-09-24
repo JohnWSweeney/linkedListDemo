@@ -369,6 +369,73 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeFront")
+		{
+			result = dlist.deleteNodeFront(&list);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if(result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeBack")
+		{
+			result = dlist.deleteNodeBack(&list);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeByPos")
+		{
+			result = dlist.deleteNodeByPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is out of bounds.\n";
+			}
+		}
 		else if (cmd.function == "returnPtrByPos")
 		{
 			result = dlist.returnPtrByPos(list, cmd.input1, ptr);

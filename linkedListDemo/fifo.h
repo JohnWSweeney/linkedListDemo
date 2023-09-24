@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
+//#include <iostream>
 #include "nodes.h"
+// sweeney's hand-rolled first-in-first-out (FIFO) class.
 
 class fifo
 {

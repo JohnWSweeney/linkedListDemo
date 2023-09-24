@@ -1,5 +1,6 @@
 #pragma once
 #include "nodes.h"
+// sweeney's hand-rolled queue class.
 
 class queue
 {
