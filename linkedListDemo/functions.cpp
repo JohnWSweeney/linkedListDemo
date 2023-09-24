@@ -189,11 +189,11 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is null.\n\n";
+				std::cout << "Pointer is not in list.\n\n";
 			}
 			else if (result == -2)
 			{
-				std::cout << "Pointer not in list.\n\n";
+				std::cout << "Pointer is null.\n\n";
 			}
 		}
 		else if (cmd.function == "updateDataByPos")
@@ -625,6 +625,8 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		if (cmd.function == "init")
 		{
 			list = cdlist.init(cmd.input1);
+			cdlist.size(list, nodeCount);
+			std::cout << "Node count: " << nodeCount << '\n';
 			cdlist.print(list);
 		}
 		else if (cmd.function == "addNodeFront")
@@ -632,6 +634,8 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = cdlist.addNodeFront(list, cmd.input1);
 			if (result == 0)
 			{
+				cdlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
 				cdlist.print(list);
 			}
 			else
@@ -644,11 +648,31 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = cdlist.addNodeBack(list, cmd.input1);
 			if (result == 0)
 			{
+				cdlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
 				cdlist.print(list);
 			}
 			else
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodeByPos")
+		{
+			result = cdlist.addNodeByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				cdlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
+				cdlist.print(list);
+			}
+			else if(result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Postition is out of bounds.\n";
 			}
 		}
 		else if (cmd.function == "deleteNodeFront")
@@ -715,7 +739,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Requested postition is out of bounds.\n";
+				std::cout << "Postition is out of bounds.\n";
 			}
 		}
 		else if (cmd.function == "returnPtrByPos")
@@ -731,7 +755,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Requested postition is out of bounds.\n";
+				std::cout << "Postition is out of bounds.\n";
 			}
 		}
 		else if (cmd.function == "returnPosByPtr")
@@ -753,6 +777,42 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else if (result == -2)
 			{
 				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPos")
+		{
+			result = cdlist.returnDataByPos(list, cmd.output, cmd.input1);
+			if (result == 0)
+			{
+				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Postition is out of bounds.\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPtr")
+		{
+			result = cdlist.returnDataByPtr(list, cmd.output, ptr);
+			if (result == 0)
+			{
+				std::cout << "Data in pointer " << ptr << ": " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n\n";
 			}
 		}
 		else if (cmd.function == "clear")
@@ -799,6 +859,14 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "printReverse")
+		{
+			result = cdlist.printReverse(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
 		else if (cmd.function == "addNodes")
 		{
 			if (list != nullptr)
@@ -815,6 +883,11 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "List is empty.\n";
 			}
+		}
+		else if (cmd.function == "clearPtr")
+		{
+			ptr = nullptr;
+			std::cout << "Pointer cleared.\n";
 		}
 		cv.notify_one();
 	}

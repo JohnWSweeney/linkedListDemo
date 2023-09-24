@@ -213,14 +213,8 @@ int sList::returnDataByPos(node* list, int &data, int pos)
 
 int sList::returnDataByPtr(node* list, int &data, node* ptr)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
-	if (ptr == NULL)
-	{
-		return -2;
-	}
+	if (list == NULL) return 1;
+	if (ptr == NULL) return -2;
 
 	do {
 		if (list == ptr)

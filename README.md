@@ -63,6 +63,10 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.5.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.0/linkedListDemo_v1_5_0.exe) [61 kB]
 
 ## ChangeLog
+v1.5.1
+- Updated cdList class and cdDemo.
+	- Added addNodeByPos, returnDataByPos, returnDataByPtr, printReverse, and clearPtr functions.
+
 v1.5.0
 - Added queue class and interactive demo function, updated commands, functions, threads headers/cpps accordingly. 
 	- Added push, pop, front, back, clear, isEmpty, size, and print functions.

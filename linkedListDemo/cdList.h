@@ -9,13 +9,17 @@ public:
 	dNode* init(int data);
 	int addNodeFront(dNode* list, int data);
 	int addNodeBack(dNode* list, int data);
+	int addNodeByPos(dNode* list, int data, int pos);
 	int deleteNodeFront(dNode** list);
 	int deleteNodeBack(dNode** list);
 	int deleteNodeByPos(dNode** list, int pos);
 	int returnPtrByPos(dNode* list, int pos, dNode* &ptr);
 	int returnPosByPtr(dNode* list, int &pos, dNode* ptr);
+	int returnDataByPos(dNode* list, int &data, int pos);
+	int returnDataByPtr(dNode* list, int &data, dNode* ptr);
 	int clear(dNode** list);
 	int isEmpty(dNode* list);
 	int size(dNode* list, int &nodeCount);
 	int print(dNode* list);
+	int printReverse(dNode* list);
 };

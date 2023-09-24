@@ -142,7 +142,7 @@ int dList::findDataReturnPos(dNode* list, int data, int &pos)
 	do {
 		if (list->data == data)
 		{
-			pos == tempPos;
+			pos = tempPos;
 			return 0;
 		}
 		++tempPos;

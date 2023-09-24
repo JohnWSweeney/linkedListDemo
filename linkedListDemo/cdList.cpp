@@ -46,6 +46,43 @@ int cdList::addNodeBack(dNode* list, int data)
 	} while (list != head);
 }
 
+int cdList::addNodeByPos(dNode* list, int data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (pos == 0)
+		{
+			dNode* after = head->next;
+			dNode* newNode = new dNode();
+			newNode->data = head->data;
+			newNode->next = after;
+			newNode->prev = head;
+			head->data = data;
+			head->next = newNode;
+			after->prev = newNode;
+			return 0;
+		}
+		else if (tempPos == pos)
+		{
+			dNode* before = list->prev;
+			dNode* after = list;
+			dNode* newNode = new dNode();
+			newNode->data = data;
+			newNode->next = after;
+			newNode->prev = before;
+			before->next = newNode;
+			after->prev = newNode;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
 int cdList::deleteNodeFront(dNode** list)
 {
 	if (*list == nullptr) return 1;
@@ -169,6 +206,41 @@ int cdList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
 	return -1;
 }
 
+int cdList::returnDataByPos(dNode* list, int &data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			data = list->data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return -2;
+
+	dNode* head = list;
+	do {
+		if (list == ptr)
+		{
+			data = list->data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
 int cdList::clear(dNode** list)
 {
 	if (*list == nullptr) return 1;
@@ -224,6 +296,23 @@ int cdList::print(dNode* list)
 		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
 		++tempPos;
 		list = list->next;
+	} while (list != head);
+	std::cout << '\n';
+	return 0;
+}
+
+int cdList::printReverse(dNode* list)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos;
+	this->size(list, tempPos);
+	std::cout << "#\tdata:\tcurr:\t\t\tnext:\t\t\tprev:\n";
+	do {
+		list = list->prev;
+		--tempPos;
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
 	} while (list != head);
 	std::cout << '\n';
 	return 0;
