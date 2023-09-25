@@ -13,9 +13,11 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Singly linked list demo started.\n";
 	sList slist;
 	int result;
+	int position;
+	int data;
 	int nodeCount;
-	node* list = NULL;
-	node* ptr = NULL;
+	node* list = nullptr;
+	node* ptr = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
@@ -26,15 +28,24 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		if (cmd.function == "init")
 		{
 			list = slist.init(cmd.input1);
-			slist.print(list);
+			result = slist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				slist.print(list);
+			}
 		}
 		else if (cmd.function == "addNodeFront")
 		{
 			result = slist.addNodeFront(list, cmd.input1);
 			if (result == 0)
 			{
-				std::cout << "Node added to list front.\n";
-				slist.print(list);
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
 			}
 			else
 			{
@@ -47,7 +58,12 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = slist.addNodeBack(list, cmd.input1);
 			if (result == 0)
 			{
-				slist.print(list);
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
 			}
 			else if (result == 1)
 			{
@@ -59,8 +75,12 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = slist.addNodeByPos(list, cmd.input1, cmd.input2);
 			if (result == 0)
 			{
-				std::cout << "Postion added.\n\n";
-				slist.print(list);
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
 			}
 			else if (result == 1)
 			{
@@ -76,24 +96,34 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = slist.deleteNodeFront(&list);
 			if (result == 0)
 			{
-				result = slist.print(list);
-				if (result != 0)
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+				else
 				{
 					std::cout << "List is empty.\n";
 				}
 			}
-			if (result == 1)
+			else if (result == 1)
 			{
 				std::cout << "List is empty.\n";
 			}
 		}
 		else if (cmd.function == "deleteNodeBack")
 		{
-			result = slist.deleteNodeBack(list);
+			result = slist.deleteNodeBack(&list);
 			if (result == 0)
 			{
-				result = slist.print(list);
-				if (result != 0)
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+				else
 				{
 					std::cout << "List is empty.\n";
 				}
@@ -108,8 +138,16 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = slist.deleteNodeByPtr(&list, ptr);
 			if (result == 0)
 			{
-				std::cout << "Postion deleted.\n\n";
-				slist.print(list);
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
 			}
 			else if (result == 1)
 			{
@@ -266,6 +304,51 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Data not found in list.\n";
 			}
 		}
+		else if (cmd.function == "findMinReturnPos")
+		{
+			result = slist.findMinReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPos")
+		{
+			result = slist.findMaxReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "moveToFrontByPos")
+		{
+			result = slist.moveToFrontByPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = slist.clear(&list);
@@ -305,8 +388,14 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "print")
 		{
-			result = slist.print(list);
-			if (result != 0)
+
+			result = slist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				slist.print(list);
+			}
+			else
 			{
 				std::cout << "List is empty.\n";
 			}
@@ -315,9 +404,19 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		{
 			for (int i = 0; i < 9; i++)
 			{
-				slist.addNodeBack(list, i * i * i);
+				result = slist.addNodeBack(list, pow(i, 5));
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
 			}
-			slist.print(list);
+			result = slist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				slist.print(list);
+			}
 		}
 		cv.notify_one();
 	}

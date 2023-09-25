@@ -2,8 +2,8 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
-std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
-std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "addNodes" };
+std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "moveToFrontByPos" };
+std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMaxReturnPos", "clear", "isEmpty", "size", "print", "addNodes" };
 
 std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> dListFuncNoInts = { "deleteNodeFront", "deleteNodeBack", "returnPosByPtr", "clear", "isEmpty", "size", "print", "addNodes", "clearPtr" };

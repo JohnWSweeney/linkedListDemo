@@ -4,12 +4,12 @@
 struct node
 {
 	int data;
-	node* next = NULL;
+	node* next = nullptr;
 };
 
 struct dNode
 {
 	int data;
-	dNode* next = NULL;
-	dNode* prev = NULL;
+	dNode* next = nullptr;
+	dNode* prev = nullptr;
 };

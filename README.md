@@ -63,6 +63,12 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.5.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.0/linkedListDemo_v1_5_0.exe) [61 kB]
 
 ## ChangeLog
+v1.5.4
+- Updated sList class and demo.
+	- Added findMinReturnPos, findMaxReturnPos, moveToFrontByPos functions.
+	- Replaced all instances of "NULL" with "nullptr".
+	- Fixed miscellaneous bugs and housekeeping.
+
 v1.5.3
 - Updated stack class and demo.
 	- Merged init function with push, added top function.

@@ -10,7 +10,7 @@ public:
 	int addNodeBack(node* list, int data);
 	int addNodeByPos(node* list, int data, int pos);
 	int deleteNodeFront(node** list);
-	int deleteNodeBack(node* list);
+	int deleteNodeBack(node** list);
 	int deleteNodeByPtr(node** list, node* ptr);
 	int returnPtrByPos(node* list, int pos, node* &ptr);
 	int returnPosByPtr(node* list, int &pos, node* ptr);
@@ -20,6 +20,9 @@ public:
 	int updateDataByPtr(node* list, int data, node* ptr);
 	int findDataReturnPos(node* list, int data, int &pos);
 	int findDataReturnPtr(node* list, int data, node* &ptr);
+	int findMinReturnPos(node* list, int &min, int &pos);
+	int findMaxReturnPos(node* list, int &max, int &pos);
+	int moveToFrontByPos(node** list, int pos);
 	int clear(node** list);
 	int isEmpty(node* list);
 	int size(node* list, int &nodeCount);
