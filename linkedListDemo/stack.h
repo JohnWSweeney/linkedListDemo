@@ -5,11 +5,11 @@
 class stack
 {
 public:
-	node* init(int data);
-	void push(node* list, int data);
+	int push(node** list, int data);
 	int pop(node** list);
-	void clear(node** list);
+	int top(node* list, int &data);
+	int clear(node** list);
 	int isEmpty(node* list);
-	int size(node* list);
-	void print(node* list);
+	int size(node* list, int &nodeCount);
+	int print(node* list);
 };

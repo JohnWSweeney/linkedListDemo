@@ -1009,6 +1009,7 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Stack demo started.\n";
 	stack stack;
 	int result;
+	int nodeCount;
 	node* list = NULL;
 
 	std::unique_lock<std::mutex> lk(m);
@@ -1017,25 +1018,50 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	{
 		cv.wait(lk);
 		std::cout << '\n';
-		if (cmd.function == "init")
+		if (cmd.function == "push")
 		{
-			list = stack.init(cmd.input1);
-			stack.print(list);
-		}
-		else if (cmd.function == "push")
-		{
-			stack.push(list, cmd.input1);
+			stack.push(&list, cmd.input1);
 			stack.print(list);
 		}
 		else if (cmd.function == "pop")
 		{
-			std::cout << "Stack output: " << stack.pop(&list) << '\n';
-			stack.print(list);
+			result = stack.pop(&list);
+			if (result == 0)
+			{
+				result = stack.print(list);
+				if (result == 1)
+				{
+					std::cout << "Stack is empty.\n";
+				}
+			}
+			else if(result == 1)
+			{
+				std::cout << "Stack is empty.\n";
+			}
+		}
+		else if (cmd.function == "top")
+		{
+			result = stack.top(list, cmd.output);
+			if (result == 0)
+			{
+				std::cout << "Top node: " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "Stack is empty.\n";
+			}
 		}
 		else if (cmd.function == "clear")
 		{
-			stack.clear(&list);
-			stack.print(list);
+			result = stack.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "Stack cleared.\n";
+			}
+			else
+			{
+				std::cout << "Stack is empty.\n";
+			}
 		}
 		else if (cmd.function == "isEmpty")
 		{
@@ -1051,12 +1077,23 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "size")
 		{
-			std::cout << "Stack size: " << stack.size(list) << '\n';
-			stack.print(list);
+			result = stack.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Stack size: " << nodeCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "Stack is empty.\n";
+			}
 		}
 		else if (cmd.function == "print")
 		{
-			stack.print(list);
+			result = stack.print(list);
+			if (result == 1)
+			{
+				std::cout << "Stack is empty.\n";
+			}
 		}
 		cv.notify_one();
 	}

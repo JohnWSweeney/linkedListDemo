@@ -1,97 +1,106 @@
 #include "stack.h"
 // sweeney's hand-rolled stack class.
 
-node* stack::init(int data)
+int stack::push(node** list, int data)
 {
-	node* newNode = new node();
-	newNode->data = data;
-	return newNode;
-}
-
-void stack::push(node* list, int data)
-{
-	if (list == NULL)
+	if (*list == nullptr)
 	{
-		std::cout << "Stack is empty.\n";
-		return;
+		node* newNode = new node();
+		newNode->data = data;
+		newNode->next = nullptr;
+		*list = newNode;
+		return 0;
 	}
-
-	node* newNode = new node();
-	newNode->data = list->data;
-	newNode->next = list->next;
-	list->data = data;
-	list->next = newNode;
+	else
+	{
+		node* head = *list;
+		node* newNode = new node();
+		newNode->data = head->data;
+		newNode->next = head->next;
+		head->data = data;
+		head->next = newNode;
+		return 0;
+	}
 }
 
 int stack::pop(node** list)
 {
-	if (list == NULL)
-	{
-		std::cout << "Stack is empty.\n";
-		return INT_MIN;
-	}
+	if (*list == nullptr) return 1;
 
-	node* dummy = *list;
-	*list = dummy->next;
-	int temp = dummy->data;
-	delete dummy;
-	return temp;
+	node* head = *list;
+	if (head->next == nullptr)
+	{
+		*list = nullptr;
+		delete head;
+		return 0;
+	}
+	else
+	{
+		*list = head->next;
+		delete head;
+		return 0;
+	}
 }
 
-void stack::clear(node** list)
+int stack::top(node* list, int &data)
 {
-	if (list == NULL)
+	if (list == nullptr) return 1;
+	else
 	{
-		std::cout << "Stack is empty.\n";
-		return;
+		data = list->data;
+		return 0;
+	}
+}
+
+int stack::clear(node** list)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (head->next == nullptr)
+	{
+		*list = nullptr;
+		delete head;
+		return 0;
 	}
 
 	do {
 		node* dummy = *list;
 		*list = dummy->next;
 		delete dummy;
-	} while (*list != NULL);
+	} while (*list != nullptr);
+	return 0;
 }
 
 int stack::isEmpty(node* list)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	if (list == nullptr) return 1;
+	else return 0;
 }
 
-int stack::size(node* list)
+int stack::size(node* list, int &nodeCount)
 {
-	if (list == NULL)
-	{
-		std::cout << "Stack is empty.\n";
-		return -1;
-	}
+	if (list == nullptr) return 1;
 
-	int nodeCount = 0;
+	nodeCount = 0;
 	do {
 		++nodeCount;
 		list = list->next;
-	} while (list != NULL);
-	return nodeCount;
+	} while (list != nullptr);
+	return 0;
 }
 
-void stack::print(node* list)
+int stack::print(node* list)
 {
-	if (list == NULL)
-	{
-		std::cout << "Stack is empty.\n";
-		return;
-	}
+	if (list == nullptr) return 1;
 
+	int tempPos = 0;
+	std::cout << "#\tdata:\tcurr:\t\t\tnext:\n";
 	do {
-		std::cout << list->data << '\t' << list->next << '\n';
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\n';
+		++tempPos;
 		list = list->next;
-	} while (list != NULL);
+	} while (list != nullptr);
 	std::cout << '\n';
+	return 0;
 }
