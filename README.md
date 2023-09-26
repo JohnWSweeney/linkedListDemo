@@ -60,9 +60,15 @@ To view the FIFO's current contents, enter:
 - ?
 
 ## Download
-[linkedListDemo v1.5.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.0/linkedListDemo_v1_5_0.exe) [61 kB]
+[linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [79 kB]
 
 ## ChangeLog
+v1.5.6
+- Updated csList class and demo.
+	- Updated deleteNodeFront, deleteNodeBack, deleteNodeByPtr, returnPtrByPos, returnPosByPtr, returnDataByPos, updateDataByPos, size, isEmpty, and print functions.
+	- Added deleteNodeByPos, clear, reverse, and addNodes functions.
+	- Replaced all instances of "NULL" with "nullptr".
+
 v1.5.5
 - Updated sList class and demo.
 	- Added findMinReturnPtr, findMaxReturnPtr, and reverse functions.

@@ -754,7 +754,12 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Circular singly linked list demo started.\n";
 	csList cslist;
 	int result;
-	node* list = NULL;
+	int position;
+	int data;
+	int nodeCount;
+	node* list = nullptr;
+	node* ptr = nullptr;
+
 
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
@@ -769,23 +774,230 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			cslist.addNodeFront(list, cmd.input1);
-			cslist.print(list);
+			result = cslist.addNodeFront(list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else
+			{
+				std::cout << "List is empty.\n\n";
+			}
 		}
 		else if (cmd.function == "addNodeBack")
 		{
-			cslist.addNodeBack(list, cmd.input1);
-			cslist.print(list);
+			result = cslist.addNodeBack(list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "deleteNodeFront")
 		{
-			cslist.deleteNodeFront(list);
-			cslist.print(list);
+			result = cslist.deleteNodeFront(&list);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "deleteNodeBack")
 		{
-			cslist.deleteNodeBack(list);
-			cslist.print(list);
+			result = cslist.deleteNodeBack(&list);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeByPos")
+		{
+			result = cslist.deleteNodeByPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "deleteNodeByPtr")
+		{
+			result = cslist.deleteNodeByPtr(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPos")
+		{
+			result = cslist.returnDataByPos(list, data, cmd.input1);
+			if (result == 0)
+			{
+				std::cout << "Data in position " << cmd.input1 << ": " << data << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "returnPtrByPos")
+		{
+			result = cslist.returnPtrByPos(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer to position " << cmd.input1 << ": " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "returnPosByPtr")
+		{
+			result = cslist.returnPosByPtr(list, cmd.output, ptr);
+			if (result == 0)
+			{
+				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
+		else if (cmd.function == "returnDataByPos")
+		{
+			result = cslist.returnDataByPos(list, cmd.output, cmd.input1);
+			if (result == 0)
+			{
+				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "updateDataByPos")
+		{
+			result = cslist.updateDataByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				std::cout << "List updated.\n";
+				cslist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "clear")
+		{
+			result = cslist.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List cleared.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
 		}
 		else if (cmd.function == "isEmpty")
 		{
@@ -801,12 +1013,70 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "size")
 		{
-			std::cout << "Node count: " << cslist.size(list) << '\n';
-			cslist.print(list);
+			result = cslist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+
 		}
 		else if (cmd.function == "print")
 		{
-			cslist.print(list);
+
+			result = cslist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				cslist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "reverse")
+		{
+			result = cslist.reverse(&list);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				result = cslist.addNodeBack(list, pow(i, 5));
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
+			}
+			result = cslist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				cslist.print(list);
+			}
+		}
+		else if (cmd.function == "clearPtr")
+		{
+			ptr = nullptr;
+			std::cout << "Pointer cleared.\n";
 		}
 		cv.notify_one();
 	}

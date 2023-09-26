@@ -10,11 +10,7 @@ node* csList::init(int data)
 
 int csList::addNodeFront(node* list, int data)
 {
-	if (list == NULL)
-	{
-		std::cout << "addNodeFront: list is empty.\n";
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	node* newNode = new node();
 	newNode->data = list->data;
@@ -26,11 +22,7 @@ int csList::addNodeFront(node* list, int data)
 
 int csList::addNodeBack(node* list, int data)
 {
-	if (list == NULL)
-	{
-		std::cout << "addNodeBack: list is empty.\n";
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	node* head = list;
 	do {
@@ -46,159 +38,212 @@ int csList::addNodeBack(node* list, int data)
 	} while (list != head);
 }
 
-int csList::deleteNodeFront(node*& list)
+int csList::deleteNodeFront(node** list)
 {
-	if (list == NULL)
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (head->next == head) // check if list has only one node.
 	{
-		std::cout << "deleteNodeFront: list is empty.\n";
-		return 1;
+		delete head;
+		*list = nullptr;
+		return 0;
 	}
 
-	node* head = list;
-	node* newHead = list->next;
 	do {
-		if (list->next == head)
-		{
-			list->next = newHead;
-			delete head;
-			list = newHead;
-			return 0;
-		}
-		list = list->next;
-	} while (list != head);
-}
-
-int csList::deleteNodeBack(node* list)
-{
-	if (list == NULL)
-	{
-		std::cout << "deleteNodeBack: list is empty.\n";
-		return 1;
-	}
-
-	node* head = list;
-	do {
-		node* dummy = list->next;
+		node* dummy = *list;
 		if (dummy->next == head)
 		{
-			list->next = head;
-			delete dummy;
+			node* newHead = head->next;
+			dummy->next = newHead;
+			delete head;
+			*list = newHead;
 			return 0;
 		}
-		list = list->next;
-	} while (list != head);
+		*list = dummy->next;
+	} while (*list != head);
 }
 
-int csList::deleteNodeByPtr(node* list, node* ptr)
+int csList::deleteNodeBack(node** list)
 {
-	if (list == NULL)
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (head->next == head) // check if list has only one node.
 	{
-		std::cout << "deleteNodeByPtr: list is empty.\n";
+		delete head;
+		*list = nullptr;
+		return 0;
+	}
+
+	do {
+		node* dummy = *list;
+		if (dummy->next->next == head)
+		{
+			delete dummy->next;
+			dummy->next = head;
+			*list = head;
+			return 0;
+		}
+		*list = dummy->next;
+	} while (*list != head);
+}
+
+int csList::deleteNodeByPos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (pos == 0) // delete node in first position.
+	{
+		if (head->next == head) // check if list has only one node.
+		{
+			delete head;
+			*list = nullptr;
+			return 0;
+		}
+		else
+		{
+			do {
+				node* dummy = *list;
+				if (dummy->next == head)
+				{
+					dummy->next = head->next;
+					*list = head->next;
+					delete head;
+					return 0;
+				}
+				*list = dummy->next;
+			} while (*list != head);
+		}
+	}
+	else
+	{
+		int tempPos = 0;
+		do {
+			node* curr = *list;
+			node* dummy = curr->next;
+			if (tempPos == pos - 1)
+			{
+				curr->next = dummy->next;
+				delete dummy;
+				*list = head;
+				return 0;
+			}
+			++tempPos;
+			*list = curr->next;
+		} while (*list != head);
 		return -1;
 	}
-	else if (ptr == NULL)
-	{
-		std::cout << "returnPosByPtr: pointer is null.\n";
-		return -2;
-	}
-
-	node* head = list;
-	do {
-		node* dummy = list->next;
-		if (dummy == ptr)
-		{
-			list->next = dummy->next;
-			delete dummy;
-			return 0;
-		}
-		list = list->next;
-	} while (list != head);
-	std::cout << "Pointer is not in list.\n";
-	return 1;
 }
 
-node* csList::returnPtrByPos(node* list, int pos)
+int csList::deleteNodeByPtr(node** list, node* ptr)
 {
-	if (list == NULL)
+	if (*list == nullptr) return 1;
+
+	if (ptr == nullptr) return -2;
+
+	node* head = *list;
+	if (ptr == head) // delete node in first position.
 	{
-		std::cout << "returnPtrByPos: list is empty.\n";
-		return NULL;
+		if (head->next == head) // check if list has only one node.
+		{
+			delete head;
+			*list = nullptr;
+			return 0;
+		}
+		else
+		{
+			do {
+				node* dummy = *list;
+				if (dummy->next == head)
+				{
+					dummy->next = head->next;
+					*list = head->next;
+					delete head;
+					return 0;
+				}
+				*list = dummy->next;
+			} while (*list != head);
+		}
 	}
+	else
+	{
+		do {
+			node* curr = *list;
+			node* dummy = curr->next;
+			if (dummy == ptr)
+			{
+				curr->next = dummy->next;
+				delete dummy;
+				*list = head;
+				return 0;
+			}
+			*list = dummy->next;
+		} while (*list != head);
+		return -1;
+	}
+}
+
+int csList::returnPtrByPos(node* list, int pos, node* &ptr)
+{
+	if (list == nullptr) return 1;
 
 	node* head = list;
 	int tempPos = 0;
 	do {
 		if (tempPos == pos)
 		{
-			return list;
+			ptr = list;
+			return 0;
 		}
 		++tempPos;
 		list = list->next;
 	} while (list != head);
-	std::cout << "Requested postition is out of bounds.\n";
-	return NULL;
+	return -1;
 }
 
-int csList::returnPosByPtr(node* list, node* ptr)
+int csList::returnPosByPtr(node* list, int &pos, node* ptr)
 {
-	if (list == NULL)
-	{
-		std::cout << "returnPosByPtr: list is empty.\n";
-		return -2;
-	}
-	else if (ptr == NULL)
-	{
-		std::cout << "returnPosByPtr: pointer is null.\n";
-		return -3;
-	}
+	if (list == nullptr) return 1;
+
+	if (ptr == nullptr) return -2;
 
 	node* head = list;
 	int tempPos = 0;
 	do {
 		if (list == ptr)
 		{
-			return tempPos;
+			pos = tempPos;
+			return 0;
 		}
 		++tempPos;
 		list = list->next;
 	} while (list != head);
-	std::cout << "Pointer is not in list.\n";
 	return -1;
 }
 
-int csList::returnDataByPos(node* list, int pos)
+int csList::returnDataByPos(node* list, int &data, int pos)
 {
-	if (list == NULL)
-	{
-		std::cout << "returnDataByPos: list is empty.\n";
-		return INT_MIN;
-	}
+	if (list == nullptr) return 1;
 
 	node* head = list;
 	int tempPos = 0;
 	do {
 		if (tempPos == pos)
 		{
-			return list->data;
-		}
-		else if (tempPos > pos)
-		{
-			break;
+			data = list->data;
+			return 0;
 		}
 		++tempPos;
 		list = list->next;
 	} while (list != head);
-	std::cout << "returnDataByPos: query is out of bounds: ";
-	return INT_MIN;
+	return -1;
 }
 
-int csList::updateNodeByPos(node* list, int pos, int data)
+int csList::updateDataByPos(node* list, int pos, int data)
 {
-	if (list == NULL)
-	{
-		std::cout << "updateNodeByPos: list is empty.\n";
-		return -1;
-	}
+	if (list == nullptr) return 1;
 
 	node* head = list;
 	int tempPos = 0;
@@ -208,53 +253,53 @@ int csList::updateNodeByPos(node* list, int pos, int data)
 			list->data = data;
 			return 0;
 		}
-		else if (tempPos > pos)
-		{
-			break;
-		}
 		++tempPos;
 		list = list->next;
 	} while (list != head);
-	std::cout << "updateNodeByPos: query is out of bounds: ";
-	return 1;
+	return -1;
 }
 
-int csList::size(node* list)
+int csList::clear(node** list)
 {
-	if (list == NULL)
-	{
-		std::cout << "size: list is empty.\n";
-		return -1;
-	}
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	do {
+		node* dummy = *list;
+		if (dummy->next == head)
+		{
+			delete dummy;
+			*list = nullptr;
+			return 0;
+		}
+		*list = dummy->next;
+		delete dummy;
+	} while (*list != nullptr);
+	return 0;
+}
+
+int csList::size(node* list, int &nodeCount)
+{
+	if (list == nullptr) return 1;
 
 	node* head = list;
-	int nodeCount = 0;
+	nodeCount = 0;
 	do {
 		++nodeCount;
 		list = list->next;
 	} while (list != head);
-	return nodeCount;
+	return 0;
 }
 
 int csList::isEmpty(node* list)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	if (list == nullptr) return 1;
+	else return 0;
 }
 
-void csList::print(node* list)
+int csList::print(node* list)
 {
-	if (list == NULL)
-	{
-		std::cout << "print: list is empty.\n";
-		return;
-	}
+	if (list == nullptr) return 1;
 
 	node* head = list;
 	int tempPos = 0;
@@ -265,4 +310,25 @@ void csList::print(node* list)
 		list = list->next;
 	} while (list != head);
 	std::cout << '\n';
+	return 0;
+}
+
+int csList::reverse(node** list)
+{
+	if (*list == nullptr) return 1;
+
+	node* tail = *list;
+	node* head = tail;
+
+	*list = head->next;
+	do {
+		node* curr = *list;
+		node* temp = curr->next;
+		curr->next = head;
+		head = curr;
+		tail->next = head;
+		*list = temp;
+	} while (*list != tail);
+	*list = head;
+	return 0;
 }
