@@ -293,6 +293,23 @@ int sList::findMinReturnPos(node* list, int &min, int &pos)
 	return 0;
 }
 
+int sList::findMinReturnPtr(node* list, int &min, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	min = list->data;
+	ptr = list;
+	do {
+		if (list->data < min)
+		{
+			min = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
+}
+
 int sList::findMaxReturnPos(node* list, int &max, int &pos)
 {
 	if (list == nullptr) return 1;
@@ -308,6 +325,23 @@ int sList::findMaxReturnPos(node* list, int &max, int &pos)
 			pos = tempPos;
 		}
 		++tempPos;
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
+}
+
+int sList::findMaxReturnPtr(node* list, int &max, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	max = list->data;
+	ptr = list;
+	do {
+		if (list->data > max)
+		{
+			max = list->data;
+			ptr = list;
+		}
 		list = list->next;
 	} while (list != nullptr);
 	return 0;
@@ -396,4 +430,28 @@ int sList::print(node* list)
 	} while (list != NULL);
 	std::cout << '\n';
 	return 0;
+}
+
+int sList::reverse(node** list)
+{
+	if (*list == nullptr) return 1;
+
+	node* tail = *list;
+	if (tail->next == nullptr) // check if list has only one node.
+	{
+		return 0;
+	}
+	*list = tail->next;
+	tail->next = nullptr;
+
+	node* curr = nullptr;
+	do {
+		curr = *list;
+		node* temp = curr->next;
+		curr->next = tail;
+		tail = curr;
+		*list = temp;
+	} while (*list != nullptr);
+
+	*list = curr;
 }

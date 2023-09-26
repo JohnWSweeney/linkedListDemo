@@ -21,10 +21,13 @@ public:
 	int findDataReturnPos(node* list, int data, int &pos);
 	int findDataReturnPtr(node* list, int data, node* &ptr);
 	int findMinReturnPos(node* list, int &min, int &pos);
+	int findMinReturnPtr(node* list, int &min, node* &ptr);
 	int findMaxReturnPos(node* list, int &max, int &pos);
+	int findMaxReturnPtr(node* list, int &max, node* &ptr);
 	int moveToFrontByPos(node** list, int pos);
 	int clear(node** list);
 	int isEmpty(node* list);
 	int size(node* list, int &nodeCount);
 	int print(node* list);
+	int reverse(node** list);
 };

@@ -316,12 +316,36 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "findMinReturnPtr")
+		{
+			result = slist.findMinReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "findMaxReturnPos")
 		{
 			result = slist.findMaxReturnPos(list, data, position);
 			if (result == 0)
 			{
 				std::cout << "List maximum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPtr")
+		{
+			result = slist.findMaxReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in pointer " << ptr << ".\n";
 			}
 			else
 			{
@@ -394,6 +418,23 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Node count: " << nodeCount << '\n';
 				slist.print(list);
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "reverse")
+		{
+			result = slist.reverse(&list);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
 			}
 			else
 			{
