@@ -6,10 +6,9 @@
 class fifo
 {
 public:
-	node* init(int data);
-	void write(node* list, int data);
-	int read(node*& list);
-	int size(node* list);
-	void clear(node* list);
-	void print(node* list);
+	int wr_en(node* &list, int din);
+	int rd_en(node** list, int &dout);
+	int data_count(node* list, int &wordCount);
+	int rst(node** list);
+	int print(node* list);
 };

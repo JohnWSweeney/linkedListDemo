@@ -1,94 +1,85 @@
 #include "fifo.h"
 // sweeney's hand-rolled first-in-first-out (FIFO) class.
 
-node* fifo::init(int data)
+int fifo::wr_en(node* &list, int din)
 {
-	node* newNode = new node();
-	newNode->data = data;
-	return newNode;
-}
-
-void fifo::write(node* list, int data)
-{
-	if (list == NULL)
+	if (list == nullptr)
 	{
-		std::cout << "fifo.write: list is empty.\n";
-		return;
+		node* newNode = new node();
+		newNode->data = din;
+		list = newNode;
+		return 0;
 	}
 
-	node* newNode = new node();
-	newNode->data = data;
+	node* head = list;
 	do {
-		if (list->next == NULL)
+		if (list->next == nullptr)
 		{
+			node* newNode = new node();
+			newNode->data = din;
 			list->next = newNode;
-			return;
+			list = head;
+			return 0;
 		}
 		list = list->next;
-	} while (list != NULL);
+	} while (list != nullptr);
 }
 
-int fifo::read(node*& list)
+int fifo::rd_en(node** list, int &dout)
 {
-	if (list == NULL)
-	{
-		std::cout << "fifo.read: list is empty.\n";
-		return INT_MIN;
-	}
+	if (list == nullptr) return 1;
 
-	node* dummy = list;
-	int data = dummy->data;
-	list = list->next;
-	delete dummy;
-	return data;
+	node* head = *list;
+	dout = head->data;
+	if (head->next == nullptr)
+	{
+		delete head;
+		*list = nullptr;
+		return 0;
+	}
+	else
+	{
+		*list = head->next;
+		delete head;
+		return 0;
+	}
 }
 
-int fifo::size(node* list)
+int fifo::data_count(node* list, int &wordCount)
 {
-	if (list == NULL)
-	{
-		std::cout << "fifo.size: list is empty.\n";
-		return INT_MIN;
-	}
+	if (list == nullptr) return 1;
 
-	int count = 0;
+	wordCount = 0;
 	do {
-		++count;
+		++wordCount;
 		list = list->next;
-	} while (list != NULL);
-	return count;
+	} while (list != nullptr);
+	return 0;
 }
 
-void fifo::clear(node* list)
+int fifo::rst(node** list)
 {
-	if (list == NULL)
-	{
-		std::cout << "fifo.clear: list is empty.\n";
-		return;
-	}
+	if (*list == nullptr) return 1;
 
 	do {
-		node* dummy = list->next;
-		list->next = dummy->next;
+		node* dummy = *list;
+		*list = dummy->next;
 		delete dummy;
-	} while (list->next != NULL);
-	list->data = 0;
+	} while (*list != nullptr);
+	return 0;
 }
 
-void fifo::print(node* list)
+int fifo::print(node* list)
 {
-	if (list == NULL)
-	{
-		std::cout << "fifo.print: list is empty.\n";
-		return;
-	}
+	if (list == nullptr) return 1;
 
 	int tempPos = 0;
-	std::cout << "#\tdata:\tnext:\n";
+	std::cout << "#\tdata:\tcurr:\t\t\tnext:\n";
 	do {
-		std::cout << tempPos << '\t' << list->data << '\t' << list->next << '\n';
+		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\n';
 		++tempPos;
 		list = list->next;
-	} while (list != NULL);
+	} while (list != nullptr);
 	std::cout << '\n';
+	return 0;
 }

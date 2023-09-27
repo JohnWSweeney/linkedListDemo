@@ -3,9 +3,9 @@
 #include "dList.h"
 #include "csList.h"
 #include "cdList.h"
-#include "fifo.h"
 #include "stack.h"
 #include "queue.h"
+#include "fifo.h"
 #include "atomicBool.h"
 
 void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
@@ -1372,48 +1372,6 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Circular doubly linked list demo stopped.\n";
 }
 
-void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
-{
-	std::cout << "FIFO demo started.\n";
-	fifo fifo;
-	node* list = NULL;
-
-	std::unique_lock<std::mutex> lk(m);
-	cv.notify_one();
-	while (status)
-	{
-		cv.wait(lk);
-		std::cout << '\n';
-		if (cmd.function == "init")
-		{
-			list = fifo.init(cmd.input1);
-			fifo.print(list);
-		}
-		else if (cmd.function == "write")
-		{
-			fifo.write(list, cmd.input1);
-			fifo.print(list);
-		}
-		else if (cmd.function == "read")
-		{
-			std::cout << "FIFO output: " << fifo.read(list) << '\n';
-			fifo.print(list);
-		}
-		else if (cmd.function == "size")
-		{
-			std::cout << "Node count: " << fifo.size(list) << '\n';
-			fifo.print(list);
-		}
-		else if (cmd.function == "print")
-		{
-			fifo.print(list);
-		}
-		cv.notify_one();
-	}
-	cv.notify_one();
-	std::cout << "FIFO demo stopped.\n";
-}
-
 void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
 	std::cout << "Stack demo started.\n";
@@ -1618,4 +1576,75 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	}
 	cv.notify_one();
 	std::cout << "Queue demo stopped.\n";
+}
+
+void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "FIFO demo started.\n";
+	fifo fifo;
+	int result;
+	int wordCount;
+	int data;
+	node* list = NULL;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "write")
+		{
+			fifo.wr_en(list, cmd.input1);
+			fifo.data_count(list, wordCount);
+			std::cout << "Word count: " << wordCount << '\n';
+			fifo.print(list);
+		}
+		else if (cmd.function == "read")
+		{
+			fifo.rd_en(&list, data);
+			std::cout << "FIFO output: " << data << '\n';
+			fifo.print(list);
+		}
+		else if (cmd.function == "clear")
+		{
+			result = fifo.rst(&list);
+			if (result == 0)
+			{
+				std::cout << "FIFO cleared.\n";
+			}
+			else if(result == 1)
+			{
+				std::cout << "FIFO is empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			result = fifo.data_count(list, wordCount);
+			if (result == 0)
+			{
+				std::cout << "Word count: " << wordCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "FIFO is empty.\n";
+			}
+		}
+		else if (cmd.function == "print")
+		{
+			result = fifo.data_count(list, wordCount);
+			if (result == 0)
+			{
+				std::cout << "Word count: " << wordCount << '\n';
+				fifo.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "FIFO is empty.\n";
+			}
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "FIFO demo stopped.\n";
 }
