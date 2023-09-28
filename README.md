@@ -63,6 +63,11 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [79 kB]
 
 ## ChangeLog
+v1.5.8
+- Upated fifo class and demo.
+	- Added config function to set FIFO word depth.
+	- Updated all functions to check FIFO configuration and determine FIFO state (full, almost full, overflow, empty, almost empty, and underflow), where appropriate.
+
 v1.5.7
 - Updated fifo class and demo.
 	- Merged init function with write.

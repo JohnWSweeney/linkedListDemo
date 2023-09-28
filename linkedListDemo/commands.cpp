@@ -14,7 +14,7 @@ std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBac
 std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos" };
 std::vector<std::string> cdListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "printReverse", "addNodes", "clearPtr" };
 
-std::vector<std::string> fifoFuncsInts = { "init", "write" };
+std::vector<std::string> fifoFuncsInts = { "config", "write" };
 std::vector<std::string> fifoFuncsNoInts = { "read", "clear", "size", "print" };
 
 std::vector<std::string> stackFuncsInts = { "push" };

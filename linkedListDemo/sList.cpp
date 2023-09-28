@@ -106,7 +106,7 @@ int sList::deleteNodeBack(node** list)
 
 int sList::deleteNodeByPtr(node** list, node* ptr)
 {
-	if (list == nullptr) return 1;;
+	if (list == nullptr) return 1;
 
 	if (ptr == nullptr) return -1;
 
