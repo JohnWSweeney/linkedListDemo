@@ -3,13 +3,13 @@
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
 std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "moveToFrontByPos" };
-std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes" };
+std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
-std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "findDataReturnPos", "findDataReturnPtr" };
-std::vector<std::string> dListFuncNoInts = { "deleteNodeFront", "deleteNodeBack", "returnPosByPtr", "clear", "isEmpty", "size", "print", "addNodes", "clearPtr" };
+std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
+std::vector<std::string> dListFuncNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos" };
-std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "updateDataByPtr", "findDataReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos" };
 std::vector<std::string> cdListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "returnPosByPtr", "returnDataByPtr", "clear", "isEmpty", "size", "print", "printReverse", "addNodes", "clearPtr" };

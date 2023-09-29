@@ -63,6 +63,11 @@ To view the FIFO's current contents, enter:
 [linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [79 kB]
 
 ## ChangeLog
+v1.5.9
+- Updated dList class and demo.
+	- Added addNodeByPos, deleteNodeByPtr, returnDataByPtr, updateDataByPtr, findMinReturnPos, findMinReturnPtr, findMaxReturnPos, findMaxReturnPtr, and reverse functions.
+	- Updated deleteNodeByPos function.
+
 v1.5.8
 - Upated fifo class and demo.
 	- Added config function to set FIFO word depth.

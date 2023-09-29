@@ -41,6 +41,54 @@ int dList::addNodeBack(dNode* list, int data)
 	} while (list != nullptr);
 }
 
+int dList::addNodeByPos(dNode* list, int data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	if (pos == 0) // add node to front.
+	{
+		dNode* newNode = new dNode();
+		newNode->data = head->data;
+		newNode->prev = head;
+		head->data = data;
+		if (head->next == nullptr) // if the list has only one node.
+		{
+			newNode->next = nullptr;
+		}
+		else // if the list has more than one node.
+		{
+			dNode* after = head->next;
+			newNode->next = after;
+			after->prev = newNode;
+		}
+		head->next = newNode;
+		return 0;
+	}
+	else // add node after the front node.
+	{
+		list = list->next;
+		int tempPos = 1;
+		do {
+			if (tempPos == pos)
+			{
+				dNode* before = list->prev;
+				dNode* after = list;
+				dNode* newNode = new dNode();
+				newNode->data = data;
+				newNode->next = after;
+				newNode->prev = before;
+				before->next = newNode;
+				after->prev = newNode;
+				return 0;
+			}
+			++tempPos;
+			list = list->next;
+		} while (list != nullptr);
+		return -1;
+	}
+}
+
 int dList::deleteNodeFront(dNode** list)
 {
 	if (*list == nullptr) return 1;
@@ -138,6 +186,49 @@ int dList::deleteNodeByPos(dNode** list, int pos)
 		++tempPos;
 		*list = dummy->next;
 	} while (*list != nullptr);
+	*list = head;
+	return -1;
+}
+
+int dList::deleteNodeByPtr(dNode** list, dNode* &ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return -2;
+
+	dNode* head = *list;
+	do {
+		dNode* dummy = *list;
+		if (*list == ptr)
+		{
+			if (dummy->prev == nullptr and dummy->next == nullptr) // list has only one node.
+			{
+				*list = nullptr;
+			}
+			else if (dummy->prev == nullptr) // first node
+			{
+				dNode* newHead = dummy->next;
+				newHead->prev = nullptr;
+				*list = newHead;
+			}
+			else if (dummy->next == nullptr) // last node.
+			{
+				dummy->prev->next = nullptr;
+				*list = head;
+			}
+			else // between first and last nodes.
+			{
+				dNode* before = dummy->prev;
+				dNode* after = dummy->next;
+				before->next = after;
+				after->prev = before;
+				*list = head;
+			}
+			delete dummy;
+			ptr = nullptr;
+			return 0;
+		}
+		*list = dummy->next;
+	} while (*list != nullptr);
 	return -1;
 }
 
@@ -193,6 +284,22 @@ int dList::returnDataByPos(dNode* list, int &data, int pos)
 	return -1;
 }
 
+int dList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return -2;
+
+	do {
+		if (list = ptr)
+		{
+			data = list->data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != nullptr);
+	return -1;
+}
+
 int dList::updateDataByPos(dNode* list, int data, int pos)
 {
 	if (list == nullptr) return 1;
@@ -205,6 +312,22 @@ int dList::updateDataByPos(dNode* list, int data, int pos)
 			return 0;
 		}
 		++tempPos;
+		list = list->next;
+	} while (list != nullptr);
+	return -1;
+}
+
+int dList::updateDataByPtr(dNode* list, int data, dNode* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return -2;
+
+	do {
+		if (list == ptr)
+		{
+			list->data = data;
+			return 0;
+		}
 		list = list->next;
 	} while (list != nullptr);
 	return -1;
@@ -240,6 +363,86 @@ int dList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
 		list = list->next;
 	} while (list != nullptr);
 	return -1;
+}
+
+int dList::findMinReturnPos(dNode* list, int &min, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	min = list->data;
+	pos = 0;
+	list = list->next;
+
+	int tempPos = 1;
+	do {
+		if (min > list->data)
+		{
+			min = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
+}
+
+int dList::findMinReturnPtr(dNode* list, int &min, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	min = list->data;
+	ptr = list;
+	list = list->next;
+
+	do {
+		if (min > list->data)
+		{
+			min = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
+}
+
+int dList::findMaxReturnPos(dNode* list, int &max, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	max = list->data;
+	pos = 0;
+	list = list->next;
+
+	int tempPos = 1;
+	do {
+		if (max < list->data)
+		{
+			max = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
+}
+
+int dList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	max = list->data;
+	ptr = list;
+	list = list->next;
+
+	do {
+		if (max < list->data)
+		{
+			max = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != nullptr);
+	return 0;
 }
 
 int dList::clear(dNode** list)
@@ -284,5 +487,26 @@ int dList::print(dNode* list)
 		list = list->next;
 	} while (list != nullptr);
 	std::cout << '\n';
+	return 0;
+}
+
+int dList::reverse(dNode** list)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* tail = *list;
+	*list = tail->next;
+	tail->next = nullptr;
+
+	dNode* curr = nullptr;
+	do {
+		curr = *list;
+		dNode* temp = curr->next;
+		curr->next = tail;
+		tail->prev = curr;
+		tail = curr;
+		*list = temp;
+	} while (*list != nullptr);
+	*list = curr;
 	return 0;
 }

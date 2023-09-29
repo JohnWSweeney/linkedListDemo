@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "atomicBool.h"
 #include "sList.h"
 #include "dList.h"
 #include "csList.h"
@@ -6,7 +7,6 @@
 #include "stack.h"
 #include "queue.h"
 #include "fifo.h"
-#include "atomicBool.h"
 
 void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
@@ -459,6 +459,11 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				slist.print(list);
 			}
 		}
+		else if (cmd.function == "clearPtr")
+		{
+			ptr = nullptr;
+			std::cout << "Pointer cleared.\n";
+		}
 		cv.notify_one();
 	}
 	cv.notify_one();
@@ -470,9 +475,11 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Doubly linked list demo started.\n";
 	dList dlist;
 	int result;
+	int position;
+	int data;
 	int nodeCount;
-	dNode* list = NULL;
-	dNode* ptr = NULL;
+	dNode* list = nullptr;
+	dNode* ptr = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
@@ -490,6 +497,8 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = dlist.addNodeFront(&list, cmd.input1);
 			if (result == 0)
 			{
+				dlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
 				dlist.print(list);
 			}
 			else if (result == 1)
@@ -502,11 +511,31 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = dlist.addNodeBack(list, cmd.input1);
 			if (result == 0)
 			{
+				dlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
 				dlist.print(list);
 			}
 			else if (result == 1)
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodeByPos")
+		{
+			result = dlist.addNodeByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				dlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is out of bounds.\n";
 			}
 		}
 		else if (cmd.function == "deleteNodeFront")
@@ -576,6 +605,36 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeByPtr")
+		{
+			result = dlist.deleteNodeByPtr(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					dlist.size(list, nodeCount);
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer null.\n";
+			}
+		}
 		else if (cmd.function == "returnPtrByPos")
 		{
 			result = dlist.returnPtrByPos(list, cmd.input1, ptr);
@@ -628,6 +687,26 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "returnDataByPtr")
+		{
+			result = dlist.returnDataByPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "Data in pointer " << ptr << ": " << data << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer null.\n";
+			}
+		}
 		else if (cmd.function == "updateDataByPos")
 		{
 			result = dlist.updateDataByPos(list, cmd.input1, cmd.input2);
@@ -645,6 +724,27 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "updateDataByPtr")
+		{
+			result = dlist.updateDataByPtr(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "List updated.\n";
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+			}
 		else if (cmd.function == "findDataReturnPos")
 		{
 			result = dlist.findDataReturnPos(list, cmd.input1, cmd.output);
@@ -677,6 +777,54 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Data not found in list.\n";
 			}
 		}
+		else if (cmd.function == "findMinReturnPos")
+		{
+			result = dlist.findMinReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
+		else if (cmd.function == "findMinReturnPtr")
+		{
+			result = dlist.findMinReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
+		else if (cmd.function == "findMaxReturnPos")
+		{
+			result = dlist.findMaxReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
+		else if (cmd.function == "findMaxReturnPtr")
+		{
+			result = dlist.findMaxReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
 		else if (cmd.function == "clear")
 		{
 			result = dlist.clear(&list);
@@ -715,8 +863,27 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "print")
 		{
-			result = dlist.print(list);
-			if (result != 0)
+			result = dlist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				dlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "reverse")
+		{
+			result = dlist.reverse(&list);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				std::cout << "Node count: " << nodeCount << '\n';
+				dlist.print(list);
+			}
+			else if (result == 1)
 			{
 				std::cout << "List is empty.\n";
 			}
@@ -740,7 +907,7 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "clearPtr")
 		{
-			ptr = NULL;
+			ptr = nullptr;
 			std::cout << "Pointer cleared.\n";
 		}
 		cv.notify_one();
