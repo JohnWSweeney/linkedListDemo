@@ -1,22 +1,24 @@
 # linkedListDemo
 
-A console app exploring linked lists and their applications. Currently, only the circular singly linked list and FIFO class functions can be controlled with console commands. The others will be added in a future release. The Windows executable is compiled with C++17.
+A console app exploring linked lists and their applications. The app includes classes for singly, doubly, circular singly, and circular doubly linked lists. Linked list applications include classes for stacks, queues, and FIFOs. The Windows executable is compiled with C++17.
 
 ## Functions
 The app opens a console window on startup. Enter the *command* keywords separated by a space. Commands are case-sensitive. 
 
-### Circular Singly (CS) Linked List
-To start or stop a circular singly linked thread, enter:
-> *start cs*
+## Linked Lists
+Four types of listed links are explored: singly, doubly, circular singly (csList), and circular doubly (cdList). Each list type has its own class and interactive demo to its class functions. Each node in the list stores an integer as `data` and a pointer to the next node in the list as `next`. Doubly linked list nodes have a second pointer `prev` that points to the previous node in the list.
+
+To start or stop a linked list demo, enter:
+> *start listType*
 
 > *stop*
 
-CS functions "init", "addNodeFront", "addNodeBack", "deleteNodeFront", "deleteNodeBack", "isEmpty", "size", and "print" are currently supported. Once the CS thread is running enter:
+where *listType* is `sList` is for singly linked list, `dList` is for doubly linked list, `csList` is for circular singly linked list, and `cdList` is for circular doubly linked list.
+
+First, you'll need to initialize the list with first piece of data by entering:
 > *init integer*
 
-to initialize the list with *integer*. 
-
-Nodes can be added to the beginning or end of the list with the "addNodeFront" and "addNodeBack" functions, respectively:
+You can then add new nodes to the beginning or end of the list with the "addNodeFront" and "addNodeBack" functions, respectively:
 > *addNodeFront integer*
 
 > *addNodeBack integer*
@@ -25,6 +27,11 @@ Similarly, the first and last nodes can be removed by:
 > *deleteNodeFront*
 
 > *deleteNodeBack*
+
+You can remove all nodes in the list by entering:
+> *clear*
+
+You'll have to reinitialize the list with `init` if you want to add more nodes to the list.
 
 To check if the list is empty, enter:
 > *isEmpty*
@@ -35,26 +42,46 @@ To find the list's node count, enter:
 To view the list's current contents, enter:
 > *print*
 
-### FIFO (First-In-First-Out)
-The FIFO is implemented as a singly linked list. The FIFO function names are based on the Xilinx FIFO conventions. To start or stop a FIFO thread, enter:
-> *start fifo*
+To reverse the order of nodes in the list, enter:
+> *reverse*
+
+## Linked List Applications
+The app includes three interactive linked lists applications, including stacks and queues. To start or stop an application demo, enter:
+> *start listType*
 
 > *stop*
 
-FIFO functions "init", "write", "read", "size", and "print" are currently supported. Once the FIFO thread is running enter:
-> *init integer*
+where *listType* is `stack`, `queue`, or `fifo`.
 
-to initialize the FIFO's linked list with *integer*. This is the first FIFO entry. To make another entry at the end of the list, enter: 
-> *write integer*
+### Stack
+The stack class is implemented with singly linked lists and modeled on the STL [std::stack](https://en.cppreference.com/w/cpp/container/stack) class. Functions include push, pop, top, clear, isEmpty, size, and print functions. 
 
-To read out the entry at the beginning of the list, enter:
-> *read*
+To add a new node to the top of the stack, enter:
+> *push integer*
 
-To find the FIFO's total entry count, enter:
-> *size*
+To access the top node's data, enter:
+> *top*
 
-To view the FIFO's current contents, enter:
-> *print*
+To remove the top node, enter:
+> *pop*
+
+The `clear`, `isEmpty`, `size`, and `print` functions work identically to the those in the list classes.
+
+### Queue
+The queue class is implemented with circular doubly linked lists and modeled on the STL [std::queue](https://en.cppreference.com/w/cpp/container/queue) class. Functions include push, pop, front, back, clear, isEmpty, size, and print functions. 
+
+To add a new node to the back of the queue, enter:
+> *push integer*
+
+To remove the node at the front of the queue, enter:
+> *pop*
+
+To return the front or back nodes' data, enter:
+> *front*
+
+> *back*
+
+The `clear`, `isEmpty`, `size`, and `print` functions work identically to the those in the list and stack classes.
 
 ## Future Updates
 - ?
@@ -69,7 +96,7 @@ v1.5.9
 	- Updated deleteNodeByPos function.
 
 v1.5.8
-- Upated fifo class and demo.
+- Updated fifo class and demo.
 	- Added config function to set FIFO word depth.
 	- Updated all functions to check FIFO configuration and determine FIFO state (full, almost full, overflow, empty, almost empty, and underflow), where appropriate.
 
@@ -78,7 +105,7 @@ v1.5.7
 	- Merged init function with write.
 	- Updated all functions to return C-style error codes.
 	- Replaced all instances of "NULL" with "nullptr".
-	- Renamed functions following Xilinx commmon clock FIFO conventions. where appropriate.
+	- Renamed functions following Xilinx common clock FIFO conventions. where appropriate.
 
 v1.5.6
 - Updated csList class and demo.
