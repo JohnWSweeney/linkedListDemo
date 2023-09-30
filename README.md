@@ -33,8 +33,6 @@ The first and last nodes can be removed by:
 
 > *deleteNodeBack*
 
-where *position* is the desired node's position in the list. Positions begin at zero, so the first node poisition is 0, the second node position is 1, and so on.
-
 You can remove all nodes in the list by entering:
 > *clear*
 
@@ -46,14 +44,26 @@ To check if the list is empty, enter:
 To find the list's node count, enter:
 > *size*
 
-To view the list's full contents enter:
+To view the list's full contents, enter:
 > *print*
 
 To reverse the order of nodes in the list, enter:
 > *reverse*
 
+### Functions By List Position
+Each class includes functions that operate on nodes specified by the user. List positions begin at zero, so the first node position  is 0, the second node position is 1, and so on.
+
+To delete a node in a specific position in the list, enter:
+> *deleteNodePos position*
+
+To return a pointer to a node in a specific position in the list, enter:
+> *returnPtrByPos position*
+
+To return the data of node in a specific position in the list, enter:
+> *returnDataByPos position*
+
 ## Linked List Applications
-The app includes three interactive linked list applications, including stacks, queues, and a Xilinx FPGA fifo simualtor. To start or stop an application demo, enter:
+The app includes three interactive linked list applications, including stacks, queues, and a Xilinx FPGA FIFO simulator. To start or stop an application demo, enter:
 > *start listType*
 
 > *stop*
@@ -90,8 +100,8 @@ To return the front or back nodes' data, enter:
 
 The `clear`, `isEmpty`, `size`, and `print` functions work identically to the those in the list and stack classes.
 
-### Xilnx FPGA FIFO Simulator
-Just for fun, I simulated a Xilinx FPGA FIFO as a singly linked list. Unlike the STL queue, Xilinx FIFOs have limited capacity that is configured before synthesis. The FIFO updates its capacity status after every operation, indicating empty, almost empty (one word left), almost full (one vacancy left), full, or none of the above (i.e. filled between almost empty and almost full). Xilinx documentation also refers to FIFO entries as "words" rather than nodes. Aside from that, they work the same as STL queues. The FIFO class function names are based on Xilinx conventions.
+### Xilinx FPGA FIFO Simulator
+Just for fun, I simulated a Xilinx FPGA FIFO as a singly linked list. Unlike the STL queue, Xilinx FIFOs have limited capacity that is configured before synthesis. The FIFO updates its capacity status after every operation, indicating empty, almost empty (one word left), almost full (one vacancy left), full, or none of the above (i.e., filled between almost empty and almost full). Xilinx documentation also refers to FIFO entries as "words" rather than nodes. Aside from that, they work the same as STL queues. The FIFO class function names are based on Xilinx conventions.
 
 To start or stop the FIFO demo, enter:
 > *start fifo*
