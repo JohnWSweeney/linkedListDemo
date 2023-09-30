@@ -2,36 +2,43 @@
 
 A console app exploring linked lists and their applications. The app includes classes for singly, doubly, circular singly, and circular doubly linked lists. Linked list applications include classes for stacks, queues, and FIFOs. The Windows executable is compiled with C++17.
 
-## Functions
+## Function
 The app opens a console window on startup. Enter the *command* keywords separated by a space. Commands are case-sensitive. 
 
 ## Linked Lists
-Four types of listed links are explored: singly, doubly, circular singly (csList), and circular doubly (cdList). Each list type has its own class and interactive demo to its class functions. Each node in the list stores an integer as `data` and a pointer to the next node in the list as `next`. Doubly linked list nodes have a second pointer `prev` that points to the previous node in the list.
+Four types of linked lists are explored: singly, doubly, circular singly, and circular doubly.  Each list node stores an integer as `data` and a pointer to the next node in the list as `next`. Doubly linked list nodes have a second pointer `prev` that points to the previous node in the list.
+
+Each list type has its own class and interactive demo to test its functions, such as adding and deleting nodes and updating their data. The following functions are available in each list type's demo.
 
 To start or stop a linked list demo, enter:
 > *start listType*
 
 > *stop*
 
-where *listType* is `sList` is for singly linked list, `dList` is for doubly linked list, `csList` is for circular singly linked list, and `cdList` is for circular doubly linked list.
+where *listType* is `sList` is for a singly linked list, `dList` is for a doubly linked list, `csList` is for a circular singly linked list, and `cdList` is for a circular doubly linked list.
 
-First, you'll need to initialize the list with first piece of data by entering:
+First, you'll need to initialize the list with the first piece of data by entering:
 > *init integer*
 
-You can then add new nodes to the beginning or end of the list with the "addNodeFront" and "addNodeBack" functions, respectively:
+You can then add new nodes to the beginning or end of the list by entering:
 > *addNodeFront integer*
 
 > *addNodeBack integer*
 
-Similarly, the first and last nodes can be removed by:
+You can also add a default set of nodes to the list by entering:
+> *addNodes*
+
+The first and last nodes can be removed by:
 > *deleteNodeFront*
 
 > *deleteNodeBack*
 
+where *position* is the desired node's position in the list. Positions begin at zero, so the first node poisition is 0, the second node position is 1, and so on.
+
 You can remove all nodes in the list by entering:
 > *clear*
 
-You'll have to reinitialize the list with `init` if you want to add more nodes to the list.
+Note that you'll have to reinitialize the list with `init` if you want to add more nodes to the list.
 
 To check if the list is empty, enter:
 > *isEmpty*
@@ -39,14 +46,14 @@ To check if the list is empty, enter:
 To find the list's node count, enter:
 > *size*
 
-To view the list's current contents, enter:
+To view the list's full contents enter:
 > *print*
 
 To reverse the order of nodes in the list, enter:
 > *reverse*
 
 ## Linked List Applications
-The app includes three interactive linked lists applications, including stacks and queues. To start or stop an application demo, enter:
+The app includes three interactive linked list applications, including stacks, queues, and a Xilinx FPGA fifo simualtor. To start or stop an application demo, enter:
 > *start listType*
 
 > *stop*
@@ -54,7 +61,7 @@ The app includes three interactive linked lists applications, including stacks a
 where *listType* is `stack`, `queue`, or `fifo`.
 
 ### Stack
-The stack class is implemented with singly linked lists and modeled on the STL [std::stack](https://en.cppreference.com/w/cpp/container/stack) class. Functions include push, pop, top, clear, isEmpty, size, and print functions. 
+The stack class is implemented with singly linked lists and based on the STL [std::stack](https://en.cppreference.com/w/cpp/container/stack) class. Functions include push, pop, top, clear, isEmpty, size, and print functions. 
 
 To add a new node to the top of the stack, enter:
 > *push integer*
@@ -82,6 +89,34 @@ To return the front or back nodes' data, enter:
 > *back*
 
 The `clear`, `isEmpty`, `size`, and `print` functions work identically to the those in the list and stack classes.
+
+### Xilnx FPGA FIFO Simulator
+Just for fun, I simulated a Xilinx FPGA FIFO as a singly linked list. Unlike the STL queue, Xilinx FIFOs have limited capacity that is configured before synthesis. The FIFO updates its capacity status after every operation, indicating empty, almost empty (one word left), almost full (one vacancy left), full, or none of the above (i.e. filled between almost empty and almost full). Xilinx documentation also refers to FIFO entries as "words" rather than nodes. Aside from that, they work the same as STL queues. The FIFO class function names are based on Xilinx conventions.
+
+To start or stop the FIFO demo, enter:
+> *start fifo*
+
+> *stop*
+
+First, you'll need to configure FIFO capacity by entering:
+> *config integer*
+
+where *integer* is the number of words (nodes) the FIFO can hold. This number must be greater than zero and is currently limited to a maximum of 4096.
+
+Next, you can write to the FIFO by entering:
+> *write integer*
+
+where *integer* is the data you wish to store. Writing to a full FIFO will return an overflow error.
+
+The Xilinx FIFO *read* function combines the STL queue "front" and "pop" functions, returning the first word in the FIFO while also removing it. 
+> *read* 
+
+You can manually check the FIFO capacity status by entering: 
+> *size*
+
+which will also return empty, almost empty, almost full, and full messages when appropriate.
+
+The `clear` and `print` functions work identically to the other classes.
 
 ## Future Updates
 - ?
