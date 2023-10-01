@@ -1256,6 +1256,8 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	std::cout << "Circular doubly linked list demo started.\n";
 	cdList cdlist;
 	int result;
+	int position;
+	int data;
 	int nodeCount;
 	dNode* list = nullptr;
 	dNode* ptr = nullptr;
@@ -1386,6 +1388,35 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Postition is out of bounds.\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeByPtr")
+		{
+			result = cdlist.deleteNodeByPtr(&list, ptr);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
 		else if (cmd.function == "returnPtrByPos")
 		{
 			result = cdlist.returnPtrByPos(list, cmd.input1, ptr);
@@ -1459,6 +1490,77 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n\n";
 			}
 		}
+		else if (cmd.function == "updateDataByPos")
+		{
+			result = cdlist.updateDataByPos(list, cmd.input1, cmd.input2);
+			if (result == 0)
+			{
+				std::cout << "List updated.\n";
+				cdlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "updateDataByPtr")
+		{
+			result = cdlist.updateDataByPtr(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "List updated.\n";
+				cdlist.print(list);
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+			}
+		else if (cmd.function == "findDataReturnPos")
+		{
+			result = cdlist.findDataReturnPos(list, cmd.input1, position);
+			if (result == 0)
+			{
+				std::cout << "Data '" << cmd.input1 << "' found in position " << position << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Data not found in list.\n";
+			}
+			}
+		else if (cmd.function == "findDataReturnPtr")
+		{
+			result = cdlist.findDataReturnPtr(list, cmd.input1, ptr);
+			if (result == 0)
+			{
+				std::cout << "Data '" << cmd.input1 << "' found in pointer " << ptr << ".\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "list is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Data not found in list.\n";
+			}
+		}
+
 		else if (cmd.function == "clear")
 		{
 			result = cdlist.clear(&list);
@@ -1511,6 +1613,23 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 			}
+		else if (cmd.function == "reverse")
+		{
+			result = cdlist.reverse(&list);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "addNodes")
 		{
 			if (list != nullptr)

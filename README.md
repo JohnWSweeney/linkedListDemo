@@ -51,15 +51,15 @@ To reverse the order of nodes in the list, enter:
 > *reverse*
 
 ### Functions By List Position
-Each class includes functions that operate on nodes specified by the user. List positions begin at zero, so the first node position  is 0, the second node position is 1, and so on.
+Each class includes functions that operate on nodes according to their list position. List positions begin at zero, so the first node position  is 0, the second node position is 1, and so on.
 
-To delete a node in a specific position in the list, enter:
+To delete a node by its position, enter:
 > *deleteNodePos position*
 
-To return a pointer to a node in a specific position in the list, enter:
+To return a pointer to a node by its position, enter:
 > *returnPtrByPos position*
 
-To return the data of node in a specific position in the list, enter:
+To return the data of a node by its position, enter:
 > *returnDataByPos position*
 
 ## Linked List Applications
@@ -132,9 +132,13 @@ The `clear` and `print` functions work identically to the other classes.
 - ?
 
 ## Download
-[linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [79 kB]
+[linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [86 kB]
 
 ## ChangeLog
+v1.5.10
+- Updated cdList class and demo.
+	- Added deleteNodeByPtr, updateDataByPos, findDataReturnPos, findDataReturnPtr, and reverse functions.
+
 v1.5.9
 - Updated dList class and demo.
 	- Added addNodeByPos, deleteNodeByPtr, returnDataByPtr, updateDataByPtr, findMinReturnPos, findMinReturnPtr, findMaxReturnPos, findMaxReturnPtr, and reverse functions.

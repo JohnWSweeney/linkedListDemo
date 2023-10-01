@@ -169,6 +169,33 @@ int cdList::deleteNodeByPos(dNode** list, int pos)
 	return -1;
 }
 
+int cdList::deleteNodeByPtr(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return -2;
+
+	dNode* head = *list;
+	do {
+		dNode* dummy = *list;
+		if (dummy == ptr)
+		{
+			dNode* before = dummy->prev;
+			dNode* after = dummy->next;
+			before->next = after;
+			after->prev = before;
+			if (dummy == head) // check if node to be deleted is head.
+			{
+				head = after;
+			}
+			delete dummy;
+			*list = head;
+			return 0;
+		}
+		*list = dummy->next;
+	} while (*list != head);
+	return -1;
+}
+
 int cdList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
@@ -241,6 +268,75 @@ int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
 	return -1;
 }
 
+int cdList::updateDataByPos(dNode* list, int data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			list->data = data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int cdList::updateDataByPtr(dNode* list, int data, dNode* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = list;
+	do {
+		if (list == ptr)
+		{
+			list->data = data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int cdList::findDataReturnPos(dNode* list, int data, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (list->data == data)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int cdList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	do {
+		if (list->data == data)
+		{
+			ptr = list;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
 int cdList::clear(dNode** list)
 {
 	if (*list == nullptr) return 1;
@@ -270,11 +366,7 @@ int cdList::isEmpty(dNode* list)
 
 int cdList::size(dNode* list, int &nodeCount)
 {
-	if (list == nullptr)
-	{
-		nodeCount = 0;
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	dNode* head = list;
 	nodeCount = 0;
@@ -315,5 +407,28 @@ int cdList::printReverse(dNode* list)
 		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << list->prev << '\n';
 	} while (list != head);
 	std::cout << '\n';
+	return 0;
+}
+
+int cdList::reverse(dNode** list)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* tail = *list;
+	dNode* head = *list;
+	*list = tail->next;
+
+	dNode* curr = nullptr;
+	do {
+		curr = *list;
+		dNode* temp = curr->next;
+		curr->next = head;
+		curr->prev = tail;
+		head->prev = curr;
+		tail->next = curr;
+		head = curr;
+		*list = temp;
+	} while (*list != tail);
+	*list = head;
 	return 0;
 }
