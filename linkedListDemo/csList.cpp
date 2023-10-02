@@ -38,6 +38,40 @@ int csList::addNodeBack(node* list, int data)
 	} while (list != head);
 }
 
+int csList::addNodeByPos(node* list, int data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	if (pos == 0)
+	{
+		node* newNode = new node();
+		newNode->data = head->data;
+		newNode->next = head->next;
+		head->data = data;
+		head->next = newNode;
+		return 0;
+	}
+
+	node* prev = list;
+	list = list->next;
+	int tempPos = 1;
+	do {
+		if (tempPos == pos)
+		{
+			node* newNode = new node();
+			newNode->data = data;
+			newNode->next = list;
+			prev->next = newNode;
+			return 0;
+		}
+		++tempPos;
+		prev = list;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
 int csList::deleteNodeFront(node** list)
 {
 	if (*list == nullptr) return 1;
@@ -241,6 +275,23 @@ int csList::returnDataByPos(node* list, int &data, int pos)
 	return -1;
 }
 
+int csList::returnDataByPtr(node* list, int &data, node* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = list;
+	do {
+		if (list == ptr)
+		{
+			data = list->data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
 int csList::updateDataByPos(node* list, int pos, int data)
 {
 	if (list == nullptr) return 1;
@@ -254,6 +305,57 @@ int csList::updateDataByPos(node* list, int pos, int data)
 			return 0;
 		}
 		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int csList::updateDataByPtr(node* list, int data, node* ptr)
+{
+	if (list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = list;
+	do {
+		if (list == ptr)
+		{
+			list->data = data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int csList::findDataReturnPos(node* list, int data, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	int tempPos = 0;
+	do {
+		if (list->data == data)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int csList::findDataReturnPtr(node* list, int data, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	do {
+		if (list->data == data)
+		{
+			ptr = list;
+			return 0;
+		}
 		list = list->next;
 	} while (list != head);
 	return -1;

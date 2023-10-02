@@ -129,12 +129,16 @@ which will also return empty, almost empty, almost full, and full messages when 
 The `clear` and `print` functions work identically to the other classes.
 
 ## Future Updates
-- ?
+- Everytime I think I'm done, I find of new functions to implement, so who knows.
 
 ## Download
 [linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [86 kB]
 
 ## ChangeLog
+v1.5.12
+- Updated csList and demo.
+	- Added addNodeByPos, returnDataByPtr, updateDataByPtr, and findDataReturnPos functions.
+
 v1.5.11
 - Updated cdList class and demo.
 	- Added findMinReturnPos, findMinReturnPtr, findMaxReturnPos, and findMaxReturnPtr functions.

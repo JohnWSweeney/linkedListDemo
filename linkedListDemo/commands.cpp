@@ -8,8 +8,8 @@ std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack
 std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
 std::vector<std::string> dListFuncNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
-std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr" };
-std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findDataReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
+std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "returnPtrByPos", "returnPosByPtr", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", };
 std::vector<std::string> cdListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "printReverse", "reverse", "addNodes", "clearPtr" };
@@ -100,11 +100,6 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 			cmd.funcsInts = cdListFuncsInts;
 			cmd.funcsNoInts = cdListFuncsNoInts;
 		}
-		else if (cmd.listType == "fifo")
-		{
-			cmd.funcsInts = fifoFuncsInts;
-			cmd.funcsNoInts = fifoFuncsNoInts;
-		}
 		else if (cmd.listType == "stack")
 		{
 			cmd.funcsInts = stackFuncsInts;
@@ -114,6 +109,11 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		{
 			cmd.funcsInts = queueFuncsInts;
 			cmd.funcsNoInts = queueFuncsNoInts;
+		}
+		else if (cmd.listType == "fifo")
+		{
+			cmd.funcsInts = fifoFuncsInts;
+			cmd.funcsNoInts = fifoFuncsNoInts;
 		}
 		return 0;
 	}
