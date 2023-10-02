@@ -337,6 +337,92 @@ int cdList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
 	return -1;
 }
 
+int cdList::findMinReturnPos(dNode* list, int &min, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+
+	min = list->data;
+	pos = 0;
+	list = list->next;
+
+	int tempPos = 1;
+	do {
+		if (list->data < min)
+		{
+			min = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int cdList::findMinReturnPtr(dNode* list, int &min, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+
+	min = list->data;
+	ptr = list;
+	list = list->next;
+	do {
+		if (list->data < min)
+		{
+			min = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int cdList::findMaxReturnPos(dNode* list, int &max, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+
+	max = list->data;
+	pos = 0;
+	list = list->next;
+
+	int tempPos = 1;
+	do {
+		if (max < list->data)
+		{
+			max = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int cdList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+
+	max = list->data;
+	ptr = list;
+	list = list->next;
+	do {
+		if (max < list->data)
+		{
+			max = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
 int cdList::clear(dNode** list)
 {
 	if (*list == nullptr) return 1;

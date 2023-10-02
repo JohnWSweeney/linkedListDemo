@@ -135,6 +135,10 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [86 kB]
 
 ## ChangeLog
+v1.5.11
+- Updated cdList class and demo.
+	- Added findMinReturnPos, findMinReturnPtr, findMaxReturnPos, and findMaxReturnPtr functions.
+
 v1.5.10
 - Updated cdList class and demo.
 	- Added deleteNodeByPtr, updateDataByPos, findDataReturnPos, findDataReturnPtr, and reverse functions.

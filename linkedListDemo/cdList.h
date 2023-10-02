@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "nodes.h"
 // sweeney's hand-rolled circular doubly linked list.
 
@@ -22,6 +21,10 @@ public:
 	int updateDataByPtr(dNode* list, int data, dNode* ptr);
 	int findDataReturnPos(dNode* list, int data, int &pos);
 	int findDataReturnPtr(dNode* list, int data, dNode* &ptr);
+	int findMinReturnPos(dNode* list, int &min, int &pos);
+	int findMinReturnPtr(dNode* list, int &min, dNode* &ptr);
+	int findMaxReturnPos(dNode* list, int &max, int &pos);
+	int findMaxReturnPtr(dNode* list, int &max, dNode* &ptr);
 	int clear(dNode** list);
 	int isEmpty(dNode* list);
 	int size(dNode* list, int &nodeCount);

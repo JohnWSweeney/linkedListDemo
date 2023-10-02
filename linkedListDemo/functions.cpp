@@ -1560,7 +1560,54 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Data not found in list.\n";
 			}
 		}
-
+		else if (cmd.function == "findMinReturnPos")
+		{
+			result = cdlist.findMinReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMinReturnPtr")
+		{
+			result = cdlist.findMinReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPos")
+		{
+			result = cdlist.findMaxReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPtr")
+		{
+			result = cdlist.findMaxReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = cdlist.clear(&list);
