@@ -11,6 +11,7 @@ public:
 	int addNodeByPos(node* list, int data, int pos);
 	int deleteNodeFront(node** list);
 	int deleteNodeBack(node** list);
+	int deleteNodeByPos(node** list, int pos);
 	int deleteNodeByPtr(node** list, node* ptr);
 	int returnPtrByPos(node* list, int pos, node* &ptr);
 	int returnPosByPtr(node* list, int &pos, node* ptr);

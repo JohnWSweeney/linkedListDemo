@@ -51,7 +51,12 @@ To reverse the order of nodes in the list, enter:
 > *reverse*
 
 ### Functions By List Position
-Each class includes functions that operate on nodes according to their list position. List positions begin at zero, so the first node position  is 0, the second node position is 1, and so on.
+Each class includes functions that operate on nodes according to their list position. List positions begin at zero, so the first node position is 0, the second node position is 1, and so on.
+
+To add a node to an existing position, enter:
+> *addNodeByPos data position*
+
+This will push the node in the requested position in the next position (one down in the list) and put the new node in its place. If the new node's requested position happens to be the final position, the list will be extended by one to hold the old node.
 
 To delete a node by its position, enter:
 > *deleteNodePos position*
@@ -61,6 +66,44 @@ To return a pointer to a node by its position, enter:
 
 To return the data of a node by its position, enter:
 > *returnDataByPos position*
+
+To update a specific node's data, enter:
+>*updateDataByPos data position*
+
+To find the list position of a node with specific data, enter:
+>*findDataReturnPos data*
+
+To find the positions of nodes storing the smallest and largest integers, enter:
+>*findMinReturnPos*
+
+or
+
+>*findMaxReturnPos*
+
+### Functions By Pointer
+Each class also includes functions that operate directly on nodes by their pointers. First, you need to find the pointer to the node of interest by entering:
+>*returnPtrByPos position*
+
+where *position* is the node's list position.
+
+To delete a node by its pointer, enter:
+>*deleteNodeByPtr*
+
+To return a node's data by its pointer, enter:
+>*returnDataByPtr*
+
+To update a node's data by its pointer, enter:
+>*updateDataByPtr data*
+
+To find the pointer of a node with specific data, enter:
+>*findDataReturnPtr data*
+
+To find pointers to node's storing the smallest and largest integers, enter:
+>*findMinReturnPtr*
+
+or
+
+>*findMaxReturnPtr*
 
 ## Linked List Applications
 The app includes three interactive linked list applications, including stacks, queues, and a Xilinx FPGA FIFO simulator. To start or stop an application demo, enter:
@@ -123,7 +166,7 @@ The Xilinx FIFO *read* function combines the STL queue "front" and "pop" functio
 
 You can manually check the FIFO capacity status by entering: 
 > *size*
-
+(
 which will also return empty, almost empty, almost full, and full messages when appropriate.
 
 The `clear` and `print` functions work identically to the other classes.
@@ -132,9 +175,15 @@ The `clear` and `print` functions work identically to the other classes.
 - Everytime I think I'm done, I find of new functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.5.6](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.6/linkedListDemo_v1_5_6.exe) [86 kB]
+[linkedListDemo v1.5.13](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.13/linkedListDemo_v1_5_13.exe) [88 kB]
 
 ## ChangeLog
+v1.5.13
+- Updated csList and demo.
+	- Added findMinReturnPos, findMaxReturnPos, findMaxReturnPos, and findMaxReturnPtr functions.
+- Updated sList and demo with deleteNodeByPos function.
+- Updated README.
+
 v1.5.12
 - Updated csList and demo.
 	- Added addNodeByPos, returnDataByPtr, updateDataByPtr, and findDataReturnPos functions.

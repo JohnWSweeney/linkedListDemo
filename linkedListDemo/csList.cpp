@@ -1,4 +1,5 @@
 #include "csList.h"
+// sweeney's hand-rolled circular singly linked list.
 
 node* csList::init(int data)
 {
@@ -359,6 +360,88 @@ int csList::findDataReturnPtr(node* list, int data, node* &ptr)
 		list = list->next;
 	} while (list != head);
 	return -1;
+}
+
+int csList::findMinReturnPos(node* list, int &min, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	min = list->data;
+	pos = 0;
+
+	list = list->next;
+	int tempPos = 1;
+	do {
+		if (list->data < min)
+		{
+			min = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int csList::findMinReturnPtr(node* list, int &min, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	min = head->data;
+	ptr = head;
+	list = list->next;
+	do {
+		if (list->data < min)
+		{
+			min = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int csList::findMaxReturnPos(node* list, int &max, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	max = list->data;
+	pos = 0;
+
+	list = list->next;
+	int tempPos = 1;
+	do {
+		if (list->data > max)
+		{
+			max = list->data;
+			pos = tempPos;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return 0;
+}
+
+int csList::findMaxReturnPtr(node* list, int &max, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	max = head->data;
+	ptr = head;
+	list = list->next;
+	do {
+		if (list->data > max)
+		{
+			max = list->data;
+			ptr = list;
+		}
+		list = list->next;
+	} while (list != head);
+	return 0;
 }
 
 int csList::clear(node** list)

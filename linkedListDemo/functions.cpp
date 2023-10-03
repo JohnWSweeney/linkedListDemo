@@ -91,6 +91,31 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is out of bounds.\n\n";
 			}
 		}
+		else if (cmd.function == "deleteNodeByPos")
+		{
+			result = slist.deleteNodeByPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
 		else if (cmd.function == "deleteNodeFront")
 		{
 			result = slist.deleteNodeFront(&list);
@@ -927,7 +952,6 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	node* list = nullptr;
 	node* ptr = nullptr;
 
-
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
 	while (status)
@@ -1245,6 +1269,54 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Data not found in list.\n";
 			}
 		}
+		else if (cmd.function == "findMinReturnPos")
+		{
+			result = cslist.findMinReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMinReturnPtr")
+		{
+			result = cslist.findMinReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List minimum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPos")
+		{
+			result = cslist.findMaxReturnPos(list, data, position);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in position " << position << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findMaxReturnPtr")
+		{
+			result = cslist.findMaxReturnPtr(list, data, ptr);
+			if (result == 0)
+			{
+				std::cout << "List maximum " << data << " in pointer " << ptr << ".\n";
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+			}
 		else if (cmd.function == "clear")
 		{
 			result = cslist.clear(&list);

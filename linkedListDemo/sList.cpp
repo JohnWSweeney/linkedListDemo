@@ -104,6 +104,36 @@ int sList::deleteNodeBack(node** list)
 	} while (*list != nullptr);
 }
 
+int sList::deleteNodeByPos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (pos == 0)
+	{
+		node* newHead = head->next;
+		delete head;
+		*list = newHead;
+		return 0;
+	}
+
+	int tempPos = 1;
+	do {
+		node* curr = *list;
+		if (tempPos == pos)
+		{
+			node* dummy = curr->next;
+			curr->next = curr->next->next;
+			delete dummy;
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != nullptr);
+	return -1;
+}
+
 int sList::deleteNodeByPtr(node** list, node* ptr)
 {
 	if (list == nullptr) return 1;
