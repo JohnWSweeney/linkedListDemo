@@ -178,6 +178,9 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.5.13](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.13/linkedListDemo_v1_5_13.exe) [88 kB]
 
 ## ChangeLog
+v1.5.15
+- Updated populateCmd function so that only one demo can run at a time.
+
 v1.5.14
 - Updated startMenu and populateCmd functions.
 	- Fixed bug causing crash on entering invalid command.

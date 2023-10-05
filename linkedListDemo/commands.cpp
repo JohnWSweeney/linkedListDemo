@@ -1,4 +1,5 @@
 #include "commands.h"
+#include "atomicBool.h"
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
@@ -63,13 +64,21 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 
 	if (tokens[0] == "start")
 	{
-		result = checkStringVector(tokens[1], listTypes, cmd.listType);
-		if (result != 0)
+		if (status == false)
 		{
-			std::cout << "Invalid list or application type.\n";
+			result = checkStringVector(tokens[1], listTypes, cmd.listType);
+			if (result != 0)
+			{
+				std::cout << "Invalid list or application type.\n";
+				return 1;
+			}
+			else return result;
+		}
+		else
+		{
+			std::cout << "Only one demo can be run at a time.\n";
 			return 1;
 		}
-		else return result;
 	}
 
 	// lists.
