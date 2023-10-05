@@ -26,6 +26,10 @@ void startMenu(bool &running)
 	std::unique_lock<std::mutex> lk(m);
 	while (true)
 	{
+		cmd.function = {};
+		cmd.input1 = {};
+		cmd.input2 = {};
+		cmd.output = {};
 		std::vector<std::string> tokens;
 		getCommands(tokens);
 		
@@ -41,10 +45,13 @@ void startMenu(bool &running)
 		}
 		else if (tokens[0] == "stop")
 		{
-			cmd = { };
-			status = false;
-			cv.notify_one();
-			cv.wait(lk);
+			if (status == true)
+			{
+				cmd = {};
+				status = false;
+				cv.notify_one();
+				cv.wait(lk);
+			}
 		}
 		else if (tokens[0] == "exit")
 		{

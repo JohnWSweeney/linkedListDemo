@@ -2,26 +2,17 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
-std::vector<std::string> sListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "moveToFrontByPos" };
-std::vector<std::string> sListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
-
-std::vector<std::string> dListFuncInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
-std::vector<std::string> dListFuncNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
-
-std::vector<std::string> csListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr" };
-std::vector<std::string> csListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
-
-std::vector<std::string> cdListFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", };
-std::vector<std::string> cdListFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "printReverse", "reverse", "addNodes", "clearPtr" };
-
-std::vector<std::string> fifoFuncsInts = { "config", "write" };
-std::vector<std::string> fifoFuncsNoInts = { "read", "clear", "size", "print" };
+std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "moveToFrontByPos" };
+std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> stackFuncsInts = { "push" };
 std::vector<std::string> stackFuncsNoInts = { "pop", "top", "clear", "isEmpty", "size", "print" };
 
 std::vector<std::string> queueFuncsInts = { "push" };
 std::vector<std::string> queueFuncsNoInts = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
+
+std::vector<std::string> fifoFuncsInts = { "config", "write" };
+std::vector<std::string> fifoFuncsNoInts = { "read", "clear", "size", "print" };
 
 int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {
@@ -69,108 +60,169 @@ int getInteger(std::string token, int &integer)
 int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 {
 	int result;
-	// on start, check if user entered valid list type.
-	if (cmd.listType.empty())
+
+	if (tokens[0] == "start")
 	{
 		result = checkStringVector(tokens[1], listTypes, cmd.listType);
-		if (result == 1)
+		if (result != 0)
 		{
-			std::cout << "Invalid list type.\n";
+			std::cout << "Invalid list or application type.\n";
 			return 1;
 		}
-
-		// if valid, populate cmd func string vectors.
-		if (cmd.listType == "sList")
-		{
-			cmd.funcsInts = sListFuncsInts;
-			cmd.funcsNoInts = sListFuncsNoInts;
-		}
-		else if (cmd.listType == "dList")
-		{
-			cmd.funcsInts = dListFuncInts;
-			cmd.funcsNoInts = dListFuncNoInts;
-		}
-		else if (cmd.listType == "csList")
-		{
-			cmd.funcsInts = csListFuncsInts;
-			cmd.funcsNoInts = csListFuncsNoInts;
-		}
-		else if (cmd.listType == "cdList")
-		{
-			cmd.funcsInts = cdListFuncsInts;
-			cmd.funcsNoInts = cdListFuncsNoInts;
-		}
-		else if (cmd.listType == "stack")
-		{
-			cmd.funcsInts = stackFuncsInts;
-			cmd.funcsNoInts = stackFuncsNoInts;
-		}
-		else if (cmd.listType == "queue")
-		{
-			cmd.funcsInts = queueFuncsInts;
-			cmd.funcsNoInts = queueFuncsNoInts;
-		}
-		else if (cmd.listType == "fifo")
-		{
-			cmd.funcsInts = fifoFuncsInts;
-			cmd.funcsNoInts = fifoFuncsNoInts;
-		}
-		return 0;
+		else return result;
 	}
 
-	// check if user entered valid function for list type.
-		// first, check if user command also requires an integer.
-	result = checkStringVector(tokens[0], cmd.funcsNoInts, cmd.function);
-	if (result == 0)
+	// lists.
+	else if (cmd.listType == "sList" or cmd.listType == "dList" or cmd.listType == "csList" or cmd.listType == "cdList")
 	{
-		return 0;
-	}
-	else
-	{
-		// else, get the non integer-requiring command.
-		result = checkStringVector(tokens[0], cmd.funcsInts, cmd.function);
+		// check if command is a valid integer-requiring function.
+		result = checkStringVector(tokens[0], listFuncsInts, cmd.function);
 		if (result == 0)
 		{
-			// first, check if user entered at least two tokens (commands).
+			// check if function requires two integers.
+			if (cmd.function == "addNodeByPos")
+			{
+				// check if three commands (function, int1, int2) were entered.
+				if (tokens.size() < 3)
+				{
+					std::cout << "Too few commands entered.\n";
+					return 1;
+				}
+				// if so, get the first integer.
+				result = getInteger(tokens[1], cmd.input1);
+				if (result == 1) return 1;
+				// then get the second integer.
+				result = getInteger(tokens[2], cmd.input2);
+				return result;
+			}
+
+			// check if two commands (function, int1) were entered.
 			if (tokens.size() < 2)
 			{
 				std::cout << "Too few commands entered.\n";
 				return 1;
 			}
-			else if (tokens.size() == 2)
-			{
-				result = getInteger(tokens[1], cmd.input1);
-				if (result == 0)
-				{
-					return 0;
-				}
-				else
-				{
-					return 1;
-				}
-			}
-			else if (tokens.size() == 3)
-			{
-				result = getInteger(tokens[1], cmd.input1);
-				if(result == 1)
-				{
-					return 1;
-				}
-				result = getInteger(tokens[2], cmd.input2);
-				if (result == 0)
-				{
-					return 0;
-				}
-				else
-				{
-					return 1;
-				}
-			}
+			// get the first (or only) integer.
+			result = getInteger(tokens[1], cmd.input1);
+			return result;
 		}
 		else
 		{
-			std::cout << "Invalid function.\n";
-			return 1;
+			// check if command is a valid non-integer-requiring function.
+			result = checkStringVector(tokens[0], listFuncsNoInts, cmd.function);
+			if (result == 1)
+			{
+				std::cout << "Invalid function.\n";
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
+	}
+
+	// application: stack.
+	else if (cmd.listType == "stack")
+	{
+		// check if command is a valid integer-requiring function.
+		result = checkStringVector(tokens[0], stackFuncsInts, cmd.function);
+		if (result == 0)
+		{
+			// check if two commands (function, int1) were entered.
+			if (tokens.size() < 2)
+			{
+				std::cout << "Too few commands entered.\n";
+				return 1;
+			}
+			// get the integer.
+			result = getInteger(tokens[1], cmd.input1);
+			return result;
+		}
+		else
+		{
+			// check if command is a valid non-integer-requiring function.
+			result = checkStringVector(tokens[0], stackFuncsNoInts, cmd.function);
+			if (result == 1)
+			{
+				std::cout << "Invalid function.\n";
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+	}
+
+	// application: queue.
+	else if (cmd.listType == "queue")
+	{
+		// check if command is a valid integer-requiring function.
+		result = checkStringVector(tokens[0], queueFuncsInts, cmd.function);
+		if (result == 0)
+		{
+			// check if two commands (function, int1) were entered.
+			if (tokens.size() < 2)
+			{
+				std::cout << "Too few commands entered.\n";
+				return 1;
+			}
+			// get the integer.
+			result = getInteger(tokens[1], cmd.input1);
+			return result;
+		}
+		else
+		{
+			// check if command is a valid non-integer-requiring function.
+			result = checkStringVector(tokens[0], queueFuncsNoInts, cmd.function);
+			if (result == 1)
+			{
+				std::cout << "Invalid function.\n";
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+	}
+
+	// application: fifo.
+	else if (cmd.listType == "fifo")
+	{
+		// check if command is a valid integer-requiring function.
+		result = checkStringVector(tokens[0], fifoFuncsInts, cmd.function);
+		if (result == 0)
+		{
+			// check if two commands (function, int1) were entered.
+			if (tokens.size() < 2)
+			{
+				std::cout << "Too few commands entered.\n";
+				return 1;
+			}
+			// get the integer.
+			result = getInteger(tokens[1], cmd.input1);
+			return result;
+		}
+		else
+		{
+			// check if command is a valid non-integer-requiring function.
+			result = checkStringVector(tokens[0], fifoFuncsNoInts, cmd.function);
+			if (result == 1)
+			{
+				std::cout << "Invalid function.\n";
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Invalid command.\n";
+		return 1;
 	}
 }

@@ -1962,7 +1962,7 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		cv.notify_one();
 	}
 	cv.notify_one();
-	std::cout << "Stack dmeo stopped.\n";
+	std::cout << "Stack demo stopped.\n";
 }
 
 void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)

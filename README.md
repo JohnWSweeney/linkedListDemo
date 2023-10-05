@@ -166,7 +166,7 @@ The Xilinx FIFO *read* function combines the STL queue "front" and "pop" functio
 
 You can manually check the FIFO capacity status by entering: 
 > *size*
-(
+
 which will also return empty, almost empty, almost full, and full messages when appropriate.
 
 The `clear` and `print` functions work identically to the other classes.
@@ -178,6 +178,14 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.5.13](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.13/linkedListDemo_v1_5_13.exe) [88 kB]
 
 ## ChangeLog
+v1.5.14
+- Updated startMenu and populateCmd functions.
+	- Fixed bug causing crash on entering invalid command.
+	- Fixed bug causing keyboard input lock out when "stop" command enterd with no thread running.
+	- All integer fields checked for valid input before pushing commands to thread.
+	- Command struct input fields now cleared after invalid commands.
+	- Removed command struct funcsInts, funcsNoInts fields and consolidated all list function integer/no integer lists.
+
 v1.5.13
 - Updated csList and demo.
 	- Added findMinReturnPos, findMaxReturnPos, findMaxReturnPos, and findMaxReturnPtr functions.
