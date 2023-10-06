@@ -1,5 +1,11 @@
 #include "cdList.h"
 // sweeney's hand-rolled circular doubly linked list.
+//
+// error codes:
+// 0	no error.
+// 1	list is nullptr.
+// 2	ptr is nullptr.
+// -1	pos/ptr not in list.
 
 dNode* cdList::init(int data)
 {
@@ -172,7 +178,7 @@ int cdList::deleteNodeByPos(dNode** list, int pos)
 int cdList::deleteNodeByPtr(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	dNode* head = *list;
 	do {
@@ -217,7 +223,7 @@ int cdList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
 int cdList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
 {
 	if (list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	dNode* head = list;
 	int tempPos = 0;
@@ -254,7 +260,7 @@ int cdList::returnDataByPos(dNode* list, int &data, int pos)
 int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
 {
 	if (list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	dNode* head = list;
 	do {

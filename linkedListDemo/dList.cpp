@@ -1,4 +1,12 @@
 #include "dList.h"
+// sweeney's hand-rolled doubly linked list.
+//
+// error codes:
+// 0	no error.
+// 1	list is nullptr.
+// 2	ptr is nullptr.
+// -1	pos/ptr not in list.
+
 
 dNode* dList::init(int data)
 {
@@ -193,7 +201,7 @@ int dList::deleteNodeByPos(dNode** list, int pos)
 int dList::deleteNodeByPtr(dNode** list, dNode* &ptr)
 {
 	if (*list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	dNode* head = *list;
 	do {
@@ -252,7 +260,7 @@ int dList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
 int dList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
 {
 	if (list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	int tempPos = 0;
 	do {
@@ -287,7 +295,7 @@ int dList::returnDataByPos(dNode* list, int &data, int pos)
 int dList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
 {
 	if (list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	do {
 		if (list = ptr)
@@ -320,7 +328,7 @@ int dList::updateDataByPos(dNode* list, int data, int pos)
 int dList::updateDataByPtr(dNode* list, int data, dNode* ptr)
 {
 	if (list == nullptr) return 1;
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	do {
 		if (list == ptr)

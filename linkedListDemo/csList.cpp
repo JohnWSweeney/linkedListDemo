@@ -1,5 +1,11 @@
 #include "csList.h"
 // sweeney's hand-rolled circular singly linked list.
+//
+// error codes:
+// 0	no error.
+// 1	list is nullptr.
+// 2	ptr is nullptr.
+// -1	pos/ptr not in list.
 
 node* csList::init(int data)
 {
@@ -175,8 +181,7 @@ int csList::deleteNodeByPos(node** list, int pos)
 int csList::deleteNodeByPtr(node** list, node* ptr)
 {
 	if (*list == nullptr) return 1;
-
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	node* head = *list;
 	if (ptr == head) // delete node in first position.
@@ -241,8 +246,7 @@ int csList::returnPtrByPos(node* list, int pos, node* &ptr)
 int csList::returnPosByPtr(node* list, int &pos, node* ptr)
 {
 	if (list == nullptr) return 1;
-
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	node* head = list;
 	int tempPos = 0;

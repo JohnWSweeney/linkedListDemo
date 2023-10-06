@@ -1,6 +1,12 @@
 #pragma once
 #include "nodes.h"
 // sweeney's hand-rolled circular doubly linked list.
+//
+// error codes:
+// 0	no error.
+// 1	list is nullptr.
+// 2	ptr is nullptr.
+// -1	pos/ptr not in list.
 
 class cdList
 {

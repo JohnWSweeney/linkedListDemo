@@ -1,5 +1,12 @@
 #include "sList.h"
 // sweeney's hand-rolled singly linked list.
+//
+// error codes:
+// 0	no error.
+// 1	list is nullptr.
+// 2	ptr is nullptr.
+// -1	pos/ptr not in list.
+
 
 node* sList::init(int data)
 {
@@ -137,8 +144,7 @@ int sList::deleteNodeByPos(node** list, int pos)
 int sList::deleteNodeByPtr(node** list, node* ptr)
 {
 	if (list == nullptr) return 1;
-
-	if (ptr == nullptr) return -1;
+	if (ptr == nullptr) return 2;
 
 	if (*list == ptr)
 	{
@@ -160,7 +166,7 @@ int sList::deleteNodeByPtr(node** list, node* ptr)
 			}
 			curr = curr->next;
 		} while (curr != nullptr);
-		return -2;
+		return -1;
 	}
 }
 
@@ -184,8 +190,7 @@ int sList::returnPtrByPos(node* list, int pos, node* &ptr)
 int sList::returnPosByPtr(node* list, int &pos, node* ptr)
 {
 	if (list == nullptr) return 1;
-
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	int tempPos = 0;
 	do {
@@ -220,8 +225,7 @@ int sList::returnDataByPos(node* list, int &data, int pos)
 int sList::returnDataByPtr(node* list, int &data, node* ptr)
 {
 	if (list == nullptr) return 1;
-
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	do {
 		if (list == ptr)
@@ -254,8 +258,7 @@ int sList::updateDataByPos(node* list, int data, int pos)
 int sList::updateDataByPtr(node* list, int data, node* ptr)
 {
 	if (list == nullptr) return 1;
-
-	if (ptr == nullptr) return -2;
+	if (ptr == nullptr) return 2;
 
 	do {
 		if (list == ptr)
@@ -270,10 +273,7 @@ int sList::updateDataByPtr(node* list, int data, node* ptr)
 
 int sList::findDataReturnPos(node* list, int data, int &pos)
 {
-	if (list == nullptr)
-	{
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	int tempPos = 0;
 	do {
@@ -525,52 +525,37 @@ int sList::movePtrToBack(node** list, node* ptr)
 
 int sList::clear(node** list)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	do {
 		node* dummy = *list;
 		*list = dummy->next;
 		delete dummy;
-	} while (*list != NULL);
+	} while (*list != nullptr);
 	return 0;
 }
 
 int sList::isEmpty(node* list)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	if (list == nullptr) return 1;
+	else return 0;
 }
 
 int sList::size(node* list, int &nodeCount)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	nodeCount = 0;
 	do {
 		++nodeCount;
 		list = list->next;
-	} while (list != NULL);
+	} while (list != nullptr);
 	return 0;
 }
 
 int sList::print(node* list)
 {
-	if (list == NULL)
-	{
-		return 1;
-	}
+	if (list == nullptr) return 1;
 
 	int tempPos = 0;
 	std::cout << "#\tdata:\tlist:\t\t\tnext:\n";
@@ -578,7 +563,7 @@ int sList::print(node* list)
 		std::cout << tempPos << '\t' << list->data << '\t' << list << '\t' << list->next << '\t' << '\n';
 		++tempPos;
 		list = list->next;
-	} while (list != NULL);
+	} while (list != nullptr);
 	std::cout << '\n';
 	return 0;
 }
@@ -603,6 +588,5 @@ int sList::reverse(node** list)
 		tail = curr;
 		*list = temp;
 	} while (*list != nullptr);
-
 	*list = curr;
 }

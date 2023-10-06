@@ -180,11 +180,11 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is null.\n\n";
-			}
-			else if (result == -2)
-			{
 				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
 			}
 		}
 		else if (cmd.function == "returnPtrByPos")
@@ -216,11 +216,11 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is null.\n\n";
-			}
-			else if (result == -2)
-			{
 				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
 			}
 		}
 		else if (cmd.function == "returnDataByPos")
@@ -248,15 +248,15 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == 1)
 			{
-				std::cout << "List is empty.\n\n";
+				std::cout << "List is empty.\n";
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is not in list.\n\n";
+				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer is null.\n\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "updateDataByPos")
@@ -292,7 +292,7 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n";
 			}
@@ -468,7 +468,7 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is null.\n";
 			}
-			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = slist.clear(&list);
@@ -726,9 +726,9 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer null.\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "returnPtrByPos")
@@ -762,9 +762,9 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer null.\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "returnDataByPos")
@@ -798,9 +798,9 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer null.\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "updateDataByPos")
@@ -836,11 +836,11 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n";
 			}
-			}
+		}
 		else if (cmd.function == "findDataReturnPos")
 		{
 			result = dlist.findDataReturnPos(list, cmd.input1, cmd.output);
@@ -1171,15 +1171,15 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == 1)
 			{
-				std::cout << "List is empty.\n\n";
+				std::cout << "List is empty.\n";
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is not in list.\n\n";
+				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer is null.\n\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "returnDataByPos")
@@ -1223,15 +1223,15 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == 1)
 			{
-				std::cout << "List is empty.\n\n";
+				std::cout << "List is empty.\n";
 			}
 			else if (result == -1)
 			{
-				std::cout << "Pointer is not in list.\n\n";
+				std::cout << "Pointer is not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
-				std::cout << "Pointer is null.\n\n";
+				std::cout << "Pointer is null.\n";
 			}
 		}
 		else if (cmd.function == "returnDataByPos")
@@ -1646,7 +1646,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer not in list.\n\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n\n";
 			}
@@ -1683,7 +1683,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				
 				std::cout << "Pointer not in list.\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n";
 			}
@@ -1719,7 +1719,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "Pointer is not in list.\n\n";
 			}
-			else if (result == -2)
+			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n\n";
 			}
