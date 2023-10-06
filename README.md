@@ -175,9 +175,14 @@ The `clear` and `print` functions work identically to the other classes.
 - Everytime I think I'm done, I find of new functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.5.13](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.13/linkedListDemo_v1_5_13.exe) [88 kB]
+[linkedListDemo v1.5.16](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.16/linkedListDemo_v1_5_16.exe) [80 kB]
 
 ## ChangeLog
+v1.5.16
+- Updated sList and demo.
+	- Renamed moveToFrontByPos to movePosToFront and updated function.
+	- Added movePosToBack, movePtrToFront, and movePtrToBack functions.
+
 v1.5.15
 - Updated populateCmd function so that only one demo can run at a time.
 

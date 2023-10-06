@@ -377,17 +377,17 @@ int sList::findMaxReturnPtr(node* list, int &max, node* &ptr)
 	return 0;
 }
 
-int sList::moveToFrontByPos(node** list, int pos)
+int sList::movePosToFront(node** list, int pos)
 {
 	if (*list == nullptr) return 1;
 
 	if (pos == 0) return 0;
 
 	node* head = *list;
-	int tempPos = 0;
+	int tempPos = 1;
 	do {
 		node* dummy = *list;
-		if (tempPos == pos - 1)
+		if (tempPos == pos)
 		{
 			node* newHead = dummy->next;
 			dummy->next = newHead->next;
@@ -400,6 +400,127 @@ int sList::moveToFrontByPos(node** list, int pos)
 	} while (*list != nullptr);
 	*list = head;
 	return -1;
+}
+
+int sList::movePosToBack(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	bool foundPos = false;
+	node* curr = nullptr;
+	node* prev = nullptr;
+	node* temp = nullptr;
+	node* tail = nullptr;
+	int tempPos = 0;
+	do {
+		curr = *list;
+		// if desired node is head.
+		if (tempPos == pos and pos == 0)
+		{
+			if (curr->next == nullptr) // if list has only one node.
+			{
+				return 0;
+			}
+			foundPos = true;
+			temp = head;
+			head = head->next;
+		}
+		// if desired node is between head and tail.
+		else if (tempPos == pos and curr->next != nullptr)
+		{
+			foundPos = true;
+			temp = curr;
+			prev->next = curr->next;
+		}
+		// if desired node is tail.
+		else if (tempPos == pos and curr->next == nullptr)
+		{
+			*list = head;
+			return 0;
+		}
+		// find tail node.
+		if (curr->next == nullptr)
+		{
+			tail = curr;
+		}
+		++tempPos;
+		prev = curr;
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head;
+	if (foundPos == true)
+	{
+		tail->next = temp;
+		temp->next = nullptr;
+		return 0;
+	}
+	else return -1;
+}
+
+int sList::movePtrToFront(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	if (ptr == head) return 0;
+
+	do {
+		node* dummy = *list;
+		if (dummy->next == ptr)
+		{
+			dummy->next = dummy->next->next;
+			ptr->next = head;
+			head = ptr;
+			*list = head;
+			return 0;
+		}
+		*list = dummy->next;
+	} while (list != nullptr);
+	return -1;
+}
+
+int sList::movePtrToBack(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	node* curr = nullptr;
+	bool foundPtr = false;
+	do {
+		curr = *list;
+		// if desired node is head.
+		if (head == ptr)
+		{
+			if (head->next == nullptr) // if list has only one node.
+			{
+				return 0;
+			}
+			foundPtr = true;
+			head = ptr->next;
+		}
+		else if (curr->next == ptr)
+		{
+			foundPtr = true;
+			curr->next = ptr->next;
+		}
+		*list = curr->next;
+	} while (curr->next != nullptr);
+
+	if (foundPtr == true)
+	{
+		curr->next = ptr;
+		ptr->next = nullptr;
+		*list = head;
+		return 0;
+	}
+	else
+	{
+		*list = head;
+		return -1;
+	}
 }
 
 int sList::clear(node** list)

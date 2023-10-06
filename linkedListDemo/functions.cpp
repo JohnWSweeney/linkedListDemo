@@ -377,9 +377,9 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
-		else if (cmd.function == "moveToFrontByPos")
+		else if (cmd.function == "movePosToFront")
 		{
-			result = slist.moveToFrontByPos(&list, cmd.input1);
+			result = slist.movePosToFront(&list, cmd.input1);
 			if (result == 0)
 			{
 				result = slist.size(list, nodeCount);
@@ -398,6 +398,77 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Position is not in list.\n";
 			}
 		}
+		else if (cmd.function == "movePosToBack")
+		{
+			result = slist.movePosToBack(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+			}
+		else if (cmd.function == "movePtrToFront")
+		{
+			result = slist.movePtrToFront(&list, ptr);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrToBack")
+		{
+			result = slist.movePtrToBack(&list, ptr);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+			}
 		else if (cmd.function == "clear")
 		{
 			result = slist.clear(&list);

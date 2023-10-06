@@ -3,8 +3,8 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
-std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "moveToFrontByPos" };
-std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack"};
+std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> stackFuncsInts = { "push" };
 std::vector<std::string> stackFuncsNoInts = { "pop", "top", "clear", "isEmpty", "size", "print" };
@@ -61,7 +61,6 @@ int getInteger(std::string token, int &integer)
 int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 {
 	int result;
-
 	if (tokens[0] == "start")
 	{
 		if (status == false)
