@@ -429,6 +429,146 @@ int cdList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
 	return 0;
 }
 
+int cdList::movePtrToFront(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	if (ptr == head) return 0;
+	else if (ptr == tail)
+	{
+		head = tail;
+		*list = head;
+		return 0;
+	}
+
+	do {
+		dNode* curr = *list;
+		if (curr == ptr)
+		{
+			dNode* before = curr->prev;
+			dNode* after = curr->next;
+			before->next = after;
+			after->prev = before;
+			ptr->next = head;
+			ptr->prev = tail;
+			head->prev = ptr;
+			tail->next = ptr;
+			head = ptr;
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	return -1;
+}
+
+int cdList::movePtrToBack(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	if (ptr == head)
+	{
+		head = ptr->next;
+		*list = head;
+		return 0;
+	}
+	else if (ptr == tail) return 0;
+
+	do {
+		dNode* curr = *list;
+		if (curr == ptr)
+		{
+			dNode* before = curr->prev;
+			dNode* after = curr->next;
+			before->next = after;
+			after->prev = before;
+			ptr->next = head;
+			ptr->prev = tail;
+			tail->next = ptr;
+			head->prev = ptr;
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	return -1;
+}
+
+int cdList::movePtrUp(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	if (ptr == head) return 0;
+
+	do {
+		dNode* curr = *list;
+		if (curr->next == ptr)
+		{
+			dNode* before = curr->prev;
+			dNode* after = ptr->next;
+			before->next = ptr;
+			ptr->prev = before;
+			ptr->next = curr;
+			curr->prev = ptr;
+			curr->next = after;
+			after->prev = curr;
+			if (curr == head)
+			{
+				*list = ptr;
+			}
+			else
+			{
+				*list = head;
+			}
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	return -1;
+}
+
+int cdList::movePtrDown(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	if (ptr == head->prev) return 0;
+
+	dNode* curr = nullptr;
+	do {
+		curr = *list;
+		if (curr == ptr)
+		{
+			dNode* before = curr->prev;
+			dNode* newPos = curr->next;
+			dNode* after = curr->next->next;
+			before->next = newPos;
+			newPos->prev = before;
+			newPos->next = curr;
+			curr->prev = newPos;
+			curr->next = after;
+			after->prev = curr;
+			if (curr == head)
+			{
+				head = newPos;
+			}
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	return -1;
+}
+
 int cdList::clear(dNode** list)
 {
 	if (*list == nullptr) return 1;

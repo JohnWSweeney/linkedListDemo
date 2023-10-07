@@ -4,7 +4,7 @@
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
 std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack"};
-std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> stackFuncsInts = { "push" };
 std::vector<std::string> stackFuncsNoInts = { "pop", "top", "clear", "isEmpty", "size", "print" };

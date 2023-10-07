@@ -31,6 +31,10 @@ public:
 	int findMinReturnPtr(dNode* list, int &min, dNode* &ptr);
 	int findMaxReturnPos(dNode* list, int &max, int &pos);
 	int findMaxReturnPtr(dNode* list, int &max, dNode* &ptr);
+	int movePtrToFront(dNode** list, dNode* ptr);
+	int movePtrToBack(dNode** list, dNode* ptr);
+	int movePtrUp(dNode** list, dNode* ptr);
+	int movePtrDown(dNode** list, dNode* ptr);
 	int clear(dNode** list);
 	int isEmpty(dNode* list);
 	int size(dNode* list, int &nodeCount);

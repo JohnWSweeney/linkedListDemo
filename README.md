@@ -172,12 +172,16 @@ which will also return empty, almost empty, almost full, and full messages when 
 The `clear` and `print` functions work identically to the other classes.
 
 ## Future Updates
-- Everytime I think I'm done, I find of new functions to implement, so who knows.
+- Everytime I think I'm done, I find new functions to implement, so who knows.
 
 ## Download
 [linkedListDemo v1.5.16](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.16/linkedListDemo_v1_5_16.exe) [80 kB]
 
 ## ChangeLog
+v1.5.18
+- Updated cdList class and demo.
+	- Added movePtrToFront, movePtrToBack, movePtrUp, and movePtrDown functions.
+
 v1.5.17
 - Updated error codes for slist, dList, csList, and cdList class functions and their respective demos.
 
