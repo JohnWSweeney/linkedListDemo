@@ -3,7 +3,7 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
-std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack"};
+std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes" };
 std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 
 std::vector<std::string> stackFuncsInts = { "push" };
@@ -87,6 +87,26 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		result = checkStringVector(tokens[0], listFuncsInts, cmd.function);
 		if (result == 0)
 		{
+			// check if function requires three integers.
+			if (cmd.function == "addRandomNodes")
+			{
+				// check if three commands (function, int1, int2, int3) were entered.
+				if (tokens.size() < 4)
+				{
+					std::cout << "Too few commands entered.\n";
+					return 1;
+				}
+				// if so, get the first integer.
+				result = getInteger(tokens[1], cmd.input1);
+				if (result == 1) return 1;
+				// then get the second integer.
+				result = getInteger(tokens[2], cmd.input2);
+				if (result == 1) return 1;
+				// then get the third integer.
+				result = getInteger(tokens[3], cmd.input3);
+				return result;
+			}
+
 			// check if function requires two integers.
 			if (cmd.function == "addNodeByPos")
 			{

@@ -28,6 +28,11 @@ You can then add new nodes to the beginning or end of the list by entering:
 You can also add a default set of nodes to the list by entering:
 > *addNodes*
 
+Just for fun, you can add an indefinite number of nodes with random integers by entering:
+> *addRandomNodes numInt minInt maxInt*
+
+where `numInt` is the number of nodes you wish to add to the list and `minInt` and `maxInt` are the lower and upper bounds, respectively, from which the random integers will be selected. Random integers are generated with the STL 32-bit Mersenne Twister engine and added to the end of the list with the `addNodeBack` function. 
+
 The first and last nodes can be removed by:
 > *deleteNodeFront*
 
@@ -175,9 +180,14 @@ The `clear` and `print` functions work identically to the other classes.
 - Everytime I think I'm done, I find new functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.5.16](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.5.16/linkedListDemo_v1_5_16.exe) [80 kB]
+[linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.0
+- Added random class and addRandomNodes function to sList, dList, csList, and cdList demos.
+	- Added input3 integer member to command struct. 
+	- Updated README.
+
 v1.5.18
 - Updated cdList class and demo.
 	- Added movePtrToFront, movePtrToBack, movePtrUp, and movePtrDown functions.

@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "atomicBool.h"
+#include "random.h"
 #include "sList.h"
 #include "dList.h"
 #include "csList.h"
@@ -555,6 +556,27 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				slist.print(list);
 			}
 		}
+		else if (cmd.function == "addRandomNodes")
+		{
+			random random;
+			random.initMt();
+			for (int i = 0; i < cmd.input1; i++)
+			{
+				int num = random.getNum(cmd.input2, cmd.input3);
+				result = slist.addNodeBack(list, num);
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
+			}
+			result = slist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				slist.print(list);
+			}
+		}
 		else if (cmd.function == "clearPtr")
 		{
 			ptr = nullptr;
@@ -999,6 +1021,27 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addRandomNodes")
+		{
+			random random;
+			random.initMt();
+			for (int i = 0; i < cmd.input1; i++)
+			{
+				int num = random.getNum(cmd.input2, cmd.input3);
+				result = dlist.addNodeBack(list, num);
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
+			}
+			result = dlist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				dlist.print(list);
 			}
 		}
 		else if (cmd.function == "clearPtr")
@@ -1474,6 +1517,27 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				cslist.print(list);
 			}
 		}
+		else if (cmd.function == "addRandomNodes")
+		{
+			random random;
+			random.initMt();
+			for (int i = 0; i < cmd.input1; i++)
+			{
+				int num = random.getNum(cmd.input2, cmd.input3);
+				result = cslist.addNodeBack(list, num);
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
+			}
+			result = cslist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				cslist.print(list);
+			}
+			}
 		else if (cmd.function == "clearPtr")
 		{
 			ptr = nullptr;
@@ -2028,6 +2092,27 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "addRandomNodes")
+		{
+			random random;
+			random.initMt();
+			for (int i = 0; i < cmd.input1; i++)
+			{
+				int num = random.getNum(cmd.input2, cmd.input3);
+				result = cdlist.addNodeBack(list, num);
+				if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+					break;
+				}
+			}
+			result = cdlist.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				cdlist.print(list);
+			}
+			}
 		else if (cmd.function == "clearPtr")
 		{
 			ptr = nullptr;
