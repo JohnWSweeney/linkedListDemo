@@ -40,4 +40,5 @@ public:
 	int size(node* list, int &nodeCount);
 	int print(node* list);
 	int reverse(node** list);
+	int bubbleSort(node** list, bool isAscending);
 };

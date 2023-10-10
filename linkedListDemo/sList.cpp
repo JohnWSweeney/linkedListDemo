@@ -590,3 +590,75 @@ int sList::reverse(node** list)
 	} while (*list != nullptr);
 	*list = curr;
 }
+
+int sList::bubbleSort(node** list, bool isAscending)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	if (head->next == nullptr) return 0;
+
+	int swaps = 0;
+	int swapCount = 0;
+	int sweepCount = 0;
+	node* before = nullptr;
+	node* curr = nullptr;
+	node* after = nullptr;
+	// keep sweeping list until there are no more swaps.
+	do {
+		swaps = 0;
+		// sweep list, reordering adjacent nodes according to isAscending.
+		do {
+			curr = *list;
+			after = curr->next;
+			if (after != nullptr)
+			{
+				// sort ascending.
+				if (isAscending == true)
+				{
+					if (curr->data > after->data)
+					{
+						curr->next = after->next;
+						after->next = curr;
+						if (curr == head)
+						{
+							head = after;
+						}
+						else
+						{
+							before->next = after;
+						}
+						++swaps;
+					}
+				}
+				// sort descending.
+				else
+				{
+					if (curr->data < after->data)
+					{
+						curr->next = after->next;
+						after->next = curr;
+						if (curr == head)
+						{
+							head = after;
+						}
+						else
+						{
+							before->next = after;
+						}
+						++swaps;
+					}
+				}
+			}
+			before = curr;
+			*list = curr->next;
+		} while (*list != nullptr);
+		*list = head;
+		swapCount += swaps;
+		++sweepCount;
+	} while (swaps != 0);
+	*list = head;
+	std::cout << "swapCount: " << swapCount << '\n';
+	std::cout << "sweepCount: " << sweepCount << '\n';
+	return 0;
+}

@@ -183,6 +183,13 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.1
+- Added bubbleSort sorting function to sList class and demo.
+- Updated commands header/cpp.
+	- Added getBool function.
+	- Added listFuncsBool string vector to hold sorting function names.
+	- Renamed listFuncsNoInts to listFuncs, stackFuncsNoInts to stackFuncs, queueFuncsNoInts to queueFuncs, and fifoFuncsNoInts to fifoFuncs.
+
 v1.6.0
 - Added random class and addRandomNodes function to sList, dList, csList, and cdList demos.
 	- Added input3 integer member to command struct. 

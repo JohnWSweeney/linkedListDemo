@@ -582,6 +582,23 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			ptr = nullptr;
 			std::cout << "Pointer cleared.\n";
 		}
+		else if (cmd.function == "bubbleSort")
+		{
+			result = slist.bubbleSort(&list, cmd.isAscending);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		cv.notify_one();
 	}
 	cv.notify_one();

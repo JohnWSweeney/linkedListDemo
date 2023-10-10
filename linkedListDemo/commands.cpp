@@ -3,17 +3,18 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
+std::vector<std::string> listFuncs = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
 std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes" };
-std::vector<std::string> listFuncsNoInts = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> listFuncsBool = { "bubbleSort" };
 
+std::vector<std::string> stackFuncs = { "pop", "top", "clear", "isEmpty", "size", "print" };
 std::vector<std::string> stackFuncsInts = { "push" };
-std::vector<std::string> stackFuncsNoInts = { "pop", "top", "clear", "isEmpty", "size", "print" };
 
+std::vector<std::string> queueFuncs = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
 std::vector<std::string> queueFuncsInts = { "push" };
-std::vector<std::string> queueFuncsNoInts = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
 
 std::vector<std::string> fifoFuncsInts = { "config", "write" };
-std::vector<std::string> fifoFuncsNoInts = { "read", "clear", "size", "print" };
+std::vector<std::string> fifoFuncs = { "read", "clear", "size", "print" };
 
 int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {
@@ -54,6 +55,31 @@ int getInteger(std::string token, int &integer)
 	catch (std::out_of_range)
 	{
 		std::cout << "Integer out of range.\n";
+		return 1;
+	}
+}
+
+int getBool(std::string token, bool &boolean)
+{
+	if (token.empty())
+	{
+		std::cout << "No boolean string entered.\n";
+		return 1;
+	}
+
+	if (token == "true" or token == "asc")
+	{
+		boolean = true;
+		return 0;
+	}
+	else if (token == "false" or token == "desc")
+	{
+		boolean = false;
+		return 0;
+	}
+	else
+	{
+		std::cout << "Invalid boolean string.\n";
 		return 1;
 	}
 }
@@ -134,19 +160,31 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 			result = getInteger(tokens[1], cmd.input1);
 			return result;
 		}
-		else
+
+		// check if command is a valid boolean-requiring function.
+		result = checkStringVector(tokens[0], listFuncsBool, cmd.function);
+		if(result == 0)
 		{
-			// check if command is a valid non-integer-requiring function.
-			result = checkStringVector(tokens[0], listFuncsNoInts, cmd.function);
-			if (result == 1)
+			// check if two commands (function, boolean) were entered.
+			if (tokens.size() < 2)
 			{
-				std::cout << "Invalid function.\n";
+				std::cout << "Too few commands entered.\n";
 				return 1;
 			}
-			else
-			{
-				return 0;
-			}
+			result = getBool(tokens[1], cmd.isAscending);
+			return result;
+		}
+
+		// check if command is a valid non-integer-requiring function.
+		result = checkStringVector(tokens[0], listFuncs, cmd.function);
+		if (result == 1)
+		{
+			std::cout << "Invalid function.\n";
+			return 1;
+		}
+		else
+		{
+			return 0;
 		}
 	}
 
@@ -170,7 +208,7 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		else
 		{
 			// check if command is a valid non-integer-requiring function.
-			result = checkStringVector(tokens[0], stackFuncsNoInts, cmd.function);
+			result = checkStringVector(tokens[0], stackFuncs, cmd.function);
 			if (result == 1)
 			{
 				std::cout << "Invalid function.\n";
@@ -203,7 +241,7 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		else
 		{
 			// check if command is a valid non-integer-requiring function.
-			result = checkStringVector(tokens[0], queueFuncsNoInts, cmd.function);
+			result = checkStringVector(tokens[0], queueFuncs, cmd.function);
 			if (result == 1)
 			{
 				std::cout << "Invalid function.\n";
@@ -236,7 +274,7 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 		else
 		{
 			// check if command is a valid non-integer-requiring function.
-			result = checkStringVector(tokens[0], fifoFuncsNoInts, cmd.function);
+			result = checkStringVector(tokens[0], fifoFuncs, cmd.function);
 			if (result == 1)
 			{
 				std::cout << "Invalid function.\n";
