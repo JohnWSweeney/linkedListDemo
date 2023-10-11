@@ -183,6 +183,11 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.2
+- Updated sList class and demo.
+	- Added swap function.
+- Fixed bug in populateCmd function preventing passing of second integer to updateDataByPos function in list classes, demos.
+
 v1.6.1
 - Added bubbleSort sorting function to sList class and demo.
 - Updated commands header/cpp.

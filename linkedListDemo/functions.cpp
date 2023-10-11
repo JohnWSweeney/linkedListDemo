@@ -582,6 +582,46 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			ptr = nullptr;
 			std::cout << "Pointer cleared.\n";
 		}
+		else if (cmd.function == "swap")
+		{
+			node* ptr1 = nullptr;
+			node* ptr2 = nullptr;
+			// get ptr1 from position 1.
+			result = slist.returnPtrByPos(list, cmd.input1, ptr1);
+			if (result == 0)
+			{
+				// get ptr2 from position 2.
+				result = slist.returnPtrByPos(list, cmd.input2, ptr2);
+				if (result == -1)
+				{
+					std::cout << "Postition 2 is not in list.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Postition 1 is not in list.\n";
+			}
+
+			// swap ptr1 and ptr2.
+			result = slist.swap(&list, ptr1, ptr2);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 4)
+			{
+				// 
+			}
+		}
 		else if (cmd.function == "bubbleSort")
 		{
 			result = slist.bubbleSort(&list, cmd.isAscending);

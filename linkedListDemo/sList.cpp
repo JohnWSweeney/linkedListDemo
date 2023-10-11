@@ -591,6 +591,65 @@ int sList::reverse(node** list)
 	*list = curr;
 }
 
+int sList::swap(node** list, node* ptr1, node* ptr2)
+{
+	if (*list == nullptr) return 1;
+	if (ptr1 == nullptr) return 2;
+	if (ptr2 == nullptr) return 3;
+	if (ptr1 == ptr2) return 4;
+
+	node* head = *list;
+
+	node* prev = nullptr;
+	bool foundPtr1 = false;
+	bool foundPtr2 = false;
+	node* temp1 = nullptr;
+	node* temp2 = nullptr;
+	do {
+		node* curr = *list;
+		if (curr == ptr1)
+		{
+			foundPtr1 = true;
+			temp1 = prev;
+		}
+		if (curr == ptr2)
+		{
+			foundPtr2 = true;
+			temp2 = prev;
+		}
+		prev = curr;
+		*list = curr->next;
+	} while (*list != nullptr);
+
+	if (foundPtr1 == true and foundPtr2 == true)
+	{
+		node* dummy = nullptr;
+		if (ptr1 == head)
+		{
+			head = ptr2;
+			temp2->next = ptr1;
+		}
+		else if (ptr2 == head)
+		{
+			head = ptr1;
+			temp1->next = ptr2;
+		}
+		else
+		{
+			dummy = temp1->next;
+			temp1->next = temp2->next;
+			temp2->next = dummy;
+		}
+		dummy = ptr1->next;;
+		ptr1->next = ptr2->next;
+		ptr2->next = dummy;
+		*list = head;
+		return 0;
+	}
+	if (foundPtr1 == false) return -1; // ptr1 not in list.
+	if (foundPtr2 == false) return -2; // ptr2 not in list.
+}
+
 int sList::bubbleSort(node** list, bool isAscending)
 {
 	if (*list == nullptr) return 1;

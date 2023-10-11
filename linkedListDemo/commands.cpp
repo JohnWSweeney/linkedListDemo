@@ -4,7 +4,7 @@
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
 std::vector<std::string> listFuncs = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
-std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes" };
+std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes", "swap" };
 std::vector<std::string> listFuncsBool = { "bubbleSort" };
 
 std::vector<std::string> stackFuncs = { "pop", "top", "clear", "isEmpty", "size", "print" };
@@ -134,7 +134,7 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 			}
 
 			// check if function requires two integers.
-			if (cmd.function == "addNodeByPos")
+			if (cmd.function == "addNodeByPos" or cmd.function == "updateDataByPos" or cmd.function == "swap")
 			{
 				// check if three commands (function, int1, int2) were entered.
 				if (tokens.size() < 3)
