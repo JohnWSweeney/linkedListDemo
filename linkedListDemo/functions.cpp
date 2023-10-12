@@ -1000,6 +1000,106 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 			}
+		else if (cmd.function == "movePtrToFront")
+		{
+			result = dlist.movePtrToFront(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrToBack")
+		{
+			result = dlist.movePtrToBack(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrUp")
+		{
+			result = dlist.movePtrUp(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrDown")
+		{
+			result = dlist.movePtrDown(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = dlist.clear(&list);

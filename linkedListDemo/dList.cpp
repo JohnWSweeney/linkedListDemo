@@ -453,6 +453,228 @@ int dList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
 	return 0;
 }
 
+int dList::movePtrToFront(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	if (ptr == head) return 0;
+
+	do {
+		dNode* curr = *list;
+		if (curr->next == ptr)
+		{
+			dNode* after = ptr->next;
+			curr->next = after;
+			if (after != nullptr)
+			{
+				after->prev = curr;
+			}
+			head->prev = ptr;
+			ptr->next = head;
+			ptr->prev = nullptr;
+			*list = ptr;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+	return -1;
+}
+
+int dList::movePtrToBack(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	bool foundPtr = false;
+	dNode* curr = nullptr;
+	dNode* tail = nullptr;
+	do {
+		curr = *list;
+		// list has only one node or desired node is tail.
+		if (curr == ptr and curr->next == nullptr)
+		{
+			*list = head;
+			return 0;
+		}
+		// desired node is not tail.
+		else if (curr == ptr and curr->next != nullptr)
+		{
+			foundPtr = true;
+			dNode* after = curr->next;
+			if (ptr == head) // if desired node is head.
+			{
+				head = after;
+				after->prev = nullptr;
+			}
+			else
+			{
+				dNode* before = curr->prev;
+				before->next = after;
+				after->prev = before;
+			}
+		}
+		// find tail node.
+		if (curr->next == nullptr)
+		{
+			tail = curr;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+
+	if (foundPtr == true)
+	{
+		tail->next = ptr;
+		ptr->prev = tail;
+		ptr->next = nullptr;
+		*list = head;
+		return 0;
+	}
+	else
+	{
+		*list = head;
+		return -1;
+	}
+}
+
+int dList::movePtrUp(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	if (ptr == head) return 0;
+
+	dNode* before = nullptr;
+	dNode* newPos = nullptr; // new ptr position.
+	dNode* curr = nullptr; // current ptr position.
+	dNode* after = nullptr;
+	do {
+		curr = *list;
+		// if desired node is second in list.
+		if (curr == ptr and curr->prev == head)
+		{
+			after = curr->next;
+			curr->prev = nullptr;
+			curr->next = head;
+			head->prev = curr;
+			if (after != nullptr) // if list more than two nodes.
+			{
+				after->prev = head;
+			}
+			head->next = after;
+			head = curr;
+			*list = head;
+			return 0;
+		}
+		// if desired node is b/w head and tail.
+		else if (curr == ptr and curr->next != nullptr)
+		{
+			before = curr->prev->prev;
+			newPos = curr->prev;
+			after = curr->next;
+			before->next = curr;
+			curr->prev = before;
+			curr->next = newPos;
+			newPos->prev = curr;
+			newPos->next = after;
+			after->prev = newPos;
+			*list = head;
+			return 0;
+		}
+		// if desired node is tail.
+		else if (curr == ptr and curr->next == nullptr)
+		{
+			before = curr->prev->prev;
+			newPos = curr->prev;
+			before->next = curr;
+			curr->prev = before;
+			curr->next = newPos;
+			newPos->prev = curr;
+			newPos->next = nullptr;
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+	return -1;
+}
+
+int dList::movePtrDown(dNode** list, dNode* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	dNode* head = *list;
+	dNode* before = nullptr;
+	dNode* newPos = nullptr; // new ptr position.
+	dNode* curr = nullptr; // current ptr position.
+	dNode* after = nullptr;
+	bool foundPtr = false;
+	do {
+		dNode* curr = *list;
+		if (curr == ptr)
+		{
+			// ptr is tail node or list has only one node.
+			if (curr->next == nullptr)
+			{
+				*list = head;
+				return 0;
+			}
+			// ptr is head node.
+			else if (curr == head)
+			{
+				newPos = curr->next; // new head.
+				after = curr->next->next;
+				newPos->prev = nullptr;
+				newPos->next = curr;
+				curr->prev = newPos;
+				curr->next = after;
+				if (after != nullptr) // if list more than two nodes.
+				{
+					after->prev = curr;
+				}
+				head = newPos;
+				*list = head;
+				return 0;
+			}
+			// ptr is second to last node.
+			else if (curr->next->next == nullptr)
+			{
+				before = curr->prev;
+				newPos = curr->next;
+				before->next = newPos;
+				newPos->prev = before;
+				newPos->next = curr;
+				curr->prev = newPos;
+				curr->next = nullptr;
+				*list = head;
+				return 0;
+			}
+			// ptr is between head and tail nodes.
+			else
+			{
+				before = curr->prev;
+				newPos = curr->next;
+				after = curr->next->next;
+				before->next = newPos;
+				newPos->prev = before;
+				newPos->next = curr;
+				curr->prev = newPos;
+				curr->next = after;
+				after->prev = curr;
+				*list = head;
+				return 0;
+			}
+
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+	return -1;
+}
+
 int dList::clear(dNode** list)
 {
 	if (*list == nullptr) return 1;
