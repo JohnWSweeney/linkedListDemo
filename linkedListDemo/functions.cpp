@@ -378,6 +378,30 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "findTailReturnPos")
+		{
+			result = slist.findTailReturnPos(list, position);
+			if (result == 0)
+			{
+				std::cout << "Tail position: " << position << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findTailReturnPtr")
+		{
+			result = slist.findTailReturnPtr(list, ptr);
+			if (result == 0)
+			{
+				std::cout << "Tail pointer: " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "movePosToFront")
 		{
 			result = slist.movePosToFront(&list, cmd.input1);
@@ -999,7 +1023,31 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "List is empty.\n";
 			}
+		}
+		else if (cmd.function == "findTailReturnPos")
+		{
+			result = dlist.findTailReturnPos(list, position);
+			if (result == 0)
+			{
+				std::cout << "Tail position: " << position << '\n';
 			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findTailReturnPtr")
+		{
+			result = dlist.findTailReturnPtr(list, ptr);
+			if (result == 0)
+			{
+				std::cout << "Tail pointer: " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "movePtrToFront")
 		{
 			result = dlist.movePtrToFront(&list, ptr);
@@ -1169,7 +1217,7 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				for (int i = 0; i < 9; i++)
 				{
-					dlist.addNodeBack(list, i * i * i * i);
+					dlist.addNodeBack(list, pow(i, 5));
 				}
 				dlist.size(list, nodeCount);
 				std::cout << "Node count: " << nodeCount << '\n';
@@ -1588,6 +1636,30 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 			}
+		else if (cmd.function == "findTailReturnPos")
+		{
+			result = cslist.findTailReturnPos(list, position);
+			if (result == 0)
+			{
+				std::cout << "Tail position: " << position << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findTailReturnPtr")
+		{
+			result = cslist.findTailReturnPtr(list, ptr);
+			if (result == 0)
+			{
+				std::cout << "Tail pointer: " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = cslist.clear(&list);
@@ -2063,6 +2135,30 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "findTailReturnPos")
+		{
+			result = cdlist.findTailReturnPos(list, position);
+			if (result == 0)
+			{
+				std::cout << "Tail position: " << position << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "findTailReturnPtr")
+		{
+			result = cdlist.findTailReturnPtr(list, ptr);
+			if (result == 0)
+			{
+				std::cout << "Tail pointer: " << ptr << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "movePtrToFront")
 		{
 			result = cdlist.movePtrToFront(&list, ptr);
@@ -2238,7 +2334,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				for (int i = 0; i < 9; i++)
 				{
-					cdlist.addNodeBack(list, i * i * i * i);
+					cdlist.addNodeBack(list, pow(i, 5));
 				}
 				cdlist.size(list, nodeCount);
 				std::cout << "Node count: " << nodeCount << '\n';

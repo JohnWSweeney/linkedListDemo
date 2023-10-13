@@ -429,6 +429,30 @@ int cdList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
 	return 0;
 }
 
+int cdList::findTailReturnPos(dNode* list, int &pos)
+{
+	if (list == nullptr) return 1;
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (list->next == head)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+}
+
+int cdList::findTailReturnPtr(dNode* list, dNode* &ptr)
+{
+	if (list == nullptr) return 1;
+	dNode* tail = list->prev;
+	ptr = tail;
+	return 0;
+}
+
 int cdList::movePtrToFront(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;

@@ -377,6 +377,36 @@ int sList::findMaxReturnPtr(node* list, int &max, node* &ptr)
 	return 0;
 }
 
+int sList::findTailReturnPos(node* list, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	int tempPos = 0;
+	do {
+		if (list->next == nullptr)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != nullptr);
+}
+
+int sList::findTailReturnPtr(node* list, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	do {
+		if (list->next == nullptr)
+		{
+			ptr = list;
+			return 0;
+		}
+		list = list->next;
+	} while (list != nullptr);
+}
+
 int sList::movePosToFront(node** list, int pos)
 {
 	if (*list == nullptr) return 1;

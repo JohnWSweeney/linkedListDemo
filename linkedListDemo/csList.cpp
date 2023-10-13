@@ -448,6 +448,38 @@ int csList::findMaxReturnPtr(node* list, int &max, node* &ptr)
 	return 0;
 }
 
+int csList::findTailReturnPos(node* list, int &pos)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	int tempPos = 0;
+	do {
+		if (list->next == head)
+		{
+			pos = tempPos;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+}
+
+int csList::findTailReturnPtr(node* list, node* &ptr)
+{
+	if (list == nullptr) return 1;
+
+	node* head = list;
+	do {
+		if (list->next == head)
+		{
+			ptr = list;
+			return 0;
+		}
+		list = list->next;
+	} while (list != head);
+}
+
 int csList::clear(node** list)
 {
 	if (*list == nullptr) return 1;
