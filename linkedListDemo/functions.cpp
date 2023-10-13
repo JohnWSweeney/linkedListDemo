@@ -942,6 +942,114 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 		}
+		else if (cmd.function == "deleteBeforePos")
+		{
+			result = dlist.deleteBeforePos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "deleteBeforePtr")
+		{
+			result = dlist.deleteBeforePtr(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
+		else if (cmd.function == "deleteAfterPos")
+		{
+			result = dlist.deleteAfterPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "deleteAfterPtr")
+		{
+			result = dlist.deleteAfterPtr(&list, ptr);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
 		else if (cmd.function == "returnPtrByPos")
 		{
 			result = dlist.returnPtrByPos(list, cmd.input1, ptr);

@@ -269,6 +269,7 @@ int sList::deleteAfterPos(node** list, int pos)
 		++tempPos;
 		*list = curr->next;
 	} while (*list != nullptr);
+	*list = head;
 	return -1;
 }
 
