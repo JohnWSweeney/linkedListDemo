@@ -261,7 +261,7 @@ int dList::deleteBeforePos(dNode** list, int pos)
 			dNode* before = curr->prev;
 			before->next = nullptr;
 			curr->prev = nullptr;
-			// delete detached list section.
+			// delete detached list.
 			dNode* temp = head;
 			do {
 				dNode* dummy = temp;

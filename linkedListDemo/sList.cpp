@@ -202,7 +202,7 @@ int sList::deleteBeforePos(node** list, int pos)
 		++tempPos;
 		*list = curr->next;
 	} while (*list != nullptr);
-	*list = head;
+	*list = head; // pos not in list, reset list.
 	return -1;
 }
 

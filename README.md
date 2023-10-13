@@ -183,12 +183,16 @@ which will also return empty, almost empty, almost full, and full messages when 
 The `clear` and `print` functions work identically to the other classes.
 
 ## Future Updates
-- Everytime I think I'm done, I find new functions to implement, so who knows.
+- Everytime I think I'm done, I find new and interesting functions to implement, so who knows.
 
 ## Download
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.7
+- Updated csList class and demo.
+	 - Added deleteBeforePos, deleteBeforePtr, deleteAfterPos, and deleteAfterPtr functions.
+
 v1.6.6
 - Updated dList class and demo.
 	- Added deleteBeforePos, deleteBeforePtr, deleteAfterPos, and deleteAfterPtr functions.

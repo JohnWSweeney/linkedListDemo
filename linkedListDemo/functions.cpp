@@ -1646,6 +1646,114 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 		}
+		else if (cmd.function == "deleteBeforePos")
+		{
+			result = cslist.deleteBeforePos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "deleteBeforePtr")
+		{
+			result = cslist.deleteBeforePtr(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
+		else if (cmd.function == "deleteAfterPos")
+		{
+			result = cslist.deleteAfterPos(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Positon is not in list.\n";
+			}
+		}
+		else if (cmd.function == "deleteAfterPtr")
+		{
+			result = cslist.deleteAfterPtr(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+				else
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer not in list.\n\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n\n";
+			}
+		}
 		else if (cmd.function == "returnDataByPos")
 		{
 			result = cslist.returnDataByPos(list, data, cmd.input1);

@@ -225,6 +225,166 @@ int csList::deleteNodeByPtr(node** list, node* ptr)
 	}
 }
 
+int csList::deleteBeforePos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+	if (pos == 0) return 0; // invalid.
+	node* head = *list;
+	// pos == 0 is invalid, skip head.
+	*list = head->next;
+	node* prev = *list;
+	int tempPos = 1;
+	do {
+		node* curr = *list;
+		if (tempPos == pos)
+		{
+			// detach list before pos.
+			prev->next = head;
+			// delete detached list.
+			node* temp = head;
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != head);
+			// assign new head.
+			node* newHead = curr;
+			// find tail, connect to new head.
+			do {
+				curr = *list;
+				if (curr->next == head) // found tail.
+				{
+					curr->next = newHead;
+					*list = newHead;
+					return 0;
+				}
+				*list = curr->next;
+			} while (*list != head);
+		}
+		++tempPos;
+		prev = curr;
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // pos not in list, reset list.
+	return -1;
+}
+
+int csList::deleteBeforePtr(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	if (ptr == head) // invalid.
+	{
+		*list = head;
+		return 0;
+	}
+	node* prev = *list; // store previous node in sweep.
+	*list = head->next; // ptr == 0 is invalid, skip head.
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr) // ptr found.
+		{
+			prev->next = nullptr; // detach list before ptr.
+			// delete detached list.
+			node* temp = head;
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != nullptr);
+			node* newHead = curr; // assign new head node.
+			// find tail node.
+			do {
+				curr = *list;
+				if (curr->next == head)
+				{
+					// connect tail to new head.
+					curr->next = newHead;
+					*list = newHead;
+					return 0;
+				}
+				*list = curr->next;
+			} while (*list != head);
+		}
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // ptr not found in list, reset list.
+	return -1;
+}
+
+int csList::deleteAfterPos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	int tempPos = 0;
+	do {
+		node* curr = *list;
+		if (tempPos == pos) // found pos in list.
+		{
+			// check if node is tail.
+			if (curr->next == nullptr)
+			{
+				*list = head;
+				return 0;
+			}
+			// else, detach list after pos.
+			node* temp = curr->next;
+			// connect new tail to head.
+			curr->next = head;
+			// delete detached list.
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != head);
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // pos not in list, reset list.
+	return -1;
+}
+
+int csList::deleteAfterPtr(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	do {
+		node* curr = *list;
+		if (curr == ptr) // found ptr in list.
+		{
+			// check if ptr is tail.
+			if (curr->next == nullptr)
+			{
+				*list = head;
+				return 0;
+			}
+			// detach list after ptr.
+			node* temp = curr->next;
+			curr->next = head;
+			// delete detached list.
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != head);
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // ptr not in list, reset list.
+	return -1;
+}
+
 int csList::returnPtrByPos(node* list, int pos, node* &ptr)
 {
 	if (list == nullptr) return 1;
