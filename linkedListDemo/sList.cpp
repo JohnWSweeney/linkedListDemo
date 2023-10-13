@@ -170,6 +170,143 @@ int sList::deleteNodeByPtr(node** list, node* ptr)
 	}
 }
 
+int sList::deleteBeforePos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+	if (pos == 0) return 0;
+
+	node* head = *list;
+	if (head->next != nullptr)
+	{
+		*list = head->next;
+	}
+	// first, verify the position is in the list.
+	int tempPos = 1;
+	do {
+		node* curr = *list;
+		if (tempPos == pos) // position found.
+		{
+			// reset list and delete nodes up to pos.
+			tempPos = 0;
+			*list = head;
+			do {
+				node* dummy = *list;
+				*list = dummy->next;
+				delete dummy;
+				++tempPos;
+			} while (tempPos != pos);
+			head = curr;
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head;
+	return -1;
+}
+
+int sList::deleteBeforePtr(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	if (ptr == head) return 0;
+	// first, verify ptr is in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr) // found ptr.
+		{
+			// reset list and delete nodes before ptr.
+			*list = head;
+			do {
+				node* dummy = *list;
+				*list = dummy->next;
+				delete dummy;
+			} while (*list != ptr);
+			head = curr;
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head;
+	return -1;
+}
+
+int sList::deleteAfterPos(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+
+	int tempPos = 0;
+	do {
+		node* curr = *list;
+		if (tempPos == pos)
+		{
+			// if pos is tail node or list has only one node.
+			if (curr->next == nullptr)
+			{
+				*list = head;
+				return 0;
+			}
+			// detach list after pos.
+			node* temp = curr->next;
+			curr->next = nullptr;
+
+			// delete detached portion of list.
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != nullptr);
+
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != nullptr);
+	return -1;
+}
+
+int sList::deleteAfterPtr(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	do {
+		node* curr = *list;
+		if (curr == ptr)
+		{
+			// if pos is tail node or list has only one node.
+			if (curr->next == nullptr)
+			{
+				*list = head;
+				return 0;
+			}
+			// detach list after pos.
+			node* temp = curr->next;
+			curr->next = nullptr;
+			// delete detached portion of list.
+			do {
+				node* dummy = temp;
+				temp = temp->next;
+				delete dummy;
+			} while (temp != nullptr);
+
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head;
+	return -1;
+}
+
 int sList::returnPtrByPos(node* list, int pos, node* &ptr)
 {
 	if (list == nullptr) return 1;

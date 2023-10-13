@@ -3,8 +3,8 @@
 
 std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fifo", "stack", "queue" };
 
-std::vector<std::string> listFuncs = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "findTailReturnPos", "findTailReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
-std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes", "swap" };
+std::vector<std::string> listFuncs = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "deleteBeforePtr", "deleteAfterPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "findTailReturnPos", "findTailReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr" };
+std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "deleteBeforePos", "deleteAfterPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "addRandomNodes", "swap" };
 std::vector<std::string> listFuncsBool = { "bubbleSort" };
 
 std::vector<std::string> stackFuncs = { "pop", "top", "clear", "isEmpty", "size", "print" };
