@@ -72,6 +72,9 @@ To return a pointer to a node by its position, enter:
 To return the data of a node by its position, enter:
 > *returnDataByPos position*
 
+To find the position of the list's tail node, enter:
+>*findTailReturnPos*
+
 To update a specific node's data, enter:
 >*updateDataByPos data position*
 
@@ -97,10 +100,13 @@ To delete a node by its pointer, enter:
 To return a node's data by its pointer, enter:
 >*returnDataByPtr*
 
+To return a pointer to the list's tail node, enter:
+>*findTailReturnPtr*
+
 To update a node's data by its pointer, enter:
 >*updateDataByPtr data*
 
-To find the pointer of a node with specific data, enter:
+To find the pointer to a node with specific data, enter:
 >*findDataReturnPtr data*
 
 To find pointers to node's storing the smallest and largest integers, enter:
