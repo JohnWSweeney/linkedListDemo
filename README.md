@@ -58,7 +58,7 @@ To reverse the order of nodes in the list, enter:
 ### Functions By List Position
 Each class includes functions that operate on nodes according to their list position. List positions begin at zero, so the first node position is 0, the second node position is 1, and so on.
 
-To add a node to an existing position, enter:
+To add a node in an existing position, enter:
 > *addNodeByPos data position*
 
 This will push the node in the requested position in the next position (one down in the list) and put the new node in its place. If the new node's requested position happens to be the final position, the list will be extended by one to hold the old node.
@@ -189,6 +189,10 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.8
+- Updated cdList class and demo.
+	- Added deleteBeforePos, deleteBeforePtr, deleteAfterPos, and deleteAfterPtr functions.
+
 v1.6.7
 - Updated csList class and demo.
 	 - Added deleteBeforePos, deleteBeforePtr, deleteAfterPos, and deleteAfterPtr functions.
