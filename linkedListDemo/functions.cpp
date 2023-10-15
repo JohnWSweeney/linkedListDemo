@@ -1984,6 +1984,106 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "movePtrToFront")
+		{
+			result = cslist.movePtrToFront(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrToBack")
+		{
+			result = cslist.movePtrToBack(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrUp")
+		{
+			result = cslist.movePtrUp(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePtrDown")
+		{
+			result = cslist.movePtrDown(&list, ptr);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer is not in list.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer is null.\n";
+			}
+		}
 		else if (cmd.function == "clear")
 		{
 			result = cslist.clear(&list);

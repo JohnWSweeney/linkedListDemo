@@ -1,6 +1,9 @@
 #include "csList.h"
 // sweeney's hand-rolled circular singly linked list.
 //
+// pos = "position".
+// ptr = "pointer".
+//
 // error codes:
 // 0	no error.
 // 1	list is nullptr.
@@ -638,6 +641,213 @@ int csList::findTailReturnPtr(node* list, node* &ptr)
 		}
 		list = list->next;
 	} while (list != head);
+}
+
+int csList::movePtrToFront(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	if (ptr == head) return 0;
+
+	bool foundPtr = false;
+	node* curr = nullptr;
+	do {
+		curr = *list;
+		if (curr->next == ptr)
+		{
+			foundPtr = true;
+			curr->next = ptr->next;
+		}
+		*list = curr->next;
+	} while (curr->next != head);
+
+	if (foundPtr == true)
+	{
+		curr->next = ptr;
+		ptr->next = head;
+		head = ptr;
+		*list = head;
+		return 0;
+	}
+	else return -1; // ptr not in list.
+}
+
+int csList::movePtrToBack(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+
+	node* tempPrev = *list; // prev node in sweep.
+	node* prev = *list; // store ptr prev node.
+	node* tail = nullptr; // tail node.
+	bool foundPtr = false;
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr) // ptr found.
+		{
+			// check if ptr is tail node.
+			if (curr->next == head)
+			{
+				*list = head;
+				return 0;
+			}
+			foundPtr = true;
+			prev = tempPrev;
+		}
+		// find tail node.
+		if (curr->next == head)
+		{
+			tail = curr;
+		}
+		tempPrev = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPtr == true)
+	{
+		if (ptr == head)
+		{
+			head = head->next;
+		}
+		else
+		{
+			prev->next = ptr->next;
+		}
+		tail->next = ptr;
+		ptr->next = head;
+		*list = head;
+		return 0;
+	}
+	else // ptr not in list, reset list.
+	{
+		*list = head;
+		return -1;
+	}
+}
+
+int csList::movePtrUp(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	node* before = *list; // node before nodes to be swapped.
+	node* prev = *list; // node previous to ptr.
+	node* tail = *list;
+	node* temp1 = *list; // hold 'before' node b/w sweeps.
+	node* temp2 = *list; // hold 'prev' node b/w sweeps.
+	bool foundPtr = false;
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr) // found ptr.
+		{
+			foundPtr = true;
+			before = temp2;
+			prev = temp1;
+		}
+		if (curr->next == head) // find tail node.
+		{
+			tail = curr;
+		}
+		temp2 = temp1; // 'before'.
+		temp1 = curr; // 'prev'.
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPtr == true)
+	{
+		node* temp = ptr->next;
+		if (prev == head)
+		{
+			tail->next = ptr;
+			ptr->next = prev;
+			prev->next = temp;
+			head = ptr;
+		}
+		else
+		{
+			before->next = ptr;
+			ptr->next = prev;
+			prev->next = temp;
+		}
+		*list = head;
+		return 0;
+	}
+	else // ptr not in list, reset list.
+	{
+		*list = head;
+		return -1;
+	}
+}
+
+int csList::movePtrDown(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	node* prev = *list; // node before ptr.
+	node* after = *list; // node after nodes to be swapped.
+	node* tail = *list;
+	node* temp = *list; // hold 'prev' node b/w sweeps.
+	bool foundPtr = false;
+
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr) // found ptr.
+		{
+			// if ptr is tail, no action needed.
+			if (curr->next == head)
+			{
+				*list = head;
+				return 0;
+			}
+			else
+			{
+				foundPtr = true;
+				prev = temp;
+				after = curr->next->next;
+			}
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		temp = curr; // 'prev'.
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPtr == true)
+	{
+		node* temp = ptr->next;
+		if (ptr == head)
+		{
+			tail->next = temp;
+			temp->next = ptr;
+			ptr->next = after;
+			head = temp;
+		}
+		else
+		{
+			prev->next = temp;
+			temp->next = ptr;
+			ptr->next = after;
+		}
+		*list = head;
+		return 0;
+	}
+	else // ptr not in list.
+	{
+		*list = head;
+		return -1;
+	}
 }
 
 int csList::clear(node** list)

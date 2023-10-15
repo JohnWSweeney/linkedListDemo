@@ -2,6 +2,9 @@
 #include "nodes.h"
 // sweeney's hand-rolled circular singly linked list.
 //
+// pos = "position".
+// ptr = "pointer".
+//
 // error codes:
 // 0	no error.
 // 1	list is nullptr.
@@ -37,6 +40,10 @@ public:
 	int findMaxReturnPtr(node* list, int &max, node* &ptr);
 	int findTailReturnPos(node* list, int &pos);
 	int findTailReturnPtr(node* list, node* &ptr);
+	int movePtrToFront(node** list, node* ptr);
+	int movePtrToBack(node** list, node* ptr);
+	int movePtrUp(node** list, node* ptr);
+	int movePtrDown(node** list, node* ptr);
 	int clear(node** list);
 	int size(node* list, int &nodeCount);
 	int isEmpty(node* list);

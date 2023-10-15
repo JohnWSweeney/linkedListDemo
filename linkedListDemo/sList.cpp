@@ -1,6 +1,9 @@
 #include "sList.h"
 // sweeney's hand-rolled singly linked list.
 //
+// pos = "position".
+// ptr = "pointer".
+//
 // error codes:
 // 0	no error.
 // 1	list is nullptr.
