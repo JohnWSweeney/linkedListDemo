@@ -694,6 +694,187 @@ int sList::movePtrToBack(node** list, node* ptr)
 	}
 }
 
+int sList::movePtrUp(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	if (ptr == head) return 0; // invalid, no action required.
+	node* before = *list; // node before swapped nodes.
+	node* prev = *list; // node previous to ptr.
+	node* temp1 = *list; // hold 'prev' b/w sweeps.
+	node* temp2 = *list; // hold 'before' b/w sweeps.
+
+	// check if list has only one node.
+	if (head->next == nullptr)
+	{
+		return 0;
+	}
+	*list = head->next; // ptr == head invalid, skip head.
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr)
+		{
+			before = temp2;
+			prev = temp1;
+			std::cout << "before: " << before->data << '\n';
+			std::cout << "prev: " << prev->data << '\n';
+			std::cout << "ptr: " << ptr->data << "\n\n";
+			if (prev == head)
+			{
+				head = ptr;
+			}
+			else
+			{
+				before->next = ptr;
+			}
+			prev->next = ptr->next;
+			ptr->next = prev;
+			*list = head;
+			return 0;
+		}
+		temp2 = temp1; // 'before'.
+		temp1 = curr; // 'prev'.
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head; // ptr not in list.
+	return -1;
+}
+
+int sList::movePosUp(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+	if (pos == 0) return 0; // no action needed.
+
+	node* head = *list;
+	node* before = *list; // node before nodes to be swapped.
+	node* prev = *list; // node previous to pos.
+	node* curr = *list; // current node in sweep.
+	node* temp1 = *list; // hold 'before' node b/w sweeps.
+	node* temp2 = *list; // hold 'prev' node b/w sweeps.
+	// check if list has only one node.
+	if (head->next == nullptr)
+	{
+		return 0; // no action needed.
+	}
+	*list = head->next; // pos == 0 invalid, skip head.
+	// find pos in list.
+	int tempPos = 1;
+	do {
+		curr = *list;
+		if (tempPos == pos)
+		{
+			before = temp2;
+			prev = temp1;
+			if (prev == head)
+			{
+				head = curr;
+			}
+			else
+			{
+				before->next = curr;
+			}
+			prev->next = curr->next;
+			curr->next = prev;
+			*list = head;
+			return 0;
+		}
+		temp2 = temp1;
+		temp1 = curr;
+		++tempPos;
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head; // pos not in list, reset, list.
+	return -1;
+}
+
+int sList::movePosDown(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	node* prev = *list; // node previous to pos.
+	node* curr = *list; // current node in sweep.	
+	// find pos in list.
+	int tempPos = 0;
+	do {
+		curr = *list;
+		if (tempPos == pos)
+		{
+			// check if list has only one node, pos is tail.
+			if (curr->next == nullptr) // no action needed.
+			{
+				*list = head;
+				return 0;
+			}
+			node* next = curr->next;
+			if (curr == head)
+			{
+				curr->next = next->next;
+				next->next = curr;
+				head = next;
+			}
+			else
+			{
+				prev->next = next;
+				curr->next = next->next;
+				next->next = curr;
+			}
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		prev = curr;
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head; // pos not in list, reset list.
+	return -1;
+}
+
+int sList::movePtrDown(node** list, node* ptr)
+{
+	if (*list == nullptr) return 1;
+	if (ptr == nullptr) return 2;
+
+	node* head = *list;
+	node* prev = *list; // node before ptr.
+	// find ptr in list.
+	do {
+		node* curr = *list;
+		if (curr == ptr)
+		{
+			// first, check if ptr is tail node.
+			if (curr->next == nullptr) // no action needed.
+			{
+				*list = head;
+				return 0;
+			}
+			node* next = curr->next;
+			if (ptr == head)
+			{
+				ptr->next = next->next;
+				next->next = ptr;
+				head = next;
+			}
+			else
+			{
+				node* after = curr->next->next;
+				prev->next = next;
+				next->next = ptr;
+				ptr->next = after;
+			}
+			*list = head;
+			return 0;
+		}
+		prev = curr;
+		*list = curr->next;
+	} while (*list != nullptr);
+	*list = head; // ptr not in list, reset list.
+	return -1;
+}
+
 int sList::clear(node** list)
 {
 	if (list == nullptr) return 1;
