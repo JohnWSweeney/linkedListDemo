@@ -42,7 +42,9 @@ public:
 	int findTailReturnPtr(node* list, node* &ptr);
 	int movePtrToFront(node** list, node* ptr);
 	int movePtrToBack(node** list, node* ptr);
+	int movePosUp(node** list, int pos);
 	int movePtrUp(node** list, node* ptr);
+	int movePosDown(node** list, int pos);
 	int movePtrDown(node** list, node* ptr);
 	int clear(node** list);
 	int size(node* list, int &nodeCount);

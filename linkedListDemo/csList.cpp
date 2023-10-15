@@ -730,6 +730,69 @@ int csList::movePtrToBack(node** list, node* ptr)
 	}
 }
 
+int csList::movePosUp(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+	if (pos == 0) return 0; // no action needed.
+
+	node* head = *list;
+	node* tail = *list;
+	node* before = *list; // node before nodes to be swapped.
+	node* prev = *list; // node previous to pos.
+	node* posNode = *list; // node in pos.
+	node* temp1 = *list; // hold 'before' node b/w sweeps.
+	node* temp2 = *list; // hold 'prev' node b/w sweeps.
+	// check if list has only only node.
+	if (head->next == head)
+	{
+		return 0; // no action needed
+	}
+	*list = head->next;
+	// find pos in list.
+	bool foundPos = false;
+	int tempPos = 1;
+	do {
+		node* curr = *list;
+		if (tempPos == pos) // found pos.
+		{
+			foundPos = true;
+			before = temp2;
+			prev = temp1;
+			posNode = curr;
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		++tempPos;
+		temp2 = temp1;
+		temp1 = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPos == true)
+	{
+		if (prev == head)
+		{
+			tail->next = posNode;
+			head = posNode;
+		}
+		else
+		{
+			before->next = posNode;
+		}
+		prev->next = posNode->next;
+		posNode->next = prev;
+		*list = head;
+		return 0;
+	}
+	else // pos not in list, resest list.
+	{
+		*list = head;
+		return -1;
+	}
+}
+
 int csList::movePtrUp(node** list, node* ptr)
 {
 	if (*list == nullptr) return 1;
@@ -780,6 +843,65 @@ int csList::movePtrUp(node** list, node* ptr)
 		return 0;
 	}
 	else // ptr not in list, reset list.
+	{
+		*list = head;
+		return -1;
+	}
+}
+
+int csList::movePosDown(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	node* tail = *list;
+	node* prev = *list; // node previous to pos.
+	node* posNode = *list; // node in pos.
+	node* temp = *list; // hold 'prev' node b/w sweeps.
+	// find pos in list.
+	bool foundPos = false;
+	int tempPos = 0;
+	do {
+		node* curr = *list;
+		if (tempPos == pos)
+		{
+			// check if pos is tail.
+			if (curr->next == head) // no action needed.
+			{
+				*list = head;
+				return 0;
+			}
+			foundPos = true;
+			prev = temp;
+			posNode = curr;
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		++tempPos;
+		temp = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPos == true)
+	{
+		node* next = posNode->next;
+		if (posNode == head)
+		{
+			tail->next = next;
+			head = next;
+		}
+		else
+		{
+			prev->next = next;
+		}
+		posNode->next = next->next;
+		next->next = posNode;
+		*list = head;
+		return 0;
+	}
+	else // pos not in list, reset list.
 	{
 		*list = head;
 		return -1;

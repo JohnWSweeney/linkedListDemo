@@ -2126,6 +2126,27 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 		}
+		else if (cmd.function == "movePosUp")
+		{
+			result = cslist.movePosUp(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+		}
 		else if (cmd.function == "movePtrUp")
 		{
 			result = cslist.movePtrUp(&list, ptr);
@@ -2149,6 +2170,27 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePosDown")
+		{
+			result = cslist.movePosDown(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
 			}
 		}
 		else if (cmd.function == "movePtrDown")
