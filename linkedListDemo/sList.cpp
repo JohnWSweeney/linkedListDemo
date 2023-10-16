@@ -552,9 +552,13 @@ int sList::movePosToFront(node** list, int pos)
 {
 	if (*list == nullptr) return 1;
 
-	if (pos == 0) return 0;
+	if (pos == 0) return -2; // no action needed.
 
 	node* head = *list;
+	if (head->next == nullptr)
+	{
+		return 5; // list has only one node.
+	}
 	int tempPos = 1;
 	do {
 		node* dummy = *list;

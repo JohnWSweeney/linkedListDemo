@@ -40,7 +40,9 @@ public:
 	int findMaxReturnPtr(node* list, int &max, node* &ptr);
 	int findTailReturnPos(node* list, int &pos);
 	int findTailReturnPtr(node* list, node* &ptr);
+	int movePosToFront(node** list, int pos);
 	int movePtrToFront(node** list, node* ptr);
+	int movePosToBack(node** list, int pos);
 	int movePtrToBack(node** list, node* ptr);
 	int movePosUp(node** list, int pos);
 	int movePtrUp(node** list, node* ptr);

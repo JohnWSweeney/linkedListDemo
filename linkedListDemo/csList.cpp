@@ -643,6 +643,58 @@ int csList::findTailReturnPtr(node* list, node* &ptr)
 	} while (list != head);
 }
 
+int csList::movePosToFront(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+	if (pos == 0) return -2; // no action needed.
+
+	node* head = *list;
+	node* prev = *list; // node previous to pos.
+	node* temp = *list; // hold 'prev' node b/w sweeps.
+	node* posNode = *list; // node in pos.
+	node* tail = *list;
+	// check if list has only one node.
+	if (head->next == head)
+	{
+		return 5;
+	}
+	*list = head->next;
+	// find pos in list.
+	bool foundPos = false;
+	int tempPos = 1;
+	do {
+		node* curr = *list;
+		if (tempPos == pos) // found pos.
+		{
+			foundPos = true;
+			posNode = curr;
+			prev = temp;
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		++tempPos;
+		temp = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPos == true)
+	{
+		tail->next = posNode;
+		prev->next = posNode->next;
+		posNode->next = head;
+		head = posNode;
+		*list = head;
+		return 0;
+	}
+	else
+	{
+		*list = head; // pos not in list.
+		return -1;
+	}
+}
+
 int csList::movePtrToFront(node** list, node* ptr)
 {
 	if (*list == nullptr) return 1;
@@ -672,6 +724,70 @@ int csList::movePtrToFront(node** list, node* ptr)
 		return 0;
 	}
 	else return -1; // ptr not in list.
+}
+
+int csList::movePosToBack(node** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == head)
+	{
+		return 5;
+	}
+	node* prev = *list; // node previous to pos.
+	node* temp = *list; // hold 'prev' node b/w sweeps.
+	node* posNode = *list; // node in pos.
+	node* tail = *list;
+	// find pos in list.
+	bool foundPos = false;
+	int tempPos = 0;
+	do {
+		node* curr = *list;
+		if (tempPos == pos)
+		{
+			// check if pos is tail.
+			if (curr->next == head)
+			{
+				*list = head; // no action needed.
+				return -2;
+			}
+			foundPos = true;
+			posNode = curr;
+			prev = temp;
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		++tempPos;
+		temp = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPos == true)
+	{
+		if (posNode == head)
+		{
+			head = head->next;
+			tail->next = posNode;
+			posNode->next = head;
+		}
+		else
+		{
+			prev->next = posNode->next;
+			tail->next = posNode;
+			posNode->next = head;
+		}
+		*list = head;
+		return 0;
+	}
+	else
+	{
+		*list = head;
+		return -1;
+	}
 }
 
 int csList::movePtrToBack(node** list, node* ptr)

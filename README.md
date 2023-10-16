@@ -189,6 +189,12 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.12
+- Updated csList class and demo.
+	- movePosToFront and movePosToBack functions.
+- Updated sList movePosToFront function and demo to fix bug when list has only one node.
+- Added error codes 5 (list has only one node) and -2 (no action required).
+
 v1.6.11
 - Updated csList class and demo.
 	- Added movePosUp, movePosDown functions.
