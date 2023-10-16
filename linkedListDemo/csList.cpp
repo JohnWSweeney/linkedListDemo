@@ -18,16 +18,26 @@ node* csList::init(int data)
 	return newNode;
 }
 
-int csList::addNodeFront(node* list, int data)
+int csList::addNodeFront(node** list, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1;
 
-	node* newNode = new node();
-	newNode->data = list->data;
-	newNode->next = list->next;
-	list->data = data;
-	list->next = newNode;
-	return 0;
+	node* head = *list;
+	// find tail node.
+	do {
+		node* curr = *list;
+		if (curr->next == head) // found tail.
+		{
+			node* newNode = new node();
+			newNode->data = data;
+			newNode->next = head;
+			head = newNode;
+			curr->next = head;
+			*list = head;
+			return 0;
+		}
+		*list = curr->next;
+	} while (*list != head);
 }
 
 int csList::addNodeBack(node* list, int data)

@@ -18,15 +18,15 @@ node* sList::init(int data)
 	return newNode;
 }
 
-int sList::addNodeFront(node* list, int data)
+int sList::addNodeFront(node** list, int data)
 {
-	if (list == nullptr) return 1;
-
+	if (*list == nullptr) return 1;
+	node* head = *list;
 	node* newNode = new node();
-	newNode->data = list->data;
-	newNode->next = list->next;
-	list->data = data;
-	list->next = newNode;
+	newNode->data = data;
+	newNode->next = head;
+	head = newNode;
+	*list = head;
 	return 0;
 }
 

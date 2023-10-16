@@ -19,19 +19,19 @@ dNode* cdList::init(int data)
 	return newNode;
 }
 
-int cdList::addNodeFront(dNode* list, int data)
+int cdList::addNodeFront(dNode** list, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1;
 
-	dNode* head = list;
-	dNode* after = head->next;
-	dNode* newNode = new dNode();
-	newNode->data = head->data;
-	newNode->next = after;
-	newNode->prev = head;
-	head->data = data;
-	head->next = newNode;
-	after->prev = newNode;
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	dNode* newHead = new dNode();
+	newHead->data = data;
+	tail->next = newHead;
+	newHead->prev = tail;
+	newHead->next = head;
+	head->prev = newHead;
+	*list = newHead;
 	return 0;
 }
 

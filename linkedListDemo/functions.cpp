@@ -38,7 +38,7 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			result = slist.addNodeFront(list, cmd.input1);
+			result = slist.addNodeFront(&list, cmd.input1);
 			if (result == 0)
 			{
 				result = slist.size(list, nodeCount);
@@ -1600,7 +1600,7 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			result = cslist.addNodeFront(list, cmd.input1);
+			result = cslist.addNodeFront(&list, cmd.input1);
 			if (result == 0)
 			{
 				result = cslist.size(list, nodeCount);
@@ -2428,7 +2428,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeFront")
 		{
-			result = cdlist.addNodeFront(list, cmd.input1);
+			result = cdlist.addNodeFront(&list, cmd.input1);
 			if (result == 0)
 			{
 				cdlist.size(list, nodeCount);

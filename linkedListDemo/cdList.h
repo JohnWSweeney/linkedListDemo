@@ -15,7 +15,7 @@ class cdList
 {
 public:
 	dNode* init(int data);
-	int addNodeFront(dNode* list, int data);
+	int addNodeFront(dNode** list, int data);
 	int addNodeBack(dNode* list, int data);
 	int addNodeByPos(dNode* list, int data, int pos);
 	int deleteNodeFront(dNode** list);
