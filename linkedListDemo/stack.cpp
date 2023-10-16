@@ -14,11 +14,10 @@ int stack::push(node** list, int data)
 	else
 	{
 		node* head = *list;
-		node* newNode = new node();
-		newNode->data = head->data;
-		newNode->next = head->next;
-		head->data = data;
-		head->next = newNode;
+		node* newHead = new node();
+		newHead->data = data;
+		newHead->next = head;
+		*list = newHead;
 		return 0;
 	}
 }
