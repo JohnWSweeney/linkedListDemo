@@ -9,8 +9,9 @@
 // 0	no error.
 // 1	list is nullptr.
 // 2	ptr is nullptr.
+// 5	list has only one node.
 // -1	pos/ptr not in list.
-
+// -2	no action needed.
 class sList
 {
 public:

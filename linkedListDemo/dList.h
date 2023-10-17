@@ -9,7 +9,9 @@
 // 0	no error.
 // 1	list is nullptr.
 // 2	ptr is nullptr.
+// 5	list has only one node.
 // -1	pos/ptr not in list.
+// -2	no action needed.
 
 class dList
 {
@@ -40,9 +42,13 @@ public:
 	int findMaxReturnPtr(dNode* list, int &max, dNode* &ptr);
 	int findTailReturnPos(dNode* list, int &pos);
 	int findTailReturnPtr(dNode* list, dNode* &ptr);
+	int movePosToFront(dNode** list, int pos);
 	int movePtrToFront(dNode** list, dNode* ptr);
+	int movePosToBack(dNode** list, int pos);
 	int movePtrToBack(dNode** list, dNode* ptr);
+	int movePosUp(dNode** list, int pos);
 	int movePtrUp(dNode** list, dNode* ptr);
+	int movePosDown(dNode** list, int pos);
 	int movePtrDown(dNode** list, dNode* ptr);
 	int clear(dNode** list);
 	int size(dNode* list, int &nodeCount);
