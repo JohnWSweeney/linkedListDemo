@@ -1,4 +1,5 @@
 #include "sList.h"
+#include "random.h" // required for shuffle function.
 // sweeney's hand-rolled singly linked list.
 //
 // pos = "position".
@@ -8,7 +9,9 @@
 // 0	no error.
 // 1	list is nullptr.
 // 2	ptr is nullptr.
+// 5	list has only one node.
 // -1	pos/ptr not in list.
+// -2	no action needed.
 
 
 node* sList::init(int data)
@@ -1075,5 +1078,39 @@ int sList::bubbleSort(node** list, bool isAscending)
 	*list = head;
 	std::cout << "swapCount: " << swapCount << '\n';
 	std::cout << "sweepCount: " << sweepCount << '\n';
+	return 0;
+}
+
+int sList::shuffle(node** list)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == nullptr) return 5;
+
+	random random;
+	random.initMt();
+
+	int nodeCount;
+	int result = size(*list, nodeCount);
+	int position1 = 0;
+	int position2 = 0;
+	int temp = 0;
+	// swap random positions nodeCount^2 number of times.
+	do {
+		// swap two randomly selected positions.
+		do {
+			position1 = random.getNum(0, nodeCount - 1);
+			position2 = random.getNum(0, nodeCount - 1);
+		} while (position1 == position2);
+
+		node* ptr1 = nullptr;
+		node* ptr2 = nullptr;
+		returnPtrByPos(*list, position1, ptr1);
+		returnPtrByPos(*list, position2, ptr2);
+		swap(list, ptr1, ptr2);
+		++temp;
+	} while (temp < pow(nodeCount, 2));
 	return 0;
 }
