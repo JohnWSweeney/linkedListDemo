@@ -618,6 +618,48 @@ int cdList::findTailReturnPtr(dNode* list, dNode* &ptr)
 	return 0;
 }
 
+int cdList::movePosToFront(dNode** list, int pos)
+{
+	if (*list == nullptr) return 1; // list empty.
+	if (pos == 0) return -2; // no action needed.
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// pos == 0 invalid, skip head.
+	*list = head->next;
+	// find pos in list.
+	int tempPos = 1;
+	do {
+		dNode* curr = *list;
+		if (tempPos == pos)
+		{
+			// check if pos is tail.
+			if (curr->next == head)
+			{
+				// rotate list forward one node.
+				*list = tail;
+				return 0;
+			}
+			dNode* before = curr->prev;
+			dNode* after = curr->next;
+			tail->next = curr;
+			curr->prev = tail;
+			curr->next = head;
+			head->prev = curr;
+			before->next = after;
+			after->prev = before;
+			*list = curr;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // pos not in list, reset list.
+	return -1;
+}
+
 int cdList::movePtrToFront(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
@@ -651,6 +693,48 @@ int cdList::movePtrToFront(dNode** list, dNode* ptr)
 		}
 		*list = curr->next;
 	} while (*list != head);
+	return -1;
+}
+
+int cdList::movePosToBack(dNode** list, int pos)
+{
+	if (*list == nullptr) return 1;
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// find pos in list.
+	int tempPos = 0;
+	do {
+		dNode* curr = *list;
+		if (tempPos == pos)
+		{
+			// check if pos is tail.
+			if (curr->next == head)
+			{
+				*list = head;
+				return -2; // no action needed.
+			}
+			else if (curr == head)
+			{
+				head = head->next;
+			}
+			dNode* before = curr->prev;
+			dNode* after = curr->next;
+			before->next = after;
+			after->prev = before;
+			tail->next = curr;
+			curr->prev = tail;
+			curr->next = head;
+			head->prev = curr;
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // pos not in list, reset list.
 	return -1;
 }
 
@@ -689,6 +773,51 @@ int cdList::movePtrToBack(dNode** list, dNode* ptr)
 	return -1;
 }
 
+int cdList::movePosUp(dNode** list, int pos)
+{
+	if (*list == nullptr) return 1; // list empty.
+	if (pos == 0) return -2; // no action needed.
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// pos == 0 invalid, skip head.
+	*list = head->next;
+	// find pos in list.
+	int tempPos = 1;
+	do {
+		dNode* curr = *list;
+		if (tempPos == pos)
+		{
+			dNode* before = curr->prev->prev; // node before swapped nodes.
+			dNode* prev = curr->prev; // node previous to pos in original list.
+			dNode* after = curr->next; // node after swapped nodes.
+
+			if (prev == head)
+			{
+				head = curr;
+			}
+			// check if list has only two nodes.
+			if (prev != after) // list has more than two nodes.
+			{
+				before->next = curr;
+				curr->prev = before;
+				curr->next = prev;
+				prev->prev = curr;
+				prev->next = after;
+				after->prev = prev;
+			}
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // pos not in list, reset list.
+	return -1;
+}
+
 int cdList::movePtrUp(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
@@ -722,6 +851,54 @@ int cdList::movePtrUp(dNode** list, dNode* ptr)
 		*list = curr->next;
 	} while (*list != head);
 	return -1;
+}
+
+int cdList::movePosDown(dNode** list, int pos)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// check if list has only one node.
+	if (head->next == head) return 5; // no action needed.
+	// find pos in list.
+	int tempPos = 0;
+	do {
+		dNode* curr = *list;
+		if (tempPos == pos)
+		{
+			// check if pos is tail.
+			if (curr->next == head)
+			{
+				*list = head; // reset list.
+				return -2; // no action needed.
+			}
+
+			dNode* before = curr->prev;
+			dNode* next = curr->next;
+			dNode* after = curr->next->next;
+			// check if pos is head.
+			if (curr == head)
+			{
+				head = curr->next;
+			}
+			// check if list has only two nodes.
+			if (before != next)
+			{
+				before->next = next;
+				next->prev = before;
+				next->next = curr;
+				curr->prev = next;
+				curr->next = after;
+				after->prev = curr;
+			}
+			*list = head;
+			return 0;
+		}
+		++tempPos;
+		*list = curr->next;
+	} while (*list != head);
+	return -1; // pos not in list, reset list.
 }
 
 int cdList::movePtrDown(dNode** list, dNode* ptr)

@@ -3036,6 +3036,35 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "List is empty.\n";
 			}
 		}
+		else if (cmd.function == "movePosToFront")
+		{
+			result = cdlist.movePosToFront(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "No action needed.\n";
+			}
+		}
 		else if (cmd.function == "movePtrToFront")
 		{
 			result = cdlist.movePtrToFront(&list, ptr);
@@ -3061,6 +3090,35 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 			}
+		else if (cmd.function == "movePosToBack")
+		{
+			result = cdlist.movePosToBack(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "No action needed.\n";
+			}
+		}
 		else if (cmd.function == "movePtrToBack")
 		{
 			result = cdlist.movePtrToBack(&list, ptr);
@@ -3086,6 +3144,35 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 		}
+		else if (cmd.function == "movePosUp")
+		{
+			result = cdlist.movePosUp(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "No action needed.\n";
+			}
+		}
 		else if (cmd.function == "movePtrUp")
 		{
 			result = cdlist.movePtrUp(&list, ptr);
@@ -3109,6 +3196,35 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else if (result == 2)
 			{
 				std::cout << "Pointer is null.\n";
+			}
+		}
+		else if (cmd.function == "movePosDown")
+		{
+			result = cdlist.movePosDown(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = cdlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cdlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Position is not in list.\n";
+			}
+			else if (result == -2)
+			{
+				std::cout << "No action needed.\n";
 			}
 		}
 		else if (cmd.function == "movePtrDown")
