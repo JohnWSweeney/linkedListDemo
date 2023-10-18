@@ -1755,6 +1755,27 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				// 
 			}
 		}
+		else if (cmd.function == "shuffle")
+		{
+			result = dlist.shuffle(&list);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
 		cv.notify_one();
 	}
 	cv.notify_one();

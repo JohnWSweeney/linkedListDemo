@@ -1,4 +1,5 @@
 #include "dList.h"
+#include "random.h" // required for shuffle function.
 // sweeney's hand-rolled doubly linked list.
 //
 // pos = "position".
@@ -1231,4 +1232,38 @@ int dList::swap(dNode** list, dNode* ptr1, dNode* ptr2)
 		*list = head;
 		return -1;
 	}
+}
+
+int dList::shuffle(dNode** list)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	dNode* head = *list;
+	// check if list has only one node.
+	if (head->next == nullptr) return 5;
+
+	random random;
+	random.initMt();
+
+	int nodeCount;
+	int result = size(*list, nodeCount);
+	int position1 = 0;
+	int position2 = 0;
+	int temp = 0;
+	// swap random positions nodeCount^2 number of times.
+	do {
+		// swap two randomly selected positions.
+		do {
+			position1 = random.getNum(0, nodeCount - 1);
+			position2 = random.getNum(0, nodeCount - 1);
+		} while (position1 == position2);
+
+		dNode* ptr1 = nullptr;
+		dNode* ptr2 = nullptr;
+		returnPtrByPos(*list, position1, ptr1);
+		returnPtrByPos(*list, position2, ptr2);
+		swap(list, ptr1, ptr2);
+		++temp;
+	} while (temp < pow(nodeCount, 2));
+	return 0;
 }
