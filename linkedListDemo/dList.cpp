@@ -1122,3 +1122,113 @@ int dList::reverse(dNode** list)
 	*list = curr;
 	return 0;
 }
+
+int dList::swap(dNode** list, dNode* ptr1, dNode* ptr2)
+{
+	if (*list == nullptr) return 1;
+	if (ptr1 == nullptr or ptr2 == nullptr) return 2;
+	//if (ptr2 == nullptr) return 3;
+	if (ptr1 == ptr2) return -2; // no action needed.
+
+	dNode* head = *list;
+	// check if list has only only node.
+	if (head->next == nullptr) return 5;
+	// find ptr1 and ptr2 in list.
+	bool foundPtr1 = false;
+	bool foundPtr2 = false;
+	do {
+		dNode* curr = *list;
+		if (curr == ptr1)
+		{
+			foundPtr1 = true;
+		}
+		if (curr == ptr2)
+		{
+			foundPtr2 = true;
+		}
+		*list = curr->next;
+	} while (*list != nullptr);
+
+	if (foundPtr1 == true and foundPtr2 == true)
+	{
+		dNode* before1 = ptr1->prev; // node before ptr1.
+		dNode* after1 = ptr1->next; // node after ptr1.
+		dNode* before2 = ptr2->prev; // node before ptr2.
+		dNode* after2 = ptr2->next; // node after ptr2.
+
+		// check if either node is head.
+		if (ptr1 == head)
+		{
+			ptr2->prev = nullptr;
+			head = ptr2;
+		}
+		else if (ptr2 == head)
+		{
+			ptr1->prev = nullptr;
+			head = ptr1;
+		}
+
+		// check if ptr1 and ptr2 are adjacent.
+		if (ptr1->next == ptr2)
+		{
+			if (before1 != nullptr)
+			{
+				before1->next = ptr2;
+			}
+			ptr2->prev = before1;
+			ptr2->next = ptr1;
+			ptr1->prev = ptr2;
+			ptr1->next = after2;
+			if (after2 != nullptr)
+			{
+				after2->prev = ptr1;
+			}
+		}
+		else if (ptr2->next == ptr1)
+		{
+			if (before2 != nullptr)
+			{
+				before2->next = ptr1;
+			}
+			ptr1->prev = before2;
+			ptr1->next = ptr2;
+			ptr2->prev = ptr1;
+			ptr2->next = after1;
+			if (after1 != nullptr)
+			{
+				after1->prev = ptr2;
+			}
+		}
+		else // ptr1 and ptr2 not adjacent.
+		{
+			if (before1 != nullptr)
+			{
+				before1->next = ptr2;
+			}
+			ptr2->prev = before1;
+			ptr2->next = after1;
+			if (after1 != nullptr)
+			{
+				after1->prev = ptr2;
+			}
+
+			if (before2 != nullptr)
+			{
+				before2->next = ptr1;
+			}
+			ptr1->prev = before2;
+			ptr1->next = after2;
+			if (after2 != nullptr)
+			{
+				after2->prev = ptr1;
+			}
+		}
+		*list = head;
+		return 0;
+	}
+	else // pos not in list, reset list.
+	{
+		*list = head;
+		return -1;
+	}
+}

@@ -189,6 +189,9 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.18
+- Updated dList class and demo with swap function.
+
 v1.6.17
 - Updated cdList class and demo.
 	- Added movePosToFront, movePosToBack, movePosUp, and movePosDown functions.
