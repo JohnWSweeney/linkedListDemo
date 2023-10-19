@@ -189,6 +189,9 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v.1.6.21
+- Updated csList class and demo with shuffle function.
+
 v1.6.20
 - Updated csList class and demo with swap function.
 

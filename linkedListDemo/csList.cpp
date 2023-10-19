@@ -1,4 +1,5 @@
 #include "csList.h"
+#include "random.h" // required for shuffle function.
 // sweeney's hand-rolled circular singly linked list.
 //
 // pos = "position".
@@ -1260,4 +1261,38 @@ int csList::swap(node** list, node* ptr1, node* ptr2)
 		*list = head;
 		return -1;
 	}
+}
+
+int csList::shuffle(node** list)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == nullptr) return 5;
+
+	random random;
+	random.initMt();
+
+	int nodeCount;
+	int result = size(*list, nodeCount);
+	int position1;
+	int position2;
+	int temp = 0;
+	// swap random positions nodeCount^2 number of times.
+	do {
+		// get two unique list positions.
+		do {
+			position1 = random.getNum(0, nodeCount - 1);
+			position2 = random.getNum(0, nodeCount - 1);
+		} while (position1 == position2);
+		// get pointers to list positions.
+		node* ptr1 = nullptr;
+		node* ptr2 = nullptr;
+		this->returnPtrByPos(*list, position1, ptr1);
+		this->returnPtrByPos(*list, position2, ptr2);
+		swap(list, ptr1, ptr2);
+		++temp;
+	} while (temp < pow(nodeCount, 2));
+	return 0;
 }
