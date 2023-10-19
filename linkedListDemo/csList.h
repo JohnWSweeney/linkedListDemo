@@ -55,4 +55,5 @@ public:
 	int isEmpty(node* list);
 	int print(node* list);
 	int reverse(node** list);
+	int swap(node** list, node* ptr1, node* ptr2);
 };

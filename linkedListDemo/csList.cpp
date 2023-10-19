@@ -1171,3 +1171,93 @@ int csList::reverse(node** list)
 	*list = head;
 	return 0;
 }
+
+int csList::swap(node** list, node* ptr1, node* ptr2)
+{
+	if (*list == nullptr) return 1; // list is empty.
+	if (ptr1 == nullptr or ptr2 == nullptr) return 2;
+	if (ptr1 == ptr2) return 4; // no action needed.
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// find ptr1 and ptr2 in list.
+	bool foundPtr1 = false;
+	bool foundPtr2 = false;
+	node* before1 = *list; // node before ptr1 in list.
+	node* before2 = *list; // node before ptr2 in list.
+	node* temp = *list; // store previous node in list sweep.
+	node* tail = *list;
+	do {
+		node* curr = *list;
+		if (curr == ptr1) // found ptr1.
+		{
+			foundPtr1 = true;
+			before1 = temp;
+		}
+		if (curr == ptr2) // found ptr2.
+		{
+			foundPtr2 = true;
+			before2 = temp;
+		}
+		if (curr->next == head) // find tail.
+		{
+			tail = curr;
+		}
+		temp = curr;
+		*list = curr->next;
+	} while (*list != head);
+
+	if (foundPtr1 == true and foundPtr2 == true)
+	{
+		node* after1 = ptr1->next; // node after ptr1 in list.
+		node* after2 = ptr2->next; // node after ptr2 in list.
+		// check if ptr1 or ptr2 is head.
+		if (ptr1 == head)
+		{
+			before1 = tail;
+			head = ptr2;
+		}
+		else if (ptr2 == head)
+		{
+			before2 = tail;
+			head = ptr1;
+		}
+		// check if ptr1 or pt2 is tail.
+		if (ptr1 == tail)
+		{
+			after1 = head;
+		}
+		else if (ptr2 == tail)
+		{
+			after2 = head;
+		}
+		// check if ptr1 and ptr2 are adjacent.
+		if (ptr1->next == ptr2)
+		{
+			before1->next = ptr2;
+			ptr2->next = ptr1;
+			ptr1->next = after2;
+		}
+		else if (ptr2->next == ptr1)
+		{
+			before2->next = ptr1;
+			ptr1->next = ptr2;
+			ptr2->next = after1;
+		}
+		else
+		{
+			before1->next = ptr2;
+			ptr2->next = after1;
+			before2->next = ptr1;
+			ptr1->next = after2;
+		}
+		*list = head;
+		return 0;
+	}
+	else // ptr1 and/or ptr2 not in list.
+	{
+		*list = head;
+		return -1;
+	}
+}

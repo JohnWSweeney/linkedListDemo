@@ -2602,6 +2602,63 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			ptr = nullptr;
 			std::cout << "Pointer cleared.\n";
 		}
+		else if (cmd.function == "swap")
+		{
+			node* ptr1 = nullptr;
+			node* ptr2 = nullptr;
+			// get ptr1 from position 1.
+			result = cslist.returnPtrByPos(list, cmd.input1, ptr1);
+			if (result == 0)
+			{
+				// get ptr2 from position 2.
+				result = cslist.returnPtrByPos(list, cmd.input2, ptr2);
+				if (result == -1)
+				{
+					std::cout << "Postition 2 is not in list.\n";
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Postition 1 is not in list.\n";
+			}
+
+			// swap ptr1 and ptr2.
+			result = cslist.swap(&list, ptr1, ptr2);
+			std::cout << "result: " << result << "\n\n";
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 2)
+			{
+				std::cout << "Pointer 1 and/or 2 nullptr.\n";
+			}
+			else if (result == 4)
+			{
+				std::cout << "Pointers 1 and 2 are the same. No action needed.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+			else if (result == -1)
+			{
+				std::cout << "Pointer 1 and/or pointer 2 not found in list.\n";
+			}
+		}
 		cv.notify_one();
 	}
 	cv.notify_one();
