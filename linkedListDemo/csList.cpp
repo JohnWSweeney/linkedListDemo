@@ -1269,7 +1269,7 @@ int csList::shuffle(node** list)
 
 	node* head = *list;
 	// check if list has only one node.
-	if (head->next == nullptr) return 5;
+	if (head->next == head) return 5;
 
 	random random;
 	random.initMt();
