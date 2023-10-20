@@ -8,7 +8,9 @@
 // 0	no error.
 // 1	list is nullptr.
 // 2	ptr is nullptr.
+// 5	list has only one node.
 // -1	pos/ptr not in list.
+// -2	no action needed.
 
 dNode* cdList::init(int data)
 {
@@ -1029,4 +1031,95 @@ int cdList::reverse(dNode** list)
 	} while (*list != tail);
 	*list = head;
 	return 0;
+}
+
+int cdList::swap(dNode** list, dNode* ptr1, dNode* ptr2)
+{
+	if (*list == nullptr) return 1; // list is empty.
+	if (ptr1 == nullptr or ptr2 == nullptr) return 2;
+	if (ptr1 == ptr2) return 4;
+
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// find ptr1 and ptr2 in list.
+	bool foundPtr1 = false;
+	bool foundPtr2 = false;
+	do {
+		dNode* curr = *list;
+		if (curr == ptr1)
+		{
+			foundPtr1 = true;
+		}
+		if (curr == ptr2)
+		{
+			foundPtr2 = true;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	// swap ptr1 and ptr2.
+	if (foundPtr1 == true and foundPtr2 == true)
+	{
+		dNode* before1 = ptr1->prev;
+		dNode* after1 = ptr1->next;
+		dNode* before2 = ptr2->prev;
+		dNode* after2 = ptr2->next;
+		// check if ptr1 or ptr2 is head.
+		if (ptr1 == head)
+		{
+			head = ptr2;
+		}
+		else if (ptr2 == head)
+		{
+			head = ptr1;
+		}
+		// check if ptr1 or pt2 is tail.
+		if (ptr1 == tail)
+		{
+			after1 = head;
+		}
+		else if (ptr2 == tail)
+		{
+			after2 = head;
+		}
+		// check if ptr1 and ptr2 are adjacent.
+		if (ptr1->next == ptr2)
+		{
+			before1->next = ptr2;
+			ptr2->prev = before1;
+			ptr2->next = ptr1;
+			ptr1->prev = ptr2;
+			ptr1->next = after2;
+			after2->prev = ptr1;
+		}
+		else if (ptr2->next == ptr1)
+		{
+			before2->next = ptr1;
+			ptr1->prev = before2;
+			ptr1->next = ptr2;
+			ptr2->prev = ptr1;
+			ptr2->next = after1;
+			after1->prev = ptr2;
+		}
+		else
+		{
+			before1->next = ptr2;
+			ptr2->prev = before1;
+			ptr2->next = after1;
+			after1->prev = ptr2;
+
+			before2->next = ptr1;
+			ptr1->prev = before2;
+			ptr1->next = after2;
+			after2->prev = ptr1;
+		}
+		*list = head;
+		return 0;
+	}
+	else // ptr1 and/or ptr2 not in list.
+	{
+		*list = head;
+		return -1;
+	}
 }

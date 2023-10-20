@@ -56,4 +56,5 @@ public:
 	int print(dNode* list);
 	int printReverse(dNode* list);
 	int reverse(dNode** list);
+	int swap(dNode** list, dNode* ptr1, dNode* ptr2);
 };
