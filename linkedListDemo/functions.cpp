@@ -862,6 +862,44 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				// 
 			}
 		}
+		else if (cmd.function == "bubbleSort")
+		{
+			result = slist.bubbleSort(&list, cmd.isAscending);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "selectionSort")
+		{
+			result = slist.selectionSort(&list, cmd.isAscending);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
 		else if (cmd.function == "shuffle")
 		{
 			result = slist.shuffle(&list);
@@ -881,23 +919,6 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else if (result == 5)
 			{
 				std::cout << "List has only one node.\n";
-			}
-		}
-		else if (cmd.function == "bubbleSort")
-		{
-			result = slist.bubbleSort(&list, cmd.isAscending);
-			if (result == 0)
-			{
-				result = slist.size(list, nodeCount);
-				if (result == 0)
-				{
-					std::cout << "Node count: " << nodeCount << '\n';
-					slist.print(list);
-				}
-			}
-			else if (result == 1)
-			{
-				std::cout << "List is empty.\n";
 			}
 		}
 		cv.notify_one();

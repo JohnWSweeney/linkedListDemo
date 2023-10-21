@@ -1081,6 +1081,81 @@ int sList::bubbleSort(node** list, bool isAscending)
 	return 0;
 }
 
+int sList::selectionSort(node** list, bool isAscending)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == nullptr) return 5;
+	// declare and initialize variables.
+	node* sortedList = *list; // sorted portion of list.
+	node* unsortedList = *list; // unsorted portion of list.
+	node* unsortedHead = *list; // first node in unsorted list.
+	node* temp = *list; // min/max node for current sweep.
+	node* tempPrev = *list; // node before temp in list.
+	node* prev = *list;	// hold previous node in sweep increment.
+	bool firstSweep = true;
+	// 
+	do {
+		temp = unsortedHead;
+		tempPrev = unsortedHead;
+		prev = unsortedHead;
+		*list = unsortedList->next;
+		// sweep list to find min/max node according to isAscending.
+		do {
+			node* curr = *list;
+			if (isAscending == true) // find min node.
+			{
+				if (curr->data < temp->data)
+				{
+					temp = curr;
+					tempPrev = prev;
+				}
+			}
+			else // find max node.
+			{
+				if (curr->data > temp->data)
+				{
+					temp = curr;
+					tempPrev = prev;
+				}
+			}
+			prev = curr;
+			*list = curr->next;
+		} while (*list != nullptr);
+
+		if (temp == unsortedHead)
+		{
+			unsortedHead = unsortedHead->next;
+			unsortedList = unsortedHead;
+		}
+		else
+		{
+			tempPrev->next = temp->next;
+		}
+
+		// 
+		if (firstSweep == true)
+		{	// set min/max node has head of sorted list.
+			firstSweep = false;
+			temp->next = unsortedHead;
+			sortedList = temp;
+			head = sortedList;
+		}
+		else
+		{	// add min/max node to end of sorted portion of list.
+			sortedList->next = temp;
+			temp->next = unsortedHead;
+			sortedList = temp;
+		}
+
+	} while (unsortedHead->next != nullptr);
+	std::cout << '\n';
+	*list = head;
+	return 0;
+}
+
 int sList::shuffle(node** list)
 {
 	if (*list == nullptr) return 1; // list is empty.

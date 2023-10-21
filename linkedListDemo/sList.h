@@ -56,5 +56,6 @@ public:
 	int reverse(node** list);
 	int swap(node** list, node* ptr1, node* ptr2);
 	int bubbleSort(node** list, bool isAscending);
+	int selectionSort(node** list, bool isAscending);
 	int shuffle(node** list);
 };

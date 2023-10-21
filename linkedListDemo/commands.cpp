@@ -5,7 +5,7 @@ std::vector<std::string> listTypes = { "sList", "dList", "csList", "cdList", "fi
 
 std::vector<std::string> listFuncs = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "deleteBeforePtr", "deleteAfterPtr", "returnPosByPtr", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "findTailReturnPos", "findTailReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr", "shuffle" };
 std::vector<std::string> listFuncsInts = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "deleteBeforePos", "deleteAfterPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "movePosUp", "movePosDown", "addRandomNodes", "swap" };
-std::vector<std::string> listFuncsBool = { "bubbleSort" };
+std::vector<std::string> listFuncsBool = { "bubbleSort", "selectionSort" };
 
 std::vector<std::string> stackFuncs = { "pop", "top", "clear", "isEmpty", "size", "print" };
 std::vector<std::string> stackFuncsInts = { "push" };
