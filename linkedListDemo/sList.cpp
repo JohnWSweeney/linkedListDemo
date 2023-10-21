@@ -56,7 +56,7 @@ int sList::addNodeByPos(node** list, int pos, int data)
 	
 	node* head = *list;
 	
-	if (pos == 0) // if adding node to front.
+	if (pos == 0) // if pos is head node.
 	{
 		node* newNode = new node();
 		newNode->data = data;
@@ -66,6 +66,8 @@ int sList::addNodeByPos(node** list, int pos, int data)
 	}
 	else
 	{
+		// check if list has only one node.
+		if (head->next == nullptr) return -1; 
 		*list = head->next; // skip head node.
 		node* prev = head; // hold previous node in list sweep.
 		int tempPos = 1;
@@ -82,9 +84,11 @@ int sList::addNodeByPos(node** list, int pos, int data)
 			}
 			++tempPos;
 			prev = curr;
+			std::cout << "curr: " << curr->data << '\n';
 			*list = curr->next;
 		} while (*list != nullptr);
 	}
+	*list = head; // pos not in list, reset list.
 	return -1;
 }
 

@@ -55,50 +55,52 @@ int dList::addNodeBack(dNode* list, int data)
 	} while (list != nullptr);
 }
 
-int dList::addNodeByPos(dNode* list, int data, int pos)
+int dList::addNodeByPos(dNode** list, int pos, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1; // list is empty.
 
-	dNode* head = list;
-	if (pos == 0) // add node to front.
+	dNode* head = *list;
+	// find pos in list.
+	if (pos == 0) // if pos is head node.
 	{
 		dNode* newNode = new dNode();
-		newNode->data = head->data;
-		newNode->prev = head;
-		head->data = data;
-		if (head->next == nullptr) // if the list has only one node.
-		{
-			newNode->next = nullptr;
-		}
-		else // if the list has more than one node.
-		{
-			dNode* after = head->next;
-			newNode->next = after;
-			after->prev = newNode;
-		}
-		head->next = newNode;
+		newNode->data = data;
+		newNode->prev = nullptr;
+		newNode->next = head;
+		head->prev = newNode;
+		*list = newNode;
 		return 0;
 	}
-	else // add node after the front node.
+	else
 	{
-		list = list->next;
+		// check if list has only one node.
+		if (head->next == nullptr) return -1;
+		*list = head->next; // skip head node.
 		int tempPos = 1;
 		do {
-			if (tempPos == pos)
+			dNode* curr = *list;
+			if (tempPos == pos) // found pos.
 			{
-				dNode* before = list->prev;
-				dNode* after = list;
+				dNode* before = curr->prev;
+				dNode* after = curr->next;
 				dNode* newNode = new dNode();
 				newNode->data = data;
-				newNode->next = after;
-				newNode->prev = before;
 				before->next = newNode;
-				after->prev = newNode;
+				newNode->prev = before;
+				newNode->next = curr;
+				curr->prev = newNode;
+				curr->next = after;
+				if (after != nullptr)
+				{
+					after->prev = curr;
+				}
+				*list = head;
 				return 0;
 			}
 			++tempPos;
-			list = list->next;
-		} while (list != nullptr);
+			*list = curr->next;
+		} while (*list != nullptr);
+		*list = head; // pos not in list, reset list.
 		return -1;
 	}
 }
