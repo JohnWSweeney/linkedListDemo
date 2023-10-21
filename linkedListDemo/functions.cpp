@@ -73,7 +73,7 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeByPos")
 		{
-			result = slist.addNodeByPos(list, cmd.input1, cmd.input2);
+			result = slist.addNodeByPos(&list, cmd.input1, cmd.input2);
 			if (result == 0)
 			{
 				result = slist.size(list, nodeCount);
@@ -89,7 +89,7 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Position is out of bounds.\n\n";
+				std::cout << "Position is not in list.\n";
 			}
 		}
 		else if (cmd.function == "deleteNodeByPos")

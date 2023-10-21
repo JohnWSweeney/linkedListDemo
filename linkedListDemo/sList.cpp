@@ -50,37 +50,42 @@ int sList::addNodeBack(node* list, int data)
 	} while (list != nullptr);
 }
 
-int sList::addNodeByPos(node* list, int data, int pos)
+int sList::addNodeByPos(node** list, int pos, int data)
 {
-	if (list == nullptr) return 1;
-
+	if (*list == nullptr) return 1; // list is empty.
+	
+	node* head = *list;
+	
 	if (pos == 0) // if adding node to front.
 	{
 		node* newNode = new node();
-		newNode->data = list->data;
-		newNode->next = list->next;
-		list->data = data;
-		list->next = newNode;
+		newNode->data = data;
+		newNode->next = head;
+		*list = newNode;
 		return 0;
 	}
 	else
 	{
+		*list = head->next; // skip head node.
+		node* prev = head; // hold previous node in list sweep.
 		int tempPos = 1;
 		do {
+			node* curr = *list;
 			if (pos == tempPos)
 			{
-				node* after = list->next;
 				node* newNode = new node();
 				newNode->data = data;
-				newNode->next = after;
-				list->next = newNode;
+				prev->next = newNode;
+				newNode->next = curr;
+				*list = head;
 				return 0;
 			}
 			++tempPos;
-			list = list->next;
-		} while (list->next != nullptr);
-		return -1;
+			prev = curr;
+			*list = curr->next;
+		} while (*list != nullptr);
 	}
+	return -1;
 }
 
 int sList::deleteNodeFront(node** list)

@@ -189,6 +189,12 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.25
+- Updated sList class function addNodeByPos and sList demo.
+	- Fixed bug causing crash when *pos* is not in list.
+	- Fixed bug corrupting original head node pointer when adding node to *pos* zero. 
+	- Swapped *data* and *pos* order in parameter list.
+
 v1.6.24
 - Updated sList class and demo with selectionSort function.
 
