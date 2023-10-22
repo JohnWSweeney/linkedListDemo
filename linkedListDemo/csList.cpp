@@ -9,7 +9,9 @@
 // 0	no error.
 // 1	list is nullptr.
 // 2	ptr is nullptr.
+// 5	list has only one node.
 // -1	pos/ptr not in list.
+// -2	no action needed.
 
 node* csList::init(int data)
 {
@@ -59,38 +61,47 @@ int csList::addNodeBack(node* list, int data)
 	} while (list != head);
 }
 
-int csList::addNodeByPos(node* list, int data, int pos)
+int csList::addNodeByPos(node** list, int pos, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1; // list is empty.
 
-	node* head = list;
-	if (pos == 0)
+	node* head = *list;
+	// find pos in list.
+	if (pos == 0) // pos is head node.
 	{
 		node* newNode = new node();
-		newNode->data = head->data;
-		newNode->next = head->next;
-		head->data = data;
-		head->next = newNode;
+		newNode->data = data;
+		newNode->next = head;
+		// find tail node.
+		node* tail = nullptr;
+		this->findTailReturnPtr(*list, tail);
+		tail->next = newNode;
+		*list = newNode; // reset list.
 		return 0;
 	}
-
-	node* prev = list;
-	list = list->next;
-	int tempPos = 1;
-	do {
-		if (tempPos == pos)
-		{
-			node* newNode = new node();
-			newNode->data = data;
-			newNode->next = list;
-			prev->next = newNode;
-			return 0;
-		}
-		++tempPos;
-		prev = list;
-		list = list->next;
-	} while (list != head);
-	return -1;
+	else
+	{
+		*list = head->next; // skip head node.
+		node* prev = head; // store previous node in sweep.
+		int tempPos = 1;
+		do {
+			node* curr = *list;
+			if (tempPos == pos)
+			{
+				node* newNode = new node();
+				newNode->data = data;
+				prev->next = newNode;
+				newNode->next = curr;
+				*list = head; // reset list.
+				return 0;
+			}
+			++tempPos;
+			prev = curr;
+			*list = curr->next;
+		} while (*list != head);
+		*list = head; // pos not in list, reset list.
+		return -1;
+	}
 }
 
 int csList::deleteNodeFront(node** list)
