@@ -862,6 +862,27 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				// 
 			}
 		}
+		else if (cmd.function == "shuffle")
+		{
+			result = slist.shuffle(&list);
+			if (result == 0)
+			{
+				result = slist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					slist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
 		else if (cmd.function == "bubbleSort")
 		{
 			result = slist.bubbleSort(&list, cmd.isAscending);
@@ -882,27 +903,6 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		else if (cmd.function == "selectionSort")
 		{
 			result = slist.selectionSort(&list, cmd.isAscending);
-			if (result == 0)
-			{
-				result = slist.size(list, nodeCount);
-				if (result == 0)
-				{
-					std::cout << "Node count: " << nodeCount << '\n';
-					slist.print(list);
-				}
-			}
-			else if (result == 1)
-			{
-				std::cout << "List is empty.\n";
-			}
-			else if (result == 5)
-			{
-				std::cout << "List has only one node.\n";
-			}
-		}
-		else if (cmd.function == "shuffle")
-		{
-			result = slist.shuffle(&list);
 			if (result == 0)
 			{
 				result = slist.size(list, nodeCount);
@@ -1811,6 +1811,8 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	int position;
 	int data;
 	int nodeCount;
+	int swapCount;
+	int sweepCount;
 	node* list = nullptr;
 	node* ptr = nullptr;
 
@@ -2688,6 +2690,29 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				result = cslist.size(list, nodeCount);
 				if (result == 0)
 				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					cslist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
+		else if (cmd.function == "bubbleSort")
+		{
+			result = cslist.bubbleSort(&list, cmd.isAscending, swapCount, sweepCount);
+			if (result == 0)
+			{
+				result = cslist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "swapCount: " << swapCount << '\n';
+					std::cout << "sweepCount: " << sweepCount << '\n';
 					std::cout << "Node count: " << nodeCount << '\n';
 					cslist.print(list);
 				}

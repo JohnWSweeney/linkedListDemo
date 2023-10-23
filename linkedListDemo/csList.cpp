@@ -1307,3 +1307,106 @@ int csList::shuffle(node** list)
 	} while (temp < pow(nodeCount, 2));
 	return 0;
 }
+
+int csList::bubbleSort(node** list, bool isAscending, int &swapCount, int &sweepCount)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	node* head = *list;
+	// check if list has only one node.
+	if (head->next == head) return 5;
+	// delcare and initialze variables.
+	node* prev = *list; // previous node in list sweep.
+	node* tail = *list; // tail node.
+	int swaps = 0; // store node swap count b/w sweeps.
+	swapCount = 0;
+	sweepCount = 0;
+	// find tail node.
+	do {
+		node* curr = *list;
+		if (curr->next == head)
+		{
+			tail = curr;
+		}
+		*list = curr->next;
+	} while (*list != head);
+	*list = head; // reset list.
+	// sweep list, swapping nodes as needed.
+	// stop on first sweep with no swaps.
+	do {
+		// compare adjacent nodes, swap according to isAscending.
+		swaps = 0;
+		do {
+			node* curr = *list; // current node.
+			node* test = curr->next; // node after current node.
+			if (isAscending == true) // sort ascending.
+			{
+				if (curr->data > test->data)
+				{
+					node* temp = test->next;
+					if (curr == head)
+					{
+						tail->next = test;
+						head = test;
+					}
+					else if (test == tail)
+					{
+						prev->next = test;
+						tail = curr;
+					}
+					else
+					{
+						prev->next = test;
+					}
+					test->next = curr;
+					curr->next = temp;
+					prev = test;
+					*list = curr;
+					++swaps;
+				}
+				else
+				{
+					prev = curr;
+					*list = test;
+				}
+			}
+			else // sort descending.
+			{
+				if (curr->data < test->data)
+				{
+					node* temp = test->next;
+					if (curr == head)
+					{
+						tail->next = test;
+						head = test;
+					}
+					else if (test == tail)
+					{
+						prev->next = test;
+						tail = curr;
+					}
+					else
+					{
+						prev->next = test;
+					}
+					test->next = curr;
+					curr->next = temp;
+					prev = test;
+					*list = curr;
+					++swaps;
+				}
+				else
+				{
+					prev = curr;
+					*list = test;
+				}
+			}
+		} while (*list != tail);
+		swapCount += swaps;
+		++sweepCount;
+		*list = head; // reset list.
+		
+	} while (swaps != 0);
+	*list = head; // reset list.
+	return 0;
+}
