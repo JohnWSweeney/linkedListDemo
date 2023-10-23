@@ -2761,7 +2761,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodeByPos")
 		{
-			result = cdlist.addNodeByPos(list, cmd.input1, cmd.input2);
+			result = cdlist.addNodeByPos(&list, cmd.input1, cmd.input2);
 			if (result == 0)
 			{
 				cdlist.size(list, nodeCount);
@@ -2774,7 +2774,7 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == -1)
 			{
-				std::cout << "Postition is out of bounds.\n";
+				std::cout << "Postition is not in list.\n";
 			}
 		}
 		else if (cmd.function == "deleteNodeFront")

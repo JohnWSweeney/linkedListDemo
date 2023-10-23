@@ -58,41 +58,50 @@ int cdList::addNodeBack(dNode* list, int data)
 	} while (list != head);
 }
 
-int cdList::addNodeByPos(dNode* list, int data, int pos)
+int cdList::addNodeByPos(dNode** list, int pos, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1; // list is empty.
 
-	dNode* head = list;
-	int tempPos = 0;
-	do {
-		if (pos == 0)
-		{
-			dNode* after = head->next;
-			dNode* newNode = new dNode();
-			newNode->data = head->data;
-			newNode->next = after;
-			newNode->prev = head;
-			head->data = data;
-			head->next = newNode;
-			after->prev = newNode;
-			return 0;
-		}
-		else if (tempPos == pos)
-		{
-			dNode* before = list->prev;
-			dNode* after = list;
-			dNode* newNode = new dNode();
-			newNode->data = data;
-			newNode->next = after;
-			newNode->prev = before;
-			before->next = newNode;
-			after->prev = newNode;
-			return 0;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != head);
-	return -1;
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	// find pos in list.
+	if (pos == 0) // found pos.
+	{
+		dNode* newNode = new dNode();
+		newNode->data = data;
+		tail->next = newNode;
+		newNode->prev = tail;
+		newNode->next = head;
+		head->prev = newNode;
+		*list = newNode; // assign new head node.
+		return 0;
+	}
+	else
+	{
+		// check is list has only one node.
+		if (head->next == head) return -1;
+		*list = head->next; // skip head.
+		int tempPos = 1;
+		do {
+			dNode* curr = *list;
+			if (tempPos == pos) // found pos.
+			{
+				dNode* before = curr->prev;
+				dNode* newNode = new dNode();
+				newNode->data = data;
+				before->next = newNode;
+				newNode->prev = before;
+				newNode->next = curr;
+				curr->prev = newNode;
+				*list = head;
+				return 0;
+			}
+			++tempPos;
+			*list = curr->next;
+		} while (*list != head);
+		*list = head; // pos not in list, reset list.
+		return -1;
+	}
 }
 
 int cdList::deleteNodeFront(dNode** list)

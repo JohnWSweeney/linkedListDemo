@@ -189,6 +189,11 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.28
+- Updated cdList class function addNodeByPos and cdList demo.
+	- Fixed bug reassigning original head node pointer when adding node to *pos* zero. 
+	- Swapped *data* and *pos* order in parameter list.
+
 v1.6.27
 - Updated csList class function addNodeByPos and csList demo.
 	- Fixed bug reassigning original head node pointer when adding node to *pos* zero. 
