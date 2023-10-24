@@ -935,6 +935,8 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	int position;
 	int data;
 	int nodeCount;
+	int swapCount;
+	int sweepCount;
 	dNode* list = nullptr;
 	dNode* ptr = nullptr;
 
@@ -1784,6 +1786,29 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				result = dlist.size(list, nodeCount);
 				if (result == 0)
 				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
+		else if (cmd.function == "bubbleSort")
+		{
+			result = dlist.bubbleSort(&list, cmd.isAscending, swapCount, sweepCount);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "swapCount: " << swapCount << '\n';
+					std::cout << "sweepCount: " << sweepCount << '\n';
 					std::cout << "Node count: " << nodeCount << '\n';
 					dlist.print(list);
 				}
