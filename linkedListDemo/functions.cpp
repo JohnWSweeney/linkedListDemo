@@ -1238,6 +1238,30 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Pointer is null.\n";
 			}
 		}
+		else if (cmd.function == "returnFrontData")
+		{
+			result = dlist.returnFrontData(list, data);
+			if (result == 0)
+			{
+				std::cout << "Data: " << data << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "returnBackData")
+		{
+			result = dlist.returnBackData(list, data);
+			if (result == 0)
+			{
+				std::cout << "Data: " << data << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
 		else if (cmd.function == "returnDataByPos")
 		{
 			result = dlist.returnDataByPos(list, cmd.output, cmd.input1);
@@ -1809,6 +1833,27 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				{
 					std::cout << "swapCount: " << swapCount << '\n';
 					std::cout << "sweepCount: " << sweepCount << '\n';
+					std::cout << "Node count: " << nodeCount << '\n';
+					dlist.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 5)
+			{
+				std::cout << "List has only one node.\n";
+			}
+		}
+		else if (cmd.function == "selectionSort")
+		{
+			result = dlist.selectionSort(&list, cmd.isAscending);
+			if (result == 0)
+			{
+				result = dlist.size(list, nodeCount);
+				if (result == 0)
+				{
 					std::cout << "Node count: " << nodeCount << '\n';
 					dlist.print(list);
 				}

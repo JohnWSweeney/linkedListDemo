@@ -434,6 +434,27 @@ int dList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
 	return -1;
 }
 
+int dList::returnFrontData(dNode* list, int &data)
+{
+	if (list == nullptr) return 1; // list is empty.
+	data = list->data;
+	return 0;
+}
+
+int dList::returnBackData(dNode* list, int &data)
+{
+	if (list == nullptr) return 1; // list is empty.
+	// find tail node, return data.
+	do {
+		if (list->next == nullptr)
+		{
+			data = list->data;
+			return 0;
+		}
+		list = list->next;
+	} while (list != nullptr);
+}
+
 int dList::returnDataByPos(dNode* list, int &data, int pos)
 {
 	if (list == nullptr) return 1;
@@ -1359,5 +1380,84 @@ int dList::bubbleSort(dNode** list, bool isAscending, int &swapCount, int &sweep
 		*list = head; // reset list.
 
 	} while (swaps != 0);
+	return 0;
+}
+
+int dList::selectionSort(dNode** list, bool isAscending)
+{
+	if (*list == nullptr) return 1; // list is empty.
+
+	dNode* head = *list;
+	// check if list has only one node.
+	if (head->next == nullptr) return 5;
+	// declare and initialze variables.
+	dNode* sortedList = *list; // sorted portion of list.
+	dNode* unsortedList = *list; // unsorted portion of list.
+	dNode* unsortedHead = *list; // first node in unsorted list.
+	dNode* temp = nullptr; // hold min/max for current sweep.
+	bool firstSweep = true;
+	// sweep-sort list until unsortedHead is the last node.
+	do {
+		// find min/max node, place in sorted list.
+		temp = unsortedHead; // initialize with unsortedHead.
+		*list = unsortedList->next;
+		do {
+			dNode* curr = *list;
+			if (isAscending == true) // sort list ascending.
+			{
+				if (curr->data < temp->data)
+				{
+					temp = curr;
+				}
+			}
+			else // sort list descending.
+			{
+				if (curr->data > temp->data)
+				{
+					temp = curr;
+				}
+			}
+			*list = curr->next;
+		} while (*list != nullptr);
+
+		if (temp == unsortedHead)
+		{
+			unsortedHead = unsortedHead->next;
+			unsortedList = unsortedHead;
+		}
+		else
+		{
+			dNode* before = temp->prev;
+			dNode* after = temp->next;
+			if (before != nullptr)
+			{
+				before->next = after;
+			}
+			if (after != nullptr)
+			{
+				after->prev = before;
+			}
+		}
+		// on first sweep put temp at front of sorted list.
+		if (firstSweep == true)
+		{
+			firstSweep = false;
+			temp->prev = nullptr;
+			temp->next = unsortedHead;
+			unsortedHead->prev = temp;
+			sortedList = temp;
+			head = sortedList;
+		}
+		else // afterward, concatenate temp nodes in sorted list.
+		{
+			temp->prev = sortedList;
+			sortedList->next = temp;
+			temp->next = unsortedHead;
+			unsortedHead->prev = temp;
+			sortedList = temp;
+		}
+
+	} while (unsortedHead->next != nullptr);
+	*list = head;
 	return 0;
 }
