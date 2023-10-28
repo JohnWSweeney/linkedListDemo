@@ -5,7 +5,10 @@
 
 struct cmd
 {
-	std::string listType;
+	std::string demoType;
+	std::vector<std::string> func;
+	std::vector<std::string> funcInt;
+	std::vector<std::string> funcBool;
 	std::string function;
 	int input1;
 	int input2;

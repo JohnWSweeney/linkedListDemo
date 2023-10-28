@@ -7,31 +7,31 @@ void (*ptr)(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
 	// assign function pointer to chosen list type function.
-	if (cmd.listType == "sList")
+	if (cmd.demoType == "sList")
 	{
 		ptr = sDemo;
 	}
-	else if (cmd.listType == "dList")
+	else if (cmd.demoType == "dList")
 	{
 		ptr = dDemo;
 	}
-	else if (cmd.listType == "csList")
+	else if (cmd.demoType == "csList")
 	{
 		ptr = csDemo;
 	}
-	else if (cmd.listType == "cdList")
+	else if (cmd.demoType == "cdList")
 	{
 		ptr = cdDemo;
 	}
-	else if (cmd.listType == "fifo")
+	else if (cmd.demoType == "fifo")
 	{
 		ptr = fifoDemo;
 	}
-	else if (cmd.listType == "stack")
+	else if (cmd.demoType == "stack")
 	{
 		ptr = stackDemo;
 	}
-	else if (cmd.listType == "queue")
+	else if (cmd.demoType == "queue")
 	{
 		ptr = queueDemo;
 	}

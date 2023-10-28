@@ -189,6 +189,13 @@ The `clear` and `print` functions work identically to the other classes.
 [linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
 
 ## ChangeLog
+v1.6.32
+- Updated command header/source files.
+	- Added function string vectors func, funcInt, and funcBool to cmd struct.
+	- Added populateFunctionLists function to populate cmd struct function string vectors.
+	- Added checkFunctionGetVariables function to check if user function is valid and get integers/bools.
+	- Updated populateCmd with populateFunctionLists and checkFunctionGetVariables functions.
+
 v1.6.31
 - Updated dList class/demo and commands cpp with returnFrontData, returnBackData, and selectionSort functions.
 
