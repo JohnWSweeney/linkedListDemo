@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "demos.h"
 #include "atomicBool.h"
 #include "random.h"
 #include "sList.h"
@@ -7,6 +7,7 @@
 #include "cdList.h"
 #include "stack.h"
 #include "queue.h"
+#include "priorityQueue.h"
 #include "fifo.h"
 
 void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
@@ -3904,6 +3905,133 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	}
 	cv.notify_one();
 	std::cout << "Queue demo stopped.\n";
+}
+
+void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+{
+	std::cout << "Priority Queue demo started.\n";
+	priorityQueue pq;
+	int result;
+	int nodeCount;
+	node* list = nullptr;
+
+	std::unique_lock<std::mutex> lk(m);
+	cv.notify_one();
+	while (status)
+	{
+		cv.wait(lk);
+		std::cout << '\n';
+		if (cmd.function == "set")
+		{
+			result = pq.set(&list, cmd.isAscending);
+			if (result == 0)
+			{
+				result = pq.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					pq.print(list);
+				}
+				else if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+		}
+		else if (cmd.function == "top")
+		{
+			result = pq.top(list, cmd.output);
+			if (result == 0)
+			{
+				std::cout << "First element in queue: " << cmd.output << '\n';
+			}
+			else
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "push")
+		{
+			result = pq.push(&list, cmd.input1);
+			if (result == 0)
+			{
+				result = pq.size(list, nodeCount);
+				if (result == 0)
+				{
+					std::cout << "Node count: " << nodeCount << '\n';
+					pq.print(list);
+				}
+				else if (result == 1)
+				{
+					std::cout << "List is empty.\n";
+				}
+			}
+		}
+		else if (cmd.function == "pop")
+		{
+			result = pq.pop(&list);
+			if (result == 0)
+			{
+				if (result == 0)
+				{
+					pq.size(list, nodeCount);
+					std::cout << "Node count: " << nodeCount << '\n';
+					pq.print(list);
+				}
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "clear")
+		{
+			result = pq.clear(&list);
+			if (result == 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else if (result == 1)
+			{
+				std::cout << "List was already empty.\n";
+			}
+		}
+		else if (cmd.function == "isEmpty")
+		{
+			result = pq.isEmpty(list);
+			if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+			else
+			{
+				std::cout << "List is not empty.\n";
+			}
+		}
+		else if (cmd.function == "size")
+		{
+			result = pq.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+			}
+			else if (result == 1)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "print")
+		{
+			result = pq.print(list);
+			if (result != 0)
+			{
+				std::cout << "List is empty.\n";
+			}
+		}
+		cv.notify_one();
+	}
+	cv.notify_one();
+	std::cout << "Priority Queue demo stopped.\n";
 }
 
 void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)

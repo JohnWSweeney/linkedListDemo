@@ -48,13 +48,16 @@
     <ClCompile Include="threads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="functions.cpp">
+    <ClCompile Include="demos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="priorityQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,13 +95,16 @@
     <ClInclude Include="threads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="demos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priorityQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

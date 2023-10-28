@@ -1,5 +1,5 @@
 #include "threads.h"
-#include "functions.h"
+#include "demos.h"
 
 // define function pointer.
 void (*ptr)(std::mutex &m, std::condition_variable &cv, cmd &cmd);
@@ -23,10 +23,6 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	{
 		ptr = cdDemo;
 	}
-	else if (cmd.demoType == "fifo")
-	{
-		ptr = fifoDemo;
-	}
 	else if (cmd.demoType == "stack")
 	{
 		ptr = stackDemo;
@@ -34,6 +30,14 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	else if (cmd.demoType == "queue")
 	{
 		ptr = queueDemo;
+	}
+	else if (cmd.demoType == "priorityQueue")
+	{
+		ptr = priorityQueueDemo;
+	}
+	else if (cmd.demoType == "fifo")
+	{
+		ptr = fifoDemo;
 	}
 
 	std::thread newThread(ptr, std::ref(m), std::ref(cv), std::ref(cmd));

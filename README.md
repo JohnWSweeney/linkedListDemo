@@ -186,9 +186,13 @@ The `clear` and `print` functions work identically to the other classes.
 - Everytime I think I'm done, I find new and interesting functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.6.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.6.0/linkedListDemo_v1_6_0.exe) [86 kB]
+[linkedListDemo v1.7.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.7.0/linkedListDemo_v1_7_0.exe) [127 kB]
 
 ## ChangeLog
+v1.7.0
+- Added priority queue class and demo.
+- Renamed functions header/cpp to "demos".
+
 v1.6.32
 - Updated command header/source files.
 	- Added function string vectors func, funcInt, and funcBool to cmd struct.
