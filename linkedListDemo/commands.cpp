@@ -1,7 +1,7 @@
 #include "commands.h"
 #include "atomicBool.h"
 
-std::vector<std::string> demoTypes = { "sList", "dList", "csList", "cdList", "stack", "queue", "priorityQueue", "fifo" };
+std::vector<std::string> demoTypes = { "sList", "dList", "csList", "cdList", "stack", "queue", "deque", "priorityQueue", "fifo" };
 
 std::vector<std::string> listFunc = { "deleteNodeFront", "deleteNodeBack", "deleteNodeByPtr", "deleteBeforePtr", "deleteAfterPtr", "returnPosByPtr", "returnFrontData", "returnBackData", "returnDataByPtr", "findMinReturnPos", "findMinReturnPtr", "findMaxReturnPos", "findMaxReturnPtr", "findTailReturnPos", "findTailReturnPtr", "movePtrToFront", "movePtrToBack", "movePtrUp", "movePtrDown", "clear", "isEmpty", "size", "print", "reverse", "addNodes", "clearPtr", "shuffle" };
 std::vector<std::string> listFuncInt = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "deleteBeforePos", "deleteAfterPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "movePosUp", "movePosDown", "addRandomNodes", "swap" };
@@ -12,6 +12,9 @@ std::vector<std::string> stackFuncInt = { "push" };
 
 std::vector<std::string> queueFunc = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
 std::vector<std::string> queueFuncInt = { "push" };
+
+std::vector<std::string> dequeFunc = { "front", "back", "popFront", "popBack", "clear", "isEmpty", "size", "print" };
+std::vector<std::string> dequeFuncInt = { "pushFront", "pushBack" };
 
 std::vector<std::string> priorityQueueFunc = { "top", "pop", "clear", "isEmpty", "size", "print" };
 std::vector<std::string> priorityQueueFuncInt = { "push" };
@@ -108,6 +111,12 @@ void populateFunctionLists(cmd &cmd)
 		cmd.funcInt = queueFuncInt;
 		cmd.funcBool = {};
 	}
+	else if (cmd.demoType == "deque")
+	{
+		cmd.func = dequeFunc;
+		cmd.funcInt = dequeFuncInt;
+		cmd.funcBool = {};
+	}
 	else if (cmd.demoType == "priorityQueue")
 	{
 		cmd.func = priorityQueueFunc;
@@ -193,7 +202,14 @@ int checkFunctionGetVariables(std::vector<std::string> tokens, cmd &cmd)
 
 	// check if command is a valid non-integer-requiring function.
 	result = checkStringVector(tokens[0], cmd.func, cmd.function);
-	return result;
+	if (result == 1)
+	{
+		std::cout << "Invalid function.\n";
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 int populateCmd(std::vector<std::string> tokens, cmd &cmd)
@@ -228,10 +244,6 @@ int populateCmd(std::vector<std::string> tokens, cmd &cmd)
 	{
 		// check if user enter a valid function for the demo, get integers/bools for function as needed.
 		result = checkFunctionGetVariables(tokens, cmd);
-		if (result == 1)
-		{
-			std::cout << "Invalid function.\n";
-		}
 		return result;
 	}
 }

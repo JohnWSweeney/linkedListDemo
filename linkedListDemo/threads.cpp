@@ -4,7 +4,7 @@
 // define function pointer.
 void (*ptr)(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 
-void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
+void startDemoThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 {
 	// assign function pointer to chosen list type function.
 	if (cmd.demoType == "sList")
@@ -30,6 +30,10 @@ void startThread(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	else if (cmd.demoType == "queue")
 	{
 		ptr = queueDemo;
+	}
+	else if (cmd.demoType == "deque")
+	{
+		ptr = dequeDemo;
 	}
 	else if (cmd.demoType == "priorityQueue")
 	{

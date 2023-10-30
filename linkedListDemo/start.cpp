@@ -40,7 +40,7 @@ void startMenu(bool &running)
 			if (result == 0)
 			{
 				status = true;
-				startThread(std::ref(m), std::ref(cv), std::ref(cmd));
+				startDemoThread(std::ref(m), std::ref(cv), std::ref(cmd));
 				cv.wait(lk);
 			}
 		}

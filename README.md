@@ -1,12 +1,14 @@
 # linkedListDemo
 
-A console app exploring linked lists and their applications. The app includes classes for singly, doubly, circular singly, and circular doubly linked lists. Linked list applications include classes for stacks, queues, and FIFOs. The Windows executable is compiled with C++17.
+A console app exploring linked lists and their applications. The app includes interactive demonstrations of singly, doubly, circular singly, and circular doubly linked lists and other data structures including stacks, queues, deques, priority queues, and FIFOs.
+
+Data structures featured in this demo have their own class and all are available as drop-in solutions for your project with an MIT license. Linked lists include [singly linked lists `slist`](https://github.com/JohnWSweeney/singlyLinkedListClass), [doubly linked lists `dlist` ](https://github.com/JohnWSweeney/doublyLinkedListClass), [circular singly linked lists `cslist`](https://github.com/JohnWSweeney/circularSinglyLinkedListClass), and [circular doubly linked lists `cdlist`](https://github.com/JohnWSweeney/circularDoublyLinkedListClass). Each list class includes 40+ functions based on their Standard Template Library (STL) counterparts, plus other functions I thought would be interesting/useful to implement. Data structures include [stacks](https://github.com/JohnWSweeney/stackClass), [queues](https://github.com/JohnWSweeney/queueClass), [deques](https://github.com/JohnWSweeney/dequeClass), and [priority queues](https://github.com/JohnWSweeney/priorityQueueClass). Similarly, each data structure is based on its counterpart in the STL containers library.
 
 ## Function
 The app opens a console window on startup. Enter the *command* keywords separated by a space. Commands are case-sensitive. 
 
 ## Linked Lists
-Four types of linked lists are explored: singly, doubly, circular singly, and circular doubly.  Each list node stores an integer as `data` and a pointer to the next node in the list as `next`. Doubly linked list nodes have a second pointer `prev` that points to the previous node in the list.
+Each list is comprised of nodes that store an integer as `data` and a pointer to the next node in the list as `next`. Doubly linked list nodes have a second pointer `prev` that points to the previous node in the list. For circularly  linked lists, the last (tail) node points to the first (head) node.
 
 Each list type has its own class and interactive demo to test its functions, such as adding and deleting nodes and updating their data. The following functions are available in each list type's demo.
 
@@ -183,12 +185,16 @@ which will also return empty, almost empty, almost full, and full messages when 
 The `clear` and `print` functions work identically to the other classes.
 
 ## Future Updates
-- Everytime I think I'm done, I find new and interesting functions to implement, so who knows.
+- Every time  I think I'm done, I find new and interesting functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.7.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.7.0/linkedListDemo_v1_7_0.exe) [127 kB]
+[linkedListDemo v1.8.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.8.0/linkedListDemo_v1_8_0.exe) [131 kB]\
+Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.0
+- Added deque class and demo.
+
 v1.7.0
 - Added priority queue class and demo.
 - Renamed functions header/cpp to "demos".
@@ -220,7 +226,7 @@ v1.6.27
 	- Swapped *data* and *pos* order in parameter list.
 
 v1.6.26
-- Udpated dList class function addNodeByPos and dList demo.
+- Updated dList class function addNodeByPos and dList demo.
 	- Fixed bug causing crash when *pos* is not in list.
 	- Fixed bug reassigning original head node pointer when adding node to *pos* zero. 
 	- Swapped *data* and *pos* order in parameter list.
@@ -350,7 +356,7 @@ v1.5.15
 v1.5.14
 - Updated startMenu and populateCmd functions.
 	- Fixed bug causing crash on entering invalid command.
-	- Fixed bug causing keyboard input lock out when "stop" command enterd with no thread running.
+	- Fixed bug causing keyboard input lock out when "stop" command entered with no thread running.
 	- All integer fields checked for valid input before pushing commands to thread.
 	- Command struct input fields now cleared after invalid commands.
 	- Removed command struct funcsInts, funcsNoInts fields and consolidated all list function integer/no integer lists.

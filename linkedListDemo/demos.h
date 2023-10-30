@@ -11,5 +11,6 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
+void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);
 void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd);

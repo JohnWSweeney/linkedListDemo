@@ -131,6 +131,7 @@
     <ClCompile Include="atomicBool.cpp" />
     <ClCompile Include="commands.cpp" />
     <ClCompile Include="csList.cpp" />
+    <ClCompile Include="deque.cpp" />
     <ClCompile Include="dList.cpp" />
     <ClCompile Include="cdList.cpp" />
     <ClCompile Include="fifo.cpp" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="atomicBool.h" />
     <ClInclude Include="csList.h" />
+    <ClInclude Include="deque.h" />
     <ClInclude Include="dList.h" />
     <ClInclude Include="cdList.h" />
     <ClInclude Include="fifo.h" />
