@@ -188,10 +188,13 @@ The `clear` and `print` functions work identically to the other classes.
 - Every time  I think I'm done, I find new and interesting functions to implement, so who knows.
 
 ## Download
-[linkedListDemo v1.8.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.8.0/linkedListDemo_v1_8_0.exe) [131 kB]\
+[linkedListDemo v1.8.0](https://github.com/JohnWSweeney/linkedListDemo/releases/download/v1.8.0/linkedListDemo_v1_8_0.exe) [131 kB]
 Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.1
+- Fixed bug in queue::clear function preventing list from clearing and crashing in subsequent class function calls.
+
 v1.8.0
 - Added deque class and demo.
 

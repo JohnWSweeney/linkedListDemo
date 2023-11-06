@@ -90,7 +90,6 @@ int queue::clear(dNode** list)
 		{
 			*list = dummy->next;
 			delete dummy;
-			return 0;
 		}
 		else if (dummy->next == head)
 		{
