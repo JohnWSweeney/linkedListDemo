@@ -192,6 +192,9 @@ The `clear` and `print` functions work identically to the other classes.
 Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.3
+- Updated queue::push to take advantage of list circularity.
+
 v1.8.2
 - Fixed bug in deque::pop_back function.
 

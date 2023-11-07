@@ -1,33 +1,28 @@
 #include "queue.h"
 // sweeney's hand-rolled queue class.
 
-int queue::push(dNode* &list, int data)
+int queue::push(dNode** list, int data)
 {
-	if (list == nullptr)
+	if (*list == nullptr)
 	{
 		dNode* newNode = new dNode();
 		newNode->data = data;
 		newNode->next = newNode;
 		newNode->prev = newNode;
-		list = newNode;
+		*list = newNode;
 		return 0;
 	}
-
-	dNode* head = list;
-	do {
-		if (list->next == head)
-		{
-			dNode* newNode = new dNode();
-			newNode->data = data;
-			newNode->next = head;
-			newNode->prev = list;
-			list->next = newNode;
-			head->prev = newNode;
-			list = head;
-			return 0;
-		}
-		list = list->next;
-	} while (list != head);
+	// add new node between tail and head nodes.
+	dNode* head = *list;
+	dNode* tail = head->prev;
+	dNode* newNode = new dNode();
+	newNode->data = data;
+	tail->next = newNode;
+	newNode->prev = tail;
+	newNode->next = head;
+	head->prev = newNode;
+	*list = head;
+	return 0;
 }
 
 int queue::pop(dNode** list)

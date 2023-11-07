@@ -5,7 +5,7 @@
 class queue
 {
 public:
-	int push(dNode* &list, int data);
+	int push(dNode** list, int data);
 	int pop(dNode** list);
 	int front(dNode* list, int &data);
 	int back(dNode* list, int &data);

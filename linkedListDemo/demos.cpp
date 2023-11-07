@@ -3815,7 +3815,7 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "push")
 		{
-			result = q.push(list, cmd.input1);
+			result = q.push(&list, cmd.input1);
 			q.print(list);
 		}
 		else if (cmd.function == "pop")
