@@ -100,26 +100,24 @@ int deque::pop_back(node** list)
 	if (*list == nullptr) return 1; // list is empty.
 
 	node* head = *list;
-	// find, remove tail node.
+	// first check if list has only one node.
+	if (head->next == nullptr)
+	{
+		delete head;
+		*list = nullptr;
+		return 0;
+	}
+	// else, find and remove tail node.
 	do {
 		node* curr = *list;
-		// first check if list has only one node.
-		if (curr->next == nullptr)
+		if (curr->next->next == nullptr)
 		{
-			delete curr;
-			*list = nullptr;
+			delete curr->next;
+			curr->next = nullptr;
+			*list = head;
 			return 0;
 		}
-		else
-		{
-			if (curr->next->next == nullptr)
-			{
-				delete curr->next;
-				curr->next = nullptr;
-				*list = head;
-				return 0;
-			}
-		}
+		*list = curr->next;
 	} while (*list != nullptr);
 }
 
