@@ -7,16 +7,16 @@ std::vector<std::string> listFunc = { "deleteNodeFront", "deleteNodeBack", "dele
 std::vector<std::string> listFuncInt = { "init", "addNodeFront", "addNodeBack", "addNodeByPos", "deleteNodeByPos", "deleteBeforePos", "deleteAfterPos", "returnPtrByPos", "returnDataByPos", "updateDataByPos", "updateDataByPtr", "findDataReturnPos", "findDataReturnPtr", "movePosToFront", "movePosToBack", "movePosUp", "movePosDown", "addRandomNodes", "swap" };
 std::vector<std::string> listFuncBool = { "bubbleSort", "selectionSort" };
 
-std::vector<std::string> stackFunc = { "pop", "top", "clear", "isEmpty", "size", "print" };
+std::vector<std::string> stackFunc = { "pop", "top", "clear", "isEmpty", "size", "print", "addNodes" };
 std::vector<std::string> stackFuncInt = { "push" };
 
-std::vector<std::string> queueFunc = { "pop", "front", "back", "clear", "isEmpty", "size", "print" };
+std::vector<std::string> queueFunc = { "pop", "front", "back", "clear", "isEmpty", "size", "print", "addNodes" };
 std::vector<std::string> queueFuncInt = { "push" };
 
-std::vector<std::string> dequeFunc = { "front", "back", "popFront", "popBack", "clear", "isEmpty", "size", "print" };
+std::vector<std::string> dequeFunc = { "front", "back", "popFront", "popBack", "clear", "isEmpty", "size", "print", "addNodes" };
 std::vector<std::string> dequeFuncInt = { "pushFront", "pushBack" };
 
-std::vector<std::string> priorityQueueFunc = { "top", "pop", "clear", "isEmpty", "size", "print" };
+std::vector<std::string> priorityQueueFunc = { "top", "pop", "clear", "isEmpty", "size", "print", "addNodes" };
 std::vector<std::string> priorityQueueFuncInt = { "push" };
 std::vector<std::string> priorityQueueFuncBool = { "set" };
 

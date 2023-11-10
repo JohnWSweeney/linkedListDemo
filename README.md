@@ -192,6 +192,10 @@ The `clear` and `print` functions work identically to the other classes.
 Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.4
+- Added "addNodes" function to stack, queue, deque, and priority queue demos.
+- Fixed bug in singly linked list sList::clear function causing crash when list is nullptr.
+
 v1.8.3
 - Updated queue::push to take advantage of list circularity.
 

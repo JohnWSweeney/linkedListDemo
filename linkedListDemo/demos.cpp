@@ -1723,7 +1723,7 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "addNodes")
 		{
-			if (list != NULL)
+			if (list != nullptr)
 			{
 				for (int i = 0; i < 9; i++)
 				{
@@ -3514,11 +3514,11 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = cdlist.clear(&list);
 			if (result == 0)
 			{
-				std::cout << "List is empty.\n";
+				std::cout << "List cleared.\n";
 			}
 			else
 			{
-				std::cout << "List was already empty.\n";
+				std::cout << "List is empty.\n";
 			}
 		}
 		else if (cmd.function == "isEmpty")
@@ -3708,7 +3708,7 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	stack stack;
 	int result;
 	int nodeCount;
-	node* list = NULL;
+	node* list = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
 	cv.notify_one();
@@ -3793,6 +3793,19 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 				std::cout << "Stack is empty.\n";
 			}
 		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				stack.push(&list, pow(i, 5));
+			}
+			result = stack.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				stack.print(list);
+			}
+		}
 		cv.notify_one();
 	}
 	cv.notify_one();
@@ -3843,7 +3856,7 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else
 			{
-				std::cout << "List is empty.\n";
+				std::cout << "Queue is empty.\n";
 			}
 		}
 		else if (cmd.function == "back")
@@ -3863,11 +3876,11 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = q.clear(&list);
 			if (result == 0)
 			{
-				std::cout << "List is empty.\n";
+				std::cout << "Queue cleared.\n";
 			}
 			else if (result == 1)
 			{
-				std::cout << "List was already empty.\n";
+				std::cout << "Queue is empty.\n";
 			}
 		}
 		else if (cmd.function == "isEmpty")
@@ -3900,6 +3913,19 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			if (result != 0)
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				q.push(&list, pow(i, 5));
+			}
+			result = q.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				q.print(list);
 			}
 		}
 		cv.notify_one();
@@ -4013,11 +4039,11 @@ void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = dq.clear(&list);
 			if (result == 0)
 			{
-				std::cout << "List is empty.\n";
+				std::cout << "List cleared.\n";
 			}
 			else if (result == 1)
 			{
-				std::cout << "List was already empty.\n";
+				std::cout << "List is empty.\n";
 			}
 		}
 		else if (cmd.function == "isEmpty")
@@ -4055,6 +4081,19 @@ void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			else
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				dq.push_back(&list, pow(i, 5));
+			}
+			result = dq.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				dq.print(list);
 			}
 		}
 		cv.notify_one();
@@ -4145,11 +4184,11 @@ void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			result = pq.clear(&list);
 			if (result == 0)
 			{
-				std::cout << "List is empty.\n";
+				std::cout << "List cleared.\n";
 			}
 			else if (result == 1)
 			{
-				std::cout << "List was already empty.\n";
+				std::cout << "List is empty.\n";
 			}
 		}
 		else if (cmd.function == "isEmpty")
@@ -4182,6 +4221,19 @@ void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			if (result != 0)
 			{
 				std::cout << "List is empty.\n";
+			}
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				pq.push(&list, pow(i, 5));
+			}
+			result = pq.size(list, nodeCount);
+			if (result == 0)
+			{
+				std::cout << "Node count: " << nodeCount << '\n';
+				pq.print(list);
 			}
 		}
 		cv.notify_one();

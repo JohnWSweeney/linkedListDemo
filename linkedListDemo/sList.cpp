@@ -893,7 +893,7 @@ int sList::movePtrDown(node** list, node* ptr)
 
 int sList::clear(node** list)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) return 1;
 
 	do {
 		node* dummy = *list;
