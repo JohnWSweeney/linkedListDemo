@@ -14,7 +14,6 @@ struct cmd
 	int input2;
 	int input3;
 	bool isAscending;
-	int output;
 };
 
 int populateCmd(std::vector<std::string> tokens, cmd &cmd);

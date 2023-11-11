@@ -30,7 +30,6 @@ void startMenu(bool &running)
 		cmd.input1 = {};
 		cmd.input2 = {};
 		cmd.input3 = {};
-		cmd.output = {};
 		std::vector<std::string> tokens;
 		getCommands(tokens);
 		

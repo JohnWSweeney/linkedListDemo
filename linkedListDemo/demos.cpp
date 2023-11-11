@@ -316,10 +316,10 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnPosByPtr")
 		{
-			result = slist.returnPosByPtr(list, cmd.output, ptr);
+			result = slist.returnPosByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+				std::cout << "Pointer " << ptr << " is in position " << data << ".\n";
 			}
 			else if (result == 1)
 			{
@@ -336,10 +336,10 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPos")
 		{
-			result = slist.returnDataByPos(list, cmd.output, cmd.input1);
+			result = slist.returnDataByPos(list, data, cmd.input1);
 			if (result == 0)
 			{
-				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+				std::cout << "Data in position " << cmd.input1 << ": " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -352,10 +352,10 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPtr")
 		{
-			result = slist.returnDataByPtr(list, cmd.output, ptr);
+			result = slist.returnDataByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Data in pointer " << ptr << ": " << cmd.output << '\n';
+				std::cout << "Data in pointer " << ptr << ": " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -410,10 +410,10 @@ void sDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "findDataReturnPos")
 		{
-			result = slist.findDataReturnPos(list, cmd.input1, cmd.output);
+			result = slist.findDataReturnPos(list, cmd.input1, data);
 			if (result == 0)
 			{
-				std::cout << "Data '" << cmd.input1 << "' found in position " << cmd.output << ".\n";
+				std::cout << "Data '" << cmd.input1 << "' found in position " << data << ".\n";
 			}
 			else if (result == 1)
 			{
@@ -1222,10 +1222,10 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnPosByPtr")
 		{
-			result = dlist.returnPosByPtr(list, cmd.output, ptr);
+			result = dlist.returnPosByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Pointer " << ptr << " is in position " << cmd.output << '\n';
+				std::cout << "Pointer " << ptr << " is in position " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -1266,10 +1266,10 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPos")
 		{
-			result = dlist.returnDataByPos(list, cmd.output, cmd.input1);
+			result = dlist.returnDataByPos(list, data, cmd.input1);
 			if (result == 0)
 			{
-				std::cout << "Position " << cmd.input1 << " data: " << cmd.output << '\n';
+				std::cout << "Position " << cmd.input1 << " data: " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -1340,10 +1340,10 @@ void dDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "findDataReturnPos")
 		{
-			result = dlist.findDataReturnPos(list, cmd.input1, cmd.output);
+			result = dlist.findDataReturnPos(list, cmd.input1, data);
 			if (result == 0)
 			{
-				std::cout << "Data '" << cmd.input1 << "' found in position " << cmd.output << ".\n";
+				std::cout << "Data '" << cmd.input1 << "' found in position " << data << ".\n";
 			}
 			else if (result == 1)
 			{
@@ -2189,10 +2189,10 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnPosByPtr")
 		{
-			result = cslist.returnPosByPtr(list, cmd.output, ptr);
+			result = cslist.returnPosByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+				std::cout << "Pointer " << ptr << " is in position " << data << ".\n";
 			}
 			else if (result == 1)
 			{
@@ -2209,10 +2209,10 @@ void csDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPos")
 		{
-			result = cslist.returnDataByPos(list, cmd.output, cmd.input1);
+			result = cslist.returnDataByPos(list, data, cmd.input1);
 			if (result == 0)
 			{
-				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+				std::cout << "Data in position " << cmd.input1 << ": " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -3096,10 +3096,10 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnPosByPtr")
 		{
-			result = cdlist.returnPosByPtr(list, cmd.output, ptr);
+			result = cdlist.returnPosByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Pointer " << ptr << " is in position " << cmd.output << ".\n";
+				std::cout << "Pointer " << ptr << " is in position " << data << ".\n";
 			}
 			else if (result == 1)
 			{
@@ -3117,10 +3117,10 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPos")
 		{
-			result = cdlist.returnDataByPos(list, cmd.output, cmd.input1);
+			result = cdlist.returnDataByPos(list, data, cmd.input1);
 			if (result == 0)
 			{
-				std::cout << "Data in position " << cmd.input1 << ": " << cmd.output << '\n';
+				std::cout << "Data in position " << cmd.input1 << ": " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -3133,10 +3133,10 @@ void cdDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "returnDataByPtr")
 		{
-			result = cdlist.returnDataByPtr(list, cmd.output, ptr);
+			result = cdlist.returnDataByPtr(list, data, ptr);
 			if (result == 0)
 			{
-				std::cout << "Data in pointer " << ptr << ": " << cmd.output << '\n';
+				std::cout << "Data in pointer " << ptr << ": " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -3708,6 +3708,7 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	stack stack;
 	int result;
 	int nodeCount;
+	int data;
 	node* list = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
@@ -3739,10 +3740,10 @@ void stackDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "top")
 		{
-			result = stack.top(list, cmd.output);
+			result = stack.top(list, data);
 			if (result == 0)
 			{
-				std::cout << "Top node: " << cmd.output << '\n';
+				std::cout << "Top node: " << data << '\n';
 			}
 			else if (result == 1)
 			{
@@ -3818,6 +3819,7 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	queue q;
 	int result;
 	int nodeCount;
+	int data;
 	dNode* list = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
@@ -3849,10 +3851,10 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "front")
 		{
-			result = q.front(list, cmd.output);
+			result = q.front(list, data);
 			if (result == 0)
 			{
-				std::cout << "First element in queue: " << cmd.output << '\n';
+				std::cout << "First element in queue: " << data << '\n';
 			}
 			else
 			{
@@ -3861,10 +3863,10 @@ void queueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "back")
 		{
-			result = q.back(list, cmd.output);
+			result = q.back(list, data);
 			if (result == 0)
 			{
-				std::cout << "Last element in queue: " << cmd.output << '\n';
+				std::cout << "Last element in queue: " << data << '\n';
 			}
 			else
 			{
@@ -3940,6 +3942,7 @@ void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	deque dq;
 	int result;
 	int nodeCount;
+	int data;
 	node* list = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
@@ -3950,10 +3953,10 @@ void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		std::cout << '\n';
 		if (cmd.function == "front")
 		{
-			result = dq.front(list, cmd.output);
+			result = dq.front(list, data);
 			if (result == 0)
 			{
-				std::cout << "First element in queue: " << cmd.output << '\n';
+				std::cout << "First element in queue: " << data << '\n';
 			}
 			else
 			{
@@ -3962,10 +3965,10 @@ void dequeDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "back")
 		{
-			result = dq.back(list, cmd.output);
+			result = dq.back(list, data);
 			if (result == 0)
 			{
-				std::cout << "Last element in queue: " << cmd.output << '\n';
+				std::cout << "Last element in queue: " << data << '\n';
 			}
 			else
 			{
@@ -4108,6 +4111,7 @@ void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 	priorityQueue pq;
 	int result;
 	int nodeCount;
+	int data;
 	node* list = nullptr;
 
 	std::unique_lock<std::mutex> lk(m);
@@ -4135,10 +4139,10 @@ void priorityQueueDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 		}
 		else if (cmd.function == "top")
 		{
-			result = pq.top(list, cmd.output);
+			result = pq.top(list, data);
 			if (result == 0)
 			{
-				std::cout << "First element in queue: " << cmd.output << '\n';
+				std::cout << "First element in queue: " << data << '\n';
 			}
 			else
 			{
