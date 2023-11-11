@@ -77,9 +77,8 @@ int fifo::rd_en(node** list, int &dout)
 
 int fifo::data_count(node* list, int &wordCount)
 {
-	if (fifoConfig == false) return 7; // fifo not configured.
-
 	wordCount = 0;
+	if (fifoConfig == false) return 7; // fifo not configured.
 	if (list == nullptr) return 4; // empty.
 
 	do {

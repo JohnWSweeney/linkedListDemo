@@ -20,8 +20,8 @@ std::vector<std::string> priorityQueueFunc = { "top", "pop", "clear", "isEmpty",
 std::vector<std::string> priorityQueueFuncInt = { "push" };
 std::vector<std::string> priorityQueueFuncBool = { "set" };
 
+std::vector<std::string> fifoFunc = { "read", "clear", "size", "print", "addNodes" };
 std::vector<std::string> fifoFuncInt = { "config", "write" };
-std::vector<std::string> fifoFunc = { "read", "clear", "size", "print" };
 
 int checkStringVector(std::string token, std::vector<std::string> strVector, std::string &cmdStr)
 {

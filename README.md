@@ -2,7 +2,7 @@
 
 A console app exploring linked lists and their applications. The app includes interactive demonstrations of singly, doubly, circular singly, and circular doubly linked lists and other data structures including stacks, queues, deques, priority queues, and FIFOs.
 
-Data structures featured in this demo have their own class and all are available as drop-in solutions for your project with an MIT license. Linked lists include [singly linked lists `slist`](https://github.com/JohnWSweeney/singlyLinkedListClass), [doubly linked lists `dlist` ](https://github.com/JohnWSweeney/doublyLinkedListClass), [circular singly linked lists `cslist`](https://github.com/JohnWSweeney/circularSinglyLinkedListClass), and [circular doubly linked lists `cdlist`](https://github.com/JohnWSweeney/circularDoublyLinkedListClass). Each list class includes 40+ functions based on their Standard Template Library (STL) counterparts, plus other functions I thought would be interesting/useful to implement. Data structures include [stacks](https://github.com/JohnWSweeney/stackClass), [queues](https://github.com/JohnWSweeney/queueClass), [deques](https://github.com/JohnWSweeney/dequeClass), and [priority queues](https://github.com/JohnWSweeney/priorityQueueClass). Similarly, each data structure is based on its counterpart in the STL containers library.
+Data structures featured in this demo have their own class and all are available as drop-in solutions for your project with an MIT license. Linked lists include [singly linked lists](https://github.com/JohnWSweeney/singlyLinkedListClass), [doubly linked lists](https://github.com/JohnWSweeney/doublyLinkedListClass), [circular singly linked lists](https://github.com/JohnWSweeney/circularSinglyLinkedListClass), and [circular doubly linked lists](https://github.com/JohnWSweeney/circularDoublyLinkedListClass). Each list class includes 40+ functions based on their Standard Template Library (STL) counterparts, plus other functions I thought would be interesting/useful to implement. Data structures include [stacks](https://github.com/JohnWSweeney/stackClass), [queues](https://github.com/JohnWSweeney/queueClass), [deques](https://github.com/JohnWSweeney/dequeClass), and [priority queues](https://github.com/JohnWSweeney/priorityQueueClass). Similarly, each data structure is based on its counterpart in the STL containers library.
 
 ## Function
 The app opens a console window on startup. Enter the *command* keywords separated by a space. Commands are case-sensitive. 
@@ -192,6 +192,10 @@ The `clear` and `print` functions work identically to the other classes.
 Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.5
+- Updated fifo::data_count to initialize wordCount to zero.
+- Added "addNodes" function to FIFO demo.
+
 v1.8.4
 - Added "addNodes" function to stack, queue, deque, and priority queue demos.
 - Fixed bug in singly linked list sList::clear function causing crash when list is nullptr.

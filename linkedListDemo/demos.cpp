@@ -4331,7 +4331,7 @@ void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			}
 			else if (result == 3)
 			{
-				std::cout << "FIFO almost empty.\n\n";
+				std::cout << "FIFO almost empty. Word count: " << wordCount << "\n\n";
 			}
 			else if (result == 2)
 			{
@@ -4362,6 +4362,29 @@ void fifoDemo(std::mutex &m, std::condition_variable &cv, cmd &cmd)
 			{
 				std::cout << "FIFO not configured.\n";
 			}
+		}
+		else if (cmd.function == "addNodes")
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				result = fifo.wr_en(list, pow(i, 5));
+				if (result == 7)
+				{
+					std::cout << "FIFO not configured.\n";
+					break;
+				}
+				else if (result == 6)
+				{
+					std::cout << "FIFO overflow.\n";
+					break;
+				}
+			}
+			if (result != 7)
+			{
+				result = fifo.data_count(list, wordCount);
+				std::cout << "Word count: " << wordCount << '\n';
+				fifo.print(list);
+			}	
 		}
 		cv.notify_one();
 	}
