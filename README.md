@@ -192,6 +192,9 @@ The `clear` and `print` functions work identically to the other classes.
 Executable compiled with C++17.
 
 ## ChangeLog
+v1.8.7
+- Updated cdList class and demo with bubbleSort function.
+
 v1.8.6
 - Removed cmd struct member "output", replaced all instances in demos with local "data" integer.
 
